@@ -9,13 +9,13 @@ from Helix.Sakuya.scene import SceneManager
 user32 = ctypes.windll.user32
 monitor_resolution = Vector(user32.GetSystemMetrics(0), user32.GetSystemMetrics(1))
 
-RespawnClient = Client(
-    "Project Respawn",
+HelixClient = Client(
+    "Helix",
     Vector(monitor_resolution.x*0.6, monitor_resolution.y*0.6)
 )
-RespawnSceneManager = SceneManager(RespawnClient)
-RespawnSceneManager.register_scene(Start)
-RespawnClient.fps = 60
+HelixSceneManager = SceneManager(HelixClient)
+HelixSceneManager.register_scene(Start)
+HelixClient.fps = 60
 
-RespawnClient.add_scene("Start")
-RespawnClient.main()
+HelixClient.add_scene("Start")
+HelixClient.main()
