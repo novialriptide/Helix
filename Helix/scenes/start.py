@@ -55,7 +55,7 @@ class Start(Scene):
         # self.client.screen.blit(pygame.image.load("C:\\Users\\novia\\Desktop\\s9 _m6_Black_Photo_Upright_Studio_Bundle_440x440.png"), (0,0))
 
         for e in self.entities:
-            e.update(self.client.pg_clock.tick(self.client.max_fps) / 1000)
+            e.update(self.client.delta_time)
 
         for e in self.entities:
             pygame.draw.rect(
