@@ -1,20 +1,20 @@
 import sys
 import pygame
 
-from ProjectRespawn.playercontroller import PlayerController
-from ProjectRespawn.Sakuya.entity import Entity
-from ProjectRespawn.Sakuya.animation import Animation
-from ProjectRespawn.Sakuya.scene import Scene
-from ProjectRespawn.Sakuya.math import Vector
-from ProjectRespawn.buttons import BUTTONS
+from Helix.playercontroller import PlayerController
+from Helix.Sakuya.entity import Entity
+from Helix.Sakuya.animation import Animation
+from Helix.Sakuya.scene import Scene
+from Helix.Sakuya.math import Vector
+from Helix.buttons import BUTTONS
 
 class Start(Scene):
     def __init__(self, client):
         super().__init__(client)
 
     def on_awake(self, **kwargs) -> None:
-        player_placeholder = Animation("player_placeholder", [pygame.image.load("ProjectRespawn\sprites\guy.png")])
-        self.player_entity = Entity(PlayerController, Vector(0, 0))
+        player_placeholder = Animation("player_placeholder", [pygame.image.load("Helix\sprites\guy.png")])
+        self.player_entity = Entity(PlayerController, Vector(0, 0), has_rigidbody = True)
         self.player_entity.anim_add(player_placeholder)
         self.player_entity.anim_set("player_placeholder")
         self.player_entity.enable_terminal_velocity = False
@@ -52,9 +52,10 @@ class Start(Scene):
                     #self.player_entity.velocity.y = 0
 
         self.client.screen.fill((0,0,0))
+        # self.client.screen.blit(pygame.image.load("C:\\Users\\novia\\Desktop\\s9 _m6_Black_Photo_Upright_Studio_Bundle_440x440.png"), (0,0))
 
         for e in self.entities:
-            e.update(1 / self.client.pg_clock.tick(60))
+            e.update(self.client.pg_clock.tick(self.client.max_fps) / 1000)
 
         for e in self.entities:
             pygame.draw.rect(
