@@ -17,6 +17,7 @@ class Start(Scene):
         self.player_entity = Entity(PlayerController, Vector(0, 0))
         self.player_entity.anim_add(player_placeholder)
         self.player_entity.anim_set("player_placeholder")
+        self.player_entity.enable_terminal_velocity = False
         self.entities = [
             self.player_entity
         ]
@@ -39,12 +40,16 @@ class Start(Scene):
             if event.type == pygame.KEYUP:
                 if event.key == BUTTONS["left"]:
                     controller.is_moving_left = False
+                    #self.player_entity.velocity.x = 0
                 if event.key == BUTTONS["right"]:
                     controller.is_moving_right = False
+                    #self.player_entity.velocity.x = 0
                 if event.key == BUTTONS["up"]:
                     controller.is_moving_up = False
+                    #self.player_entity.velocity.y = 0
                 if event.key == BUTTONS["down"]:
                     controller.is_moving_down = False
+                    #self.player_entity.velocity.y = 0
 
         self.client.screen.fill((0,0,0))
 
