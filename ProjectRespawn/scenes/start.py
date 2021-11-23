@@ -22,7 +22,7 @@ class Start(Scene):
             self.player_entity
         ]
 
-    def update(self, **kwargs) -> None:
+    def update(self) -> None:
         controller = self.player_entity.controller
 
         for event in pygame.event.get():
