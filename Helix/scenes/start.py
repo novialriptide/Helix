@@ -6,6 +6,7 @@ from Helix.Sakuya.entity import Entity
 from Helix.Sakuya.animation import Animation
 from Helix.Sakuya.scene import Scene
 from Helix.Sakuya.math import Vector
+from Helix.Sakuya.tile import crop_tile_image
 from Helix.buttons import BUTTONS
 
 class Start(Scene):
@@ -13,7 +14,15 @@ class Start(Scene):
         super().__init__(client)
 
     def on_awake(self, **kwargs) -> None:
-        player_placeholder = Animation("player_placeholder", [pygame.image.load("Helix\sprites\guy.png")])
+        player_placeholder = Animation(
+            "player_placeholder", 
+            [
+                crop_tile_image(pygame.image.load("Helix\sprites\guy.png"), 0, 0, 16, 24),
+                crop_tile_image(pygame.image.load("Helix\sprites\guy.png"), 1, 0, 16, 24),
+                crop_tile_image(pygame.image.load("Helix\sprites\guy.png"), 2, 0, 16, 24),
+                crop_tile_image(pygame.image.load("Helix\sprites\guy.png"), 3, 0, 16, 24),
+            ]
+        )
         self.player_entity = Entity(PlayerController, Vector(0, 0), has_rigidbody = True)
         self.player_entity.anim_add(player_placeholder)
         self.player_entity.anim_set("player_placeholder")
@@ -52,14 +61,9 @@ class Start(Scene):
                     #self.player_entity.velocity.y = 0
 
         self.client.screen.fill((0,0,0))
-        # self.client.screen.blit(pygame.image.load("C:\\Users\\novia\\Desktop\\s9 _m6_Black_Photo_Upright_Studio_Bundle_440x440.png"), (0,0))
 
         for e in self.entities:
             e.update(self.client.delta_time)
 
         for e in self.entities:
-            pygame.draw.rect(
-                self.client.screen,
-                (255,255,255),
-                e.rect
-            )
+            self.client.screen.blit(e.sprite, e.position.to_list())
