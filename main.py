@@ -18,7 +18,7 @@ HelixClient = Client(
 )
 HelixSceneManager = SceneManager(HelixClient)
 HelixSceneManager.register_scene(Start)
-HelixClient.fps = 60
+HelixClient.max_fps = 60
 
 HelixClient.add_scene("Start")
 HelixClient.main()
