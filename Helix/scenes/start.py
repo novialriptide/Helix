@@ -19,6 +19,10 @@ class Start(Scene):
             pygame.image.load("Helix\sprites\ship3.png"), 32, 32
         )
 
+        projectile_sprites = split_image(
+            pygame.image.load("Helix\sprites\projectiles.png"), 8, 8
+        )
+
         player_placeholder = Animation(
             "player_placeholder", 
             [
