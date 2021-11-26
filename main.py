@@ -14,7 +14,8 @@ monitor_resolution = Vector(
 
 HelixClient = Client(
     "Helix",
-    monitor_resolution * 0.6
+    Vector(256, 224),
+    scale_upon_startup = 4.5
 )
 HelixSceneManager = SceneManager(HelixClient)
 HelixSceneManager.register_scene(Start)
