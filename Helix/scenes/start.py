@@ -3,43 +3,54 @@ import pygame
 
 from copy import copy
 
-from Helix.playercontroller import PlayerController
-from Helix.enemy import EnemyEntity, EnemyController
+from Helix.Sakuya.waves import WaveManager
 from Helix.Sakuya.entity import Entity
 from Helix.Sakuya.animation import Animation
 from Helix.Sakuya.scene import Scene
 from Helix.Sakuya.math import Vector
-from Helix.Sakuya.tile import split_image
-from Helix.buttons import KEYBOARD
 from Helix.Sakuya.particles import Particles
+
+from Helix.buttons import KEYBOARD
+from Helix.playercontroller import PlayerController
+from Helix.enemy import EnemyEntity, EnemyController
+from Helix.images import player_sprites, enemy_sprites, projectile_sprites
 
 class Start(Scene):
     def __init__(self, client):
         super().__init__(client)
 
     def on_awake(self) -> None:
+        win_size = self.client.original_window_size
         pygame.joystick.init()
+        
+        self.wave_manager = WaveManager(30000)
+        self.wave_manager.spawn_points = [
+            Vector(int(win_size.x * 1/3), int(win_size.y * 1/7)),
+            Vector(int(win_size.x * 2/3), int(win_size.y * 1/7)),
+            Vector(int(win_size.x * 1/2), int(win_size.y * 1/7)),
+            Vector(int(win_size.x * 1/5), int(win_size.y * 1/4)),
+            Vector(int(win_size.x * 4/5), int(win_size.y * 1/4))
+        ]
 
-        player_sprites = split_image(
-            pygame.image.load("Helix\sprites\ship3.png"), 32, 32
+        projectile_anim = Animation(
+            "projectile_anim",
+            projectile_sprites,
+            fps = 2
         )
 
-        enemy_sprites = split_image(
-            pygame.image.load("Helix\sprites\ship.png"), 16, 16
-        )
+        self.projectile_entity = Entity(None, Vector(0, 0))
+        self.projectile_entity.anim_add(projectile_anim)
+        self.projectile_entity.anim_set("projectile_anim")
 
-        projectile_sprites = split_image(
-            pygame.image.load("Helix\sprites\projectiles.png"), 8, 8
-        )
 
         enemy_idle_anim = Animation(
             "enemy_idle_anim",
             enemy_sprites,
-            fps = 2
+            fps = 1.5
         )
 
         self.enemy_entity = EnemyEntity(EnemyController, Vector(0, 0), has_rigidbody = True)
-        self.enemy_entity.anim_add(enemy_idle_anim)
+        self.enemy_entity.anim_add(copy(enemy_idle_anim))
         self.enemy_entity.anim_set("enemy_idle_anim")
 
         player_idle_anim = Animation(
@@ -47,7 +58,7 @@ class Start(Scene):
             player_sprites,
             fps = 2
         )
-        win_size = self.client.original_window_size
+
         self.player_entity = Entity(PlayerController, Vector(win_size.x/2, win_size.y/2), has_rigidbody = True)
         self.player_entity.anim_add(player_idle_anim)
         self.player_entity.anim_set("player_idle_anim")
@@ -57,15 +68,25 @@ class Start(Scene):
                 Vector(0, 5),
                 colors=[(249,199,63), (255,224,70), (255, 78, 65)],
                 offset=Vector(player_rect.width/2, player_rect.height * 2/3),
-                particles_num=30
+                particles_num=10,
+                spread = 1
             )
         ]
         self.entities = [
-            self.player_entity,
-            copy(self.enemy_entity)
+            self.player_entity
+        ]
+        self.wave_manager.entities = [
+            self.enemy_entity
         ]
 
+        self.wave_manager.generate_random_wave(0, self.entities)
+
     def update(self) -> None:
+        #print(self.entities[1].position)
+        self.entities[1].position = self.entities[1].position.move_toward(
+            Vector(200, 200), 3
+        )
+
         controller = self.player_entity.controller
 
         for event in pygame.event.get():
@@ -102,7 +123,10 @@ class Start(Scene):
 
         for e in self.entities:
             if isinstance(e, EnemyEntity):
-                e.move_to(self.player_entity.position, 20 * self.client.scale.x)
+                e.shoot(Vector(0, 0), self.projectile_entity, 0, 0.7)
 
             e.update(self.client.delta_time)
             self.client.screen.blit(e.sprite, e.position.to_list())
+
+        for sp in self.wave_manager.spawn_points:
+            self.client.screen.set_at(sp.to_list(), (255,255,255))
