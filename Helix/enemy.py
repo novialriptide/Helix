@@ -50,11 +50,26 @@ class EnemyEntity(Entity):
         """
         true_distance = target.x - self.position.x
 
-        print(true_distance)
+        # move toward from the left
         if true_distance > 0 and abs(true_distance) > distance:
             self.controller.is_moving_right = True
             self.controller.is_moving_left = False
+            print("move toward from left")
 
+        # move away if too close
+        if true_distance > 0 and abs(true_distance) < distance:
+            self.controller.is_moving_right = False
+            self.controller.is_moving_left = True
+            print(f"move away from left (dis:{distance}, true_dis:{true_distance})")
+
+        # move toward from the right
         if true_distance < 0 and abs(true_distance) > distance:
             self.controller.is_moving_right = False
             self.controller.is_moving_left = True
+            print("move toward from right")
+
+        # move away if too close
+        if true_distance < 0 and abs(true_distance) < distance:
+            self.controller.is_moving_right = True
+            self.controller.is_moving_left = False
+            print(f"move away from right (dis:{distance}, true_dis:{true_distance})")

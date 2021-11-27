@@ -102,8 +102,7 @@ class Start(Scene):
 
         for e in self.entities:
             if isinstance(e, EnemyEntity):
-                e.move_to(self.player_entity.position, 10)
-                print(e.controller.is_moving_left, e.controller.is_moving_right)
+                e.move_to(self.player_entity.position, 20 * self.client.scale.x)
 
             e.update(self.client.delta_time)
             self.client.screen.blit(e.sprite, e.position.to_list())
