@@ -1,6 +1,18 @@
 import pygame
 
-BUTTONS = {
+KEYBOARD = {
+    "up": pygame.K_UP, 
+    "left": pygame.K_LEFT, 
+    "down": pygame.K_DOWN, 
+    "right": pygame.K_RIGHT, 
+    "A": pygame.K_z,
+    "B": pygame.K_x,
+    "select": pygame.K_a,
+    "start": pygame.K_s
+}
+
+# nintendo switch
+NS_CONTROLLER = {
     "up": pygame.K_UP, 
     "left": pygame.K_LEFT, 
     "down": pygame.K_DOWN, 
