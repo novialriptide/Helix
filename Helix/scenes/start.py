@@ -27,7 +27,6 @@ class Start(Scene):
         except:
             self.joystick = None
 
-
         self.wave_manager = WaveManager(30000)
         self.wave_manager.spawn_points = [
             Vector(int(win_size.x * 1/5), int(win_size.y * 1/4)),
