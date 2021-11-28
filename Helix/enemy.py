@@ -19,12 +19,11 @@ from Helix.Sakuya.particles import Particles
 
 class EnemyController(BaseController):
     def __init__(self) -> None:
-        super().__init__(0.3)
+        super().__init__(0.8)
 
 class EnemyEntity(Entity):
     def __init__(
         self,
-        controller: BaseController,
         position: Vector,
         has_collision: bool = True,
         has_rigidbody: bool = False,
@@ -32,7 +31,7 @@ class EnemyEntity(Entity):
         particle_systems: List[Particles] = []
     ):
         super().__init__(
-            controller,
+            EnemyController,
             position,
             has_collision = has_collision,
             has_rigidbody = has_rigidbody,
@@ -40,4 +39,5 @@ class EnemyEntity(Entity):
             particle_systems = particle_systems,
             obey_gravity = False
         )
+        self.is_combat_ready = False
         
