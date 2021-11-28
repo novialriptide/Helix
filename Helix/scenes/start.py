@@ -1,15 +1,17 @@
 import sys
 import pygame
+import math
 
 from copy import copy
 
-from Helix.Sakuya.waves import WaveManager, load_wave_file
 from Helix.Sakuya.entity import Entity
 from Helix.Sakuya.animation import Animation
 from Helix.Sakuya.scene import Scene
 from Helix.Sakuya.math import Vector
 from Helix.Sakuya.particles import Particles
+from Helix.Sakuya.waves import load_wave_file
 
+from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
 from Helix.playercontroller import PlayerController
 from Helix.enemy import EnemyEntity, EnemyController
@@ -28,7 +30,7 @@ class Start(Scene):
         except:
             self.joystick = None
 
-        self.wave_manager = WaveManager(30000)
+        self.wave_manager = HelixWaves(30000)
         self.wave_manager.spawn_points = [
             Vector(int(win_size.x * 1/5), int(win_size.y * 1/4)),
             Vector(int(win_size.x * 1/3), int(win_size.y * 1/7)),
@@ -40,13 +42,12 @@ class Start(Scene):
         projectile_anim = Animation(
             "projectile_anim",
             projectile_sprites,
-            fps = 2
+            fps = 0.05
         )
 
         self.projectile_entity = Entity(None, Vector(0, 0))
-        self.projectile_entity.anim_add(projectile_anim)
+        self.projectile_entity.anim_add(copy(projectile_anim))
         self.projectile_entity.anim_set("projectile_anim")
-
 
         enemy_idle_anim = Animation(
             "enemy_idle_anim",
@@ -54,7 +55,7 @@ class Start(Scene):
             fps = 1.5
         )
 
-        self.enemy_entity = EnemyEntity(EnemyController, Vector(0, 0), has_rigidbody = True)
+        self.enemy_entity = EnemyEntity(Vector(0, 0), has_rigidbody = True)
         self.enemy_entity.anim_add(copy(enemy_idle_anim))
         self.enemy_entity.anim_set("enemy_idle_anim")
 
@@ -142,16 +143,28 @@ class Start(Scene):
 
         self.client.screen.fill((0,0,0))
 
+        particles_rendered = 0
+
         for ps in self.player_entity.particle_systems:
             for p in ps.particles:
                 self.client.screen.set_at((int(p.position.x), int(p.position.y)), p.color)
+                particles_rendered += 1
 
         for e in self.entities:
             if isinstance(e, EnemyEntity):
-                e.shoot(Vector(0, 0), self.projectile_entity, 0, 0.7)
+                offset = Vector(e.rect.width/2, e.rect.height/2)
+                delta_pos = self.player_entity.position - (e.position + offset)
+                angle = math.atan2(delta_pos.y, delta_pos.x)
+                proj = e.shoot(offset, self.projectile_entity.copy(), angle, 5)
+                proj.on_destroy(5000)
+                self.entities.append(proj)
 
-            e.update(self.client.delta_time)
             self.client.screen.blit(e.sprite, e.position.to_list())
 
         for sp in self.wave_manager.spawn_points:
             self.client.screen.set_at(sp.to_list(), (255,255,255))
+        
+        self.event_system.update(self.client.delta_time)
+        self.advance_frame(self.client.delta_time)
+
+        print(f"objects:{len(self.entities)} particles:{particles_rendered} fps:{int(self.client.current_fps)}")
