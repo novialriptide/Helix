@@ -19,4 +19,13 @@ Z           Button 1
 X           Button 2
 A           Button 3
 S           Button 4
+ESCAPE      Pause
+```
+
+### Nintendo Switch Pro Controller
+```
+DPAD UP       Accelerate up
+DPAD DOWN     Accelerate down
+DPAD LEFT     Accelerate left
+DPAD RIGHT    Accelerate right
 ```
