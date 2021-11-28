@@ -2,8 +2,10 @@ import ctypes
 
 from Helix.Sakuya.client import Client
 from Helix.Sakuya.math import Vector
-from Helix.scenes.start import Start
 from Helix.Sakuya.scene import SceneManager
+
+from Helix.scenes.start import Start
+from Helix.images import player_sprites
 
 # get user's MONITOR RESOLUTION
 user32 = ctypes.windll.user32
@@ -15,7 +17,8 @@ monitor_resolution = Vector(
 HelixClient = Client(
     "Helix",
     Vector(256, 224),
-    scale_upon_startup = 4.5
+    scale_upon_startup = 4.5,
+    window_icon = player_sprites[0]
 )
 HelixSceneManager = SceneManager(HelixClient)
 HelixSceneManager.register_scene(Start)
