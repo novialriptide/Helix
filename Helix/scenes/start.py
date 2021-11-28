@@ -3,14 +3,14 @@ import pygame
 
 from copy import copy
 
-from Helix.Sakuya.waves import WaveManager
+from Helix.Sakuya.waves import WaveManager, load_wave_file
 from Helix.Sakuya.entity import Entity
 from Helix.Sakuya.animation import Animation
 from Helix.Sakuya.scene import Scene
 from Helix.Sakuya.math import Vector
 from Helix.Sakuya.particles import Particles
 
-from Helix.buttons import KEYBOARD
+from Helix.buttons import KEYBOARD, NS_CONTROLLER
 from Helix.playercontroller import PlayerController
 from Helix.enemy import EnemyEntity, EnemyController
 from Helix.images import player_sprites, enemy_sprites, projectile_sprites
@@ -22,13 +22,15 @@ class Start(Scene):
     def on_awake(self) -> None:
         win_size = self.client.original_window_size
         pygame.joystick.init()
-        
+        self.joystick = pygame.joystick.Joystick(0)
+
+
         self.wave_manager = WaveManager(30000)
         self.wave_manager.spawn_points = [
-            Vector(int(win_size.x * 1/3), int(win_size.y * 1/7)),
-            Vector(int(win_size.x * 2/3), int(win_size.y * 1/7)),
-            Vector(int(win_size.x * 1/2), int(win_size.y * 1/7)),
             Vector(int(win_size.x * 1/5), int(win_size.y * 1/4)),
+            Vector(int(win_size.x * 1/3), int(win_size.y * 1/7)),
+            Vector(int(win_size.x * 1/2), int(win_size.y * 1/7)),
+            Vector(int(win_size.x * 2/3), int(win_size.y * 1/7)),
             Vector(int(win_size.x * 4/5), int(win_size.y * 1/4))
         ]
 
@@ -66,9 +68,13 @@ class Start(Scene):
         self.player_entity.particle_systems = [
             Particles(
                 Vector(0, 5),
-                colors=[(249,199,63), (255,224,70), (255, 78, 65)],
-                offset=Vector(player_rect.width/2, player_rect.height * 2/3),
-                particles_num=10,
+                colors = [
+                    (249, 199, 63),
+                    (255, 224, 70),
+                    (255, 78, 65)
+                ],
+                offset = Vector(player_rect.width/2, player_rect.height * 2/3),
+                particles_num = 10,
                 spread = 1
             )
         ]
@@ -79,14 +85,9 @@ class Start(Scene):
             self.enemy_entity
         ]
 
-        self.wave_manager.generate_random_wave(0, self.entities)
+        self.wave = load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
 
     def update(self) -> None:
-        #print(self.entities[1].position)
-        self.entities[1].position = self.entities[1].position.move_toward(
-            Vector(200, 200), 3
-        )
-
         controller = self.player_entity.controller
 
         for event in pygame.event.get():
@@ -114,6 +115,27 @@ class Start(Scene):
                 if event.key == KEYBOARD["down"]:
                     controller.is_moving_down = False
                     #self.player_entity.velocity.y = 0
+
+            if event.type == pygame.JOYBUTTONDOWN:
+                if self.joystick.get_button(NS_CONTROLLER["left"]) == 1:
+                    controller.is_moving_left = True
+                if self.joystick.get_button(NS_CONTROLLER["right"]) == 1:
+                    controller.is_moving_right = True
+                if self.joystick.get_button(NS_CONTROLLER["up"]) == 1:
+                    controller.is_moving_up = True
+                if self.joystick.get_button(NS_CONTROLLER["down"]) == 1:
+                    controller.is_moving_down = True
+
+            if event.type == pygame.JOYBUTTONUP:
+                if self.joystick.get_button(NS_CONTROLLER["left"]) == 0:
+                    controller.is_moving_left = False
+                if self.joystick.get_button(NS_CONTROLLER["right"]) == 0:
+                    controller.is_moving_right = False
+                if self.joystick.get_button(NS_CONTROLLER["up"]) == 0:
+                    controller.is_moving_up = False
+                if self.joystick.get_button(NS_CONTROLLER["down"]) == 0:
+                    controller.is_moving_down = False
+                
 
         self.client.screen.fill((0,0,0))
 
