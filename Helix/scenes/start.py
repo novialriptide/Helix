@@ -24,6 +24,7 @@ class Start(Scene):
         pygame.joystick.init()
         try:
             self.joystick = pygame.joystick.Joystick(0)
+            print(f"Console Controller Detected! [{self.joystick.get_name()}]")
         except:
             self.joystick = None
 
