@@ -22,7 +22,10 @@ class Start(Scene):
     def on_awake(self) -> None:
         win_size = self.client.original_window_size
         pygame.joystick.init()
-        self.joystick = pygame.joystick.Joystick(0)
+        try:
+            self.joystick = pygame.joystick.Joystick(0)
+        except:
+            self.joystick = None
 
 
         self.wave_manager = WaveManager(30000)
