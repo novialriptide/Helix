@@ -74,7 +74,8 @@ class Start(Scene):
             PlayerController,
             Vector(win_size.x/2, win_size.y/2),
             has_rigidbody = True,
-            custom_hitbox_size = Vector(3, 3)
+            custom_hitbox_size = Vector(3, 3),
+            obey_gravity = False
         )
         self.player_entity.anim_add(player_idle_anim)
         self.player_entity.anim_set("player_idle_anim")
