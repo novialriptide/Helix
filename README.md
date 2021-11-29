@@ -30,8 +30,8 @@ UP KEY      Accelerate up
 DOWN KEY    Accelerate down
 LEFT KEY    Accelerate left
 RIGHT KEY   Accelerate right
-Z           Button 1
-X           Button 2
+Z           Button 1 (Select)
+X           Button 2 (Cancel)
 A           Button 3
 S           Button 4
 ESCAPE      Pause
@@ -43,4 +43,16 @@ DPAD UP       Accelerate up
 DPAD DOWN     Accelerate down
 DPAD LEFT     Accelerate left
 DPAD RIGHT    Accelerate right
+A             Button 1 (Select)
+B             Button 2 (Cancel)
+X             Button 3
+Y             Button 4
+HOME          Pause
+CAPTURE       Screenshot
++             Pause
+-             (None)
+ZR            Shoot
+R             Change Target
+ZL            (None)
+L             Change Target
 ```
