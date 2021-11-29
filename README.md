@@ -8,8 +8,23 @@
 3. Move the [Sakuya](https://github.com/novialriptide/Sakuya) directory to `~/Helix`
 4. Run `main.py`
 
-## Default Controls
-### Keyboard
+## Gameplay
+__Helix: Flight Test__ is a game written in Python3.8 using the Sakuya Engine. You are the best drone pilot on earth. Hired by Helix Industries, fly your way through the "photo-realistic" simulation to defeat the enemy’s mothership. There are many waves in this game that you will need to deal with, but you’re able to upgrade your stats. 
+
+### Stats
+```
+Health
+Attack
+Repair (regeneration)
+```
+
+### Abilities
+```
+EMP       Make enemies drop from the sky, but if you hit their falling corpse you die.
+```
+
+### Default Controls
+#### Keyboard
 ```
 UP KEY      Accelerate up
 DOWN KEY    Accelerate down
@@ -22,7 +37,7 @@ S           Button 4
 ESCAPE      Pause
 ```
 
-### Nintendo Switch Pro Controller
+#### Nintendo Switch Pro Controller
 ```
 DPAD UP       Accelerate up
 DPAD DOWN     Accelerate down
