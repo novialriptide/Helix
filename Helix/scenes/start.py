@@ -183,7 +183,6 @@ class Start(Scene):
                 angle = math.atan2(delta_pos.y, delta_pos.x)
                 proj = e.shoot(offset, self.projectile_entity.copy(), angle, 2)
                 if proj is not None:
-                    proj.on_destroy(5000)
                     self.entities.append(proj)
 
             self.client.screen.blit(e.sprite, e.position.to_list())
@@ -194,7 +193,7 @@ class Start(Scene):
         for sp in self.wave_manager.spawn_points:
             self.client.screen.set_at(sp.to_list(), (255,255,255))
 
-        # if self.test_collisions(self.player_entity): self.client.replace_scene("Start", "Death")
+        if self.test_collisions(self.player_entity): self.client.replace_scene("Start", "Death")
         
         self.event_system.update(self.client.delta_time)
         self.advance_frame(self.client.delta_time)
