@@ -45,7 +45,11 @@ class Start(Scene):
             fps = 0.05
         )
 
-        self.projectile_entity = Entity(None, Vector(0, 0))
+        self.projectile_entity = Entity(
+            None,
+            Vector(0, 0),
+            custom_hitbox_size= Vector(3, 3)
+        )
         self.projectile_entity.anim_add(copy(projectile_anim))
         self.projectile_entity.anim_set("projectile_anim")
 
