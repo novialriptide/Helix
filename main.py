@@ -5,6 +5,7 @@ from Helix.Sakuya.math import Vector
 from Helix.Sakuya.scene import SceneManager
 
 from Helix.scenes.start import Start
+from Helix.scenes.death import Death
 from Helix.images import player_sprites
 
 # get user's MONITOR RESOLUTION
@@ -22,6 +23,7 @@ HelixClient = Client(
 )
 HelixSceneManager = SceneManager(HelixClient)
 HelixSceneManager.register_scene(Start)
+HelixSceneManager.register_scene(Death)
 HelixClient.max_fps = 60
 
 HelixClient.add_scene("Start")
