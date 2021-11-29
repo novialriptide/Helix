@@ -170,6 +170,12 @@ class Start(Scene):
                 particles_rendered += 1
 
         for e in self.entities:
+            # test if entity is viewable
+            screen_rect = self.client.screen.get_rect()
+            if not e.rect.colliderect(screen_rect):
+                del e
+                continue
+
             if isinstance(e, EnemyEntity):
                 player_rect = self.player_entity.rect
                 offset = Vector(e.rect.width/2, e.rect.height/2)
@@ -188,10 +194,10 @@ class Start(Scene):
         for sp in self.wave_manager.spawn_points:
             self.client.screen.set_at(sp.to_list(), (255,255,255))
 
-        if self.test_collisions(self.player_entity):
-            self.client.replace_scene("Start", "Death")
+        # if self.test_collisions(self.player_entity): self.client.replace_scene("Start", "Death")
         
         self.event_system.update(self.client.delta_time)
         self.advance_frame(self.client.delta_time)
 
-        print(f"objects:{len(self.entities)} particles:{particles_rendered} fps:{int(self.client.current_fps)}")
+        #print(f"objects:{len(self.entities)} particles:{particles_rendered} fps:{int(self.client.current_fps)}")
+        #print(f"events:{len(self.event_system._methods)}")
