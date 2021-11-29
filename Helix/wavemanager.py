@@ -1,7 +1,7 @@
-from Helix.Sakuya.events import EventSystem, RepeatEvent
-from Helix.Sakuya.waves import WaveManager
-from Helix.Sakuya.entity import Entity
-from Helix.Sakuya.math import Vector
+from Helix.SakuyaEngine.events import EventSystem, RepeatEvent
+from Helix.SakuyaEngine.waves import WaveManager
+from Helix.SakuyaEngine.entity import Entity
+from Helix.SakuyaEngine.math import Vector
 
 spawn_animations = [
     {"spawn_position_offset": Vector(0, 0),

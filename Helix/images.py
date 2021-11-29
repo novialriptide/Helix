@@ -1,4 +1,4 @@
-from Helix.Sakuya.tile import split_image
+from Helix.SakuyaEngine.tile import split_image
 
 import pygame
 

@@ -1,9 +1,9 @@
 from typing import List
 
-from Helix.Sakuya.controllers import BaseController
-from Helix.Sakuya.entity import Entity
-from Helix.Sakuya.math import Vector
-from Helix.Sakuya.particles import Particles
+from Helix.SakuyaEngine.controllers import BaseController
+from Helix.SakuyaEngine.entity import Entity
+from Helix.SakuyaEngine.math import Vector
+from Helix.SakuyaEngine.particles import Particles
 
 """This handles the AI for a basic enemy
 

@@ -1,8 +1,8 @@
 import sys
 import pygame
 
-from Helix.Sakuya.scene import Scene
-from Helix.Sakuya.text import text
+from Helix.SakuyaEngine.scene import Scene
+from Helix.SakuyaEngine.text import text
 
 class Death(Scene):
     def __init__(self, client):

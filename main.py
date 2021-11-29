@@ -1,8 +1,8 @@
 import ctypes
 
-from Helix.Sakuya.client import Client
-from Helix.Sakuya.math import Vector
-from Helix.Sakuya.scene import SceneManager
+from Helix.SakuyaEngine.client import Client
+from Helix.SakuyaEngine.math import Vector
+from Helix.SakuyaEngine.scene import SceneManager
 
 from Helix.scenes.start import Start
 from Helix.scenes.death import Death
@@ -18,7 +18,7 @@ monitor_resolution = Vector(
 HelixClient = Client(
     "Helix",
     Vector(256, 224),
-    scale_upon_startup = 4.5,
+    scale_upon_startup = 2,
     window_icon = player_sprites[0]
 )
 HelixSceneManager = SceneManager(HelixClient)

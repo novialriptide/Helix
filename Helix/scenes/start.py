@@ -4,12 +4,12 @@ import math
 
 from copy import copy
 
-from Helix.Sakuya.entity import Entity
-from Helix.Sakuya.animation import Animation
-from Helix.Sakuya.scene import Scene
-from Helix.Sakuya.math import Vector
-from Helix.Sakuya.particles import Particles
-from Helix.Sakuya.waves import load_wave_file
+from Helix.SakuyaEngine.entity import Entity
+from Helix.SakuyaEngine.animation import Animation
+from Helix.SakuyaEngine.scene import Scene
+from Helix.SakuyaEngine.math import Vector
+from Helix.SakuyaEngine.particles import Particles
+from Helix.SakuyaEngine.waves import load_wave_file
 
 from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
@@ -94,7 +94,8 @@ class Start(Scene):
                 ],
                 offset = Vector(player_rect.width/2, player_rect.height * 2/3),
                 particles_num = 10,
-                spread = 1
+                spread = 1,
+                lifetime = 500
             )
         ]
         self.entities = [
@@ -193,4 +194,4 @@ class Start(Scene):
         self.event_system.update(self.client.delta_time)
         self.advance_frame(self.client.delta_time)
 
-        # print(f"objects:{len(self.entities)} particles:{particles_rendered} fps:{int(self.client.current_fps)}")
+        print(f"objects:{len(self.entities)} particles:{particles_rendered} fps:{int(self.client.current_fps)}")

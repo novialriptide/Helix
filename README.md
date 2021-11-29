@@ -4,12 +4,12 @@
 
 ## How to install and run from source
 1. Clone this repository
-2. Clone the [Sakuya](https://github.com/novialriptide/Sakuya) repository
-3. Move the [Sakuya](https://github.com/novialriptide/Sakuya) directory to `~/Helix`
+2. Clone the [SakuyaEngine](https://github.com/novialriptide/SakuyaEngine) repository
+3. Move the [SakuyaEngine](https://github.com/novialriptide/SakuyaEngine) directory to `~/Helix`
 4. Run `main.py`
 
 ## Gameplay
-__Helix: Flight Test__ is a game written in Python3.8 using the Sakuya Engine. You are the best drone pilot on earth. Hired by Helix Industries, fly your way through the "photo-realistic" simulation to defeat the enemy’s mothership. There are many waves in this game that you will need to deal with, but you’re able to upgrade your stats. 
+__Helix: Flight Test__ is a game written in Python3.8 using the SakuyaEngine Engine. You are the best drone pilot on earth. Hired by Helix Industries, fly your way through the "photo-realistic" simulation to defeat the enemy’s mothership. There are many waves in this game that you will need to deal with, but you’re able to upgrade your stats. 
 
 ### Stats
 ```
