@@ -55,7 +55,12 @@ class Start(Scene):
             fps = 1.5
         )
 
-        self.enemy_entity = EnemyEntity(Vector(0, 0), has_rigidbody = True)
+        self.enemy_entity = EnemyEntity(
+            Vector(0, 0),
+            has_rigidbody = True,
+            fire_rate = 500,
+            custom_hitbox_size = Vector(11, 11)
+        )
         self.enemy_entity.anim_add(copy(enemy_idle_anim))
         self.enemy_entity.anim_set("enemy_idle_anim")
 
@@ -65,7 +70,12 @@ class Start(Scene):
             fps = 2
         )
 
-        self.player_entity = Entity(PlayerController, Vector(win_size.x/2, win_size.y/2), has_rigidbody = True)
+        self.player_entity = Entity(
+            PlayerController,
+            Vector(win_size.x/2, win_size.y/2),
+            has_rigidbody = True,
+            custom_hitbox_size = Vector(3, 3)
+        )
         self.player_entity.anim_add(player_idle_anim)
         self.player_entity.anim_set("player_idle_anim")
         player_rect = self.player_entity.rect
@@ -109,16 +119,16 @@ class Start(Scene):
             if event.type == pygame.KEYUP:
                 if event.key == KEYBOARD["left"]:
                     controller.is_moving_left = False
-                    #self.player_entity.velocity.x = 0
+                    self.player_entity.velocity.x = 0
                 if event.key == KEYBOARD["right"]:
                     controller.is_moving_right = False
-                    #self.player_entity.velocity.x = 0
+                    self.player_entity.velocity.x = 0
                 if event.key == KEYBOARD["up"]:
                     controller.is_moving_up = False
-                    #self.player_entity.velocity.y = 0
+                    self.player_entity.velocity.y = 0
                 if event.key == KEYBOARD["down"]:
                     controller.is_moving_down = False
-                    #self.player_entity.velocity.y = 0
+                    self.player_entity.velocity.y = 0
 
             if event.type == pygame.JOYBUTTONDOWN:
                 if self.joystick.get_button(NS_CONTROLLER["left"]) == 1:
@@ -133,13 +143,16 @@ class Start(Scene):
             if event.type == pygame.JOYBUTTONUP:
                 if self.joystick.get_button(NS_CONTROLLER["left"]) == 0:
                     controller.is_moving_left = False
+                    self.player_entity.velocity.x = 0
                 if self.joystick.get_button(NS_CONTROLLER["right"]) == 0:
                     controller.is_moving_right = False
+                    self.player_entity.velocity.x = 0
                 if self.joystick.get_button(NS_CONTROLLER["up"]) == 0:
                     controller.is_moving_up = False
+                    self.player_entity.velocity.y = 0
                 if self.joystick.get_button(NS_CONTROLLER["down"]) == 0:
                     controller.is_moving_down = False
-                
+                    self.player_entity.velocity.y = 0
 
         self.client.screen.fill((0,0,0))
 
@@ -152,14 +165,19 @@ class Start(Scene):
 
         for e in self.entities:
             if isinstance(e, EnemyEntity):
+                player_rect = self.player_entity.rect
                 offset = Vector(e.rect.width/2, e.rect.height/2)
-                delta_pos = self.player_entity.position - (e.position + offset)
+                delta_pos = (self.player_entity.position + Vector(player_rect.width/2, player_rect.height/2)) - (e.position + offset)
                 angle = math.atan2(delta_pos.y, delta_pos.x)
-                proj = e.shoot(offset, self.projectile_entity.copy(), angle, 5)
-                proj.on_destroy(5000)
-                self.entities.append(proj)
+                proj = e.shoot(offset, self.projectile_entity.copy(), angle, 2)
+                if proj is not None:
+                    proj.on_destroy(5000)
+                    self.entities.append(proj)
 
             self.client.screen.blit(e.sprite, e.position.to_list())
+
+            # draw hitboxes
+            pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
 
         for sp in self.wave_manager.spawn_points:
             self.client.screen.set_at(sp.to_list(), (255,255,255))
