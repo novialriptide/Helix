@@ -39,19 +39,37 @@ class Start(Scene):
             Vector(int(win_size.x * 4/5), int(win_size.y * 1/4))
         ]
 
-        projectile_anim = Animation(
-            "projectile_anim",
-            projectile_sprites,
-            fps = 0.05
+        projectile1_anim = Animation(
+            "projectile1_anim",
+            [projectile_sprites[0], projectile_sprites[1], projectile_sprites[2]],
+            fps = 2
         )
 
-        self.projectile_entity = Entity(
+        self.projectile_entity1 = Entity(
             None,
             Vector(0, 0),
-            custom_hitbox_size= Vector(3, 3)
+            custom_hitbox_size= Vector(3, 3),
+            name = "projectile1",
+            tags = ["enemy_projectiles"]
         )
-        self.projectile_entity.anim_add(copy(projectile_anim))
-        self.projectile_entity.anim_set("projectile_anim")
+        self.projectile_entity1.anim_add(copy(projectile1_anim))
+        self.projectile_entity1.anim_set("projectile1_anim")
+
+        projectile2_anim = Animation(
+            "projectile2_anim",
+            [projectile_sprites[3], projectile_sprites[4], projectile_sprites[5]],
+            fps = 2
+        )
+
+        self.projectile_entity2 = Entity(
+            None,
+            Vector(0, 0),
+            custom_hitbox_size= Vector(3, 3),
+            name = "projectile2",
+            tags = ["player_projectiles"]
+        )
+        self.projectile_entity2.anim_add(copy(projectile2_anim))
+        self.projectile_entity2.anim_set("projectile2_anim")
 
         enemy_idle_anim = Animation(
             "enemy_idle_anim",
@@ -65,6 +83,7 @@ class Start(Scene):
             fire_rate = 500,
             custom_hitbox_size = Vector(11, 11)
         )
+        self.enemy_entity.tags = ["enemy"]
         self.enemy_entity.anim_add(copy(enemy_idle_anim))
         self.enemy_entity.anim_set("enemy_idle_anim")
 
@@ -122,6 +141,8 @@ class Start(Scene):
                     controller.is_moving_up = True
                 if event.key == KEYBOARD["down"]:
                     controller.is_moving_down = True
+                if event.key == KEYBOARD["A"]:
+                    controller.is_shooting = True
             if event.type == pygame.KEYUP:
                 if event.key == KEYBOARD["left"]:
                     controller.is_moving_left = False
@@ -135,6 +156,8 @@ class Start(Scene):
                 if event.key == KEYBOARD["down"]:
                     controller.is_moving_down = False
                     self.player_entity.velocity.y = 0
+                if event.key == KEYBOARD["A"]:
+                    controller.is_shooting = False
 
             if event.type == pygame.JOYBUTTONDOWN:
                 if self.joystick.get_button(NS_CONTROLLER["left"]) == 1:
@@ -164,36 +187,51 @@ class Start(Scene):
 
         particles_rendered = 0
 
+        if controller.is_shooting:
+            offset = Vector(self.player_entity.rect.width/2, self.player_entity.rect.height/2)
+            proj = self.player_entity.shoot(offset, self.projectile_entity2.copy(), math.radians(-90), 7)
+            if proj is not None:
+                self.entities.append(proj)
+
+        if self.test_collisions(self.player_entity, ignore_tags = ["player_projectiles"]):
+            self.client.replace_scene("Start", "Death")
+        
         for ps in self.player_entity.particle_systems:
             for p in ps.particles:
                 self.client.screen.set_at((int(p.position.x), int(p.position.y)), p.color)
                 particles_rendered += 1
 
+        
         for e in self.entities:
             # test if entity is viewable
             screen_rect = self.client.screen.get_rect()
             if not e.rect.colliderect(screen_rect):
-                del e
+                self.entities.remove(e)
                 continue
-
-            if isinstance(e, EnemyEntity):
+            
+            # if enemy projectile hits player or not (this is the source of flickering sprites)
+            if "enemy_projectiles" in e.tags and len(self.test_collisions(
+                e, ignore_tags=["enemy_projectiles", "enemy", "player_projectiles"]
+            )) > 0:
+                self.entities.remove(e)
+                continue
+            
+            if "enemy" in e.tags:
                 player_rect = self.player_entity.rect
                 offset = Vector(e.rect.width/2, e.rect.height/2)
                 delta_pos = (self.player_entity.position + Vector(player_rect.width/2, player_rect.height/2)) - (e.position + offset)
                 angle = math.atan2(delta_pos.y, delta_pos.x)
-                proj = e.shoot(offset, self.projectile_entity.copy(), angle, 2)
+                proj = e.shoot(offset, self.projectile_entity1.copy(), angle, 2)
                 if proj is not None:
                     self.entities.append(proj)
 
             self.client.screen.blit(e.sprite, e.position.to_list())
 
             # draw hitboxes
-            pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
+            # pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
 
         for sp in self.wave_manager.spawn_points:
             self.client.screen.set_at(sp.to_list(), (255,255,255))
-
-        if self.test_collisions(self.player_entity): self.client.replace_scene("Start", "Death")
         
         self.event_system.update(self.client.delta_time)
         self.advance_frame(self.client.delta_time)
