@@ -30,7 +30,8 @@ class EnemyEntity(Entity):
         fire_rate: bool = 0,
         scale: int = 1,
         particle_systems: List[Particles] = [],
-        custom_hitbox_size: Vector = Vector(0, 0)
+        custom_hitbox_size: Vector = Vector(0, 0),
+        name: str = None
     ):
         super().__init__(
             EnemyController,
@@ -41,7 +42,8 @@ class EnemyEntity(Entity):
             particle_systems = particle_systems,
             obey_gravity = False,
             fire_rate = fire_rate,
-            custom_hitbox_size = custom_hitbox_size
+            custom_hitbox_size = custom_hitbox_size,
+            name = name
         )
         self.is_combat_ready = False
         

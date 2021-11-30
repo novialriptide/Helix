@@ -10,6 +10,7 @@ from Helix.SakuyaEngine.scene import Scene
 from Helix.SakuyaEngine.math import Vector
 from Helix.SakuyaEngine.particles import Particles
 from Helix.SakuyaEngine.waves import load_wave_file
+from Helix.SakuyaEngine.errors import EntityNotInScene
 
 from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
@@ -49,8 +50,7 @@ class Start(Scene):
             None,
             Vector(0, 0),
             custom_hitbox_size= Vector(3, 3),
-            name = "projectile1",
-            tags = ["enemy_projectiles"]
+            name = "enemy_projectiles"
         )
         self.projectile_entity1.anim_add(copy(projectile1_anim))
         self.projectile_entity1.anim_set("projectile1_anim")
@@ -65,8 +65,7 @@ class Start(Scene):
             None,
             Vector(0, 0),
             custom_hitbox_size= Vector(3, 3),
-            name = "projectile2",
-            tags = ["player_projectiles"]
+            name = "player_projectiles"
         )
         self.projectile_entity2.anim_add(copy(projectile2_anim))
         self.projectile_entity2.anim_set("projectile2_anim")
@@ -81,9 +80,9 @@ class Start(Scene):
             Vector(0, 0),
             has_rigidbody = True,
             fire_rate = 500,
-            custom_hitbox_size = Vector(11, 11)
+            custom_hitbox_size = Vector(11, 11),
+            name = "enemy"
         )
-        self.enemy_entity.tags = ["enemy"]
         self.enemy_entity.anim_add(copy(enemy_idle_anim))
         self.enemy_entity.anim_set("enemy_idle_anim")
 
@@ -98,7 +97,8 @@ class Start(Scene):
             Vector(win_size.x/2, win_size.y/2),
             has_rigidbody = True,
             custom_hitbox_size = Vector(3, 3),
-            obey_gravity = False
+            obey_gravity = False,
+            name = "player"
         )
         self.player_entity.anim_add(player_idle_anim)
         self.player_entity.anim_set("player_idle_anim")
@@ -125,6 +125,7 @@ class Start(Scene):
         ]
 
         self.wave = load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
+        self.enemies = []
 
     def update(self) -> None:
         controller = self.player_entity.controller
@@ -187,36 +188,42 @@ class Start(Scene):
 
         particles_rendered = 0
 
+        # player shooting
         if controller.is_shooting:
             offset = Vector(self.player_entity.rect.width/2, self.player_entity.rect.height/2)
             proj = self.player_entity.shoot(offset, self.projectile_entity2.copy(), math.radians(-90), 7)
             if proj is not None:
                 self.entities.append(proj)
-
-        if self.test_collisions(self.player_entity, ignore_tags = ["player_projectiles"]):
-            self.client.replace_scene("Start", "Death")
         
         for ps in self.player_entity.particle_systems:
             for p in ps.particles:
                 self.client.screen.set_at((int(p.position.x), int(p.position.y)), p.color)
                 particles_rendered += 1
 
-        
+        # Test for collisions
+        try:
+            collided = self.test_collisions(self.player_entity)
+            for c in collided:
+                if c.name == "enemy_projectiles":
+                    self.client.replace_scene("Start", "Death")
+                    self.entities.remove(c)
+            
+            for e in self.enemies:
+                collided = self.test_collisions(e)
+                for c in collided:
+                    if c.name == "player_projectiles":
+                        self.entities.remove(c)
+        except EntityNotInScene:
+            pass
+
         for e in self.entities:
             # test if entity is viewable
             screen_rect = self.client.screen.get_rect()
-            if not e.rect.colliderect(screen_rect):
+            if not e.rect.colliderect(screen_rect) and e.name != "player":
                 self.entities.remove(e)
                 continue
             
-            # if enemy projectile hits player or not (this is the source of flickering sprites)
-            if "enemy_projectiles" in e.tags and len(self.test_collisions(
-                e, ignore_tags=["enemy_projectiles", "enemy", "player_projectiles"]
-            )) > 0:
-                self.entities.remove(e)
-                continue
-            
-            if "enemy" in e.tags:
+            if e.name == "enemy":
                 player_rect = self.player_entity.rect
                 offset = Vector(e.rect.width/2, e.rect.height/2)
                 delta_pos = (self.player_entity.position + Vector(player_rect.width/2, player_rect.height/2)) - (e.position + offset)
@@ -227,14 +234,11 @@ class Start(Scene):
 
             self.client.screen.blit(e.sprite, e.position.to_list())
 
-            # draw hitboxes
-            # pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
-
         for sp in self.wave_manager.spawn_points:
             self.client.screen.set_at(sp.to_list(), (255,255,255))
         
         self.event_system.update(self.client.delta_time)
         self.advance_frame(self.client.delta_time)
 
-        #print(f"objects:{len(self.entities)} particles:{particles_rendered} fps:{int(self.client.current_fps)}")
+        print(f"objects:{len(self.entities)} particles:{particles_rendered} fps:{int(self.client.current_fps)}")
         #print(f"events:{len(self.event_system._methods)}")
