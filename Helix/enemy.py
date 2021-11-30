@@ -19,7 +19,7 @@ from Helix.SakuyaEngine.particles import Particles
 
 class EnemyController(BaseController):
     def __init__(self) -> None:
-        super().__init__(0.8)
+        super().__init__(2)
 
 class EnemyEntity(Entity):
     def __init__(

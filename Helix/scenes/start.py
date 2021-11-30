@@ -225,12 +225,6 @@ class Start(Scene):
             pass
 
         for e in self.entities:
-            # test if entity is viewable
-            screen_rect = self.client.screen.get_rect()
-            if not e.rect.colliderect(screen_rect) and e.name != "player":
-                self.entities.remove(e)
-                continue
-            
             if e.name == "enemy":
                 player_rect = self.player_entity.rect
                 offset = Vector(e.rect.width/2, e.rect.height/2)
@@ -242,13 +236,19 @@ class Start(Scene):
 
             self.client.screen.blit(e.sprite, e.position.to_list())
 
+            # test if entity is viewable for bullets
+            screen_rect = self.client.screen.get_rect()
+            if not e.rect.colliderect(screen_rect) and (e.name == "player_projectiles" or e.name == "enemy_projectiles"):
+                self.entities.remove(e)
+                continue
+
         for sp in self.wave_manager.spawn_points:
             self.client.screen.set_at(sp.to_list(), (255,255,255))
         
         self.event_system.update(self.client.delta_time)
         self.advance_frame(self.client.delta_time)
 
-        #print(f"objects:{len(self.entities)} particles:{particles_rendered} fps:{int(self.client.current_fps)}")
+        print(f"objects:{len(self.entities)} particles:{particles_rendered} fps:{int(self.client.current_fps)}")
         #print(f"events:{len(self.event_system._methods)}")
     
     def advance_frame(self, delta_time):
