@@ -10,7 +10,7 @@ from Helix.SakuyaEngine.scene import Scene
 from Helix.SakuyaEngine.math import Vector
 from Helix.SakuyaEngine.particles import Particles
 from Helix.SakuyaEngine.waves import load_wave_file
-from Helix.SakuyaEngine.errors import EntityNotInScene
+from Helix.SakuyaEngine.errors import EntityNotInScene, SceneNotActiveError
 
 from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
@@ -98,7 +98,8 @@ class Start(Scene):
             has_rigidbody = True,
             custom_hitbox_size = Vector(3, 3),
             obey_gravity = False,
-            name = "player"
+            name = "player",
+            fire_rate=100
         )
         self.player_entity.anim_add(player_idle_anim)
         self.player_entity.anim_set("player_idle_anim")
@@ -169,6 +170,8 @@ class Start(Scene):
                     controller.is_moving_up = True
                 if self.joystick.get_button(NS_CONTROLLER["down"]) == 1:
                     controller.is_moving_down = True
+                if self.joystick.get_button(NS_CONTROLLER["A"]) == 0:
+                    controller.is_shooting = True
 
             if event.type == pygame.JOYBUTTONUP:
                 if self.joystick.get_button(NS_CONTROLLER["left"]) == 0:
@@ -183,6 +186,8 @@ class Start(Scene):
                 if self.joystick.get_button(NS_CONTROLLER["down"]) == 0:
                     controller.is_moving_down = False
                     self.player_entity.velocity.y = 0
+                if self.joystick.get_button(NS_CONTROLLER["A"]) == 0:
+                    controller.is_shooting = False
 
         self.client.screen.fill((0,0,0))
 
@@ -205,7 +210,10 @@ class Start(Scene):
             collided = self.test_collisions(self.player_entity)
             for c in collided:
                 if c.name == "enemy_projectiles":
-                    self.client.replace_scene("Start", "Death")
+                    try:
+                        self.client.replace_scene("Start", "Death")
+                    except SceneNotActiveError:
+                        pass
                     self.entities.remove(c)
             
             for e in self.enemies:
@@ -240,5 +248,14 @@ class Start(Scene):
         self.event_system.update(self.client.delta_time)
         self.advance_frame(self.client.delta_time)
 
-        print(f"objects:{len(self.entities)} particles:{particles_rendered} fps:{int(self.client.current_fps)}")
+        #print(f"objects:{len(self.entities)} particles:{particles_rendered} fps:{int(self.client.current_fps)}")
         #print(f"events:{len(self.event_system._methods)}")
+    
+    def advance_frame(self, delta_time):
+        for object in self.entities[:]:
+            object.update(delta_time)
+            if object._is_destroyed:
+                self.entities.remove(object)
+                try:
+                    self.enemies.remove(object)
+                except: pass
