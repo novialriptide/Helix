@@ -43,7 +43,7 @@ class Start(Scene):
         projectile1_anim = Animation(
             "projectile1_anim",
             [projectile_sprites[0], projectile_sprites[1], projectile_sprites[2]],
-            fps = 2
+            fps = 4
         )
 
         self.projectile_entity1 = Entity(
@@ -58,7 +58,7 @@ class Start(Scene):
         projectile2_anim = Animation(
             "projectile2_anim",
             [projectile_sprites[3], projectile_sprites[4], projectile_sprites[5]],
-            fps = 2
+            fps = 4
         )
 
         self.projectile_entity2 = Entity(
@@ -193,7 +193,7 @@ class Start(Scene):
 
         particles_rendered = 0
 
-        # player shooting
+        # Player shooting
         if controller.is_shooting:
             offset = Vector(self.player_entity.rect.width/2, self.player_entity.rect.height/2)
             proj = self.player_entity.shoot(offset, self.projectile_entity2.copy(), math.radians(-90), 7)
@@ -225,6 +225,7 @@ class Start(Scene):
             pass
 
         for e in self.entities:
+            self.client.screen.blit(e.sprite, e.position.to_list())
             if e.name == "enemy":
                 player_rect = self.player_entity.rect
                 offset = Vector(e.rect.width/2, e.rect.height/2)
@@ -234,9 +235,8 @@ class Start(Scene):
                 if proj is not None:
                     self.entities.append(proj)
 
-            self.client.screen.blit(e.sprite, e.position.to_list())
-
-            # test if entity is viewable for bullets
+            # Test if entity is viewable for bullets
+            # TODO: This seems to be the source for flickering sprites.
             screen_rect = self.client.screen.get_rect()
             if not e.rect.colliderect(screen_rect) and (e.name == "player_projectiles" or e.name == "enemy_projectiles"):
                 self.entities.remove(e)
@@ -248,7 +248,7 @@ class Start(Scene):
         self.event_system.update(self.client.delta_time)
         self.advance_frame(self.client.delta_time)
 
-        print(f"objects:{len(self.entities)} particles:{particles_rendered} fps:{int(self.client.current_fps)}")
+        #print(f"objects:{len(self.entities)} particles:{particles_rendered} fps:{int(self.client.current_fps)}")
         #print(f"events:{len(self.event_system._methods)}")
     
     def advance_frame(self, delta_time):
