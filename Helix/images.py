@@ -17,3 +17,5 @@ player_sprites = split_image(
 enemy_sprites = split_image(
     pygame.image.load("Helix\sprites\enemy1_FINAL.png"), 32, 32
 )
+
+pygame_powered_logo = pygame.image.load("Helix\sprites\pygame_powered.png")
