@@ -1,6 +1,10 @@
-from Helix.SakuyaEngine.tile import split_image
-
+"""
+Helix: Flight Test (c) 2021 Andrew Hong
+This code is licensed under MIT license (see LICENSE for details)
+"""
 import pygame
+
+from Helix.SakuyaEngine.tile import split_image
 
 projectile_sprites = split_image(
     pygame.image.load("Helix\sprites\projectiles.png"), 8, 8

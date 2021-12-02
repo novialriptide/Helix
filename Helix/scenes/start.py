@@ -1,3 +1,7 @@
+"""
+Helix: Flight Test (c) 2021 Andrew Hong
+This code is licensed under MIT license (see LICENSE for details)
+"""
 import sys
 import pygame
 import math
@@ -15,7 +19,7 @@ from Helix.SakuyaEngine.errors import EntityNotInScene, SceneNotActiveError
 from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
 from Helix.playercontroller import PlayerController
-from Helix.enemy import EnemyEntity, EnemyController
+from Helix.enemy import EnemyEntity
 from Helix.images import player_sprites, enemy_sprites, projectile_sprites
 
 class Start(Scene):
@@ -238,7 +242,7 @@ class Start(Scene):
             # Test if entity is viewable for bullets
             # TODO: This seems to be the source for flickering sprites.
             screen_rect = self.client.screen.get_rect()
-            if not e.rect.colliderect(screen_rect) and (e.name == "player_projectiles" or e.name == "enemy_projectiles"):
+            if (e.name == "player_projectiles" or e.name == "enemy_projectiles") and not e.rect.colliderect(screen_rect):
                 self.entities.remove(e)
                 continue
 

@@ -1,3 +1,7 @@
+"""
+Helix: Flight Test (c) 2021 Andrew Hong
+This code is licensed under MIT license (see LICENSE for details)
+"""
 from Helix.SakuyaEngine.events import EventSystem, RepeatEvent, WaitEvent
 from Helix.SakuyaEngine.waves import WaveManager
 from Helix.SakuyaEngine.entity import Entity
