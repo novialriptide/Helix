@@ -23,9 +23,6 @@ from Helix.enemy import EnemyEntity
 from Helix.images import player_sprites, enemy_sprites, projectile_sprites
 
 class Start(Scene):
-    def __init__(self, client):
-        super().__init__(client)
-
     def on_awake(self) -> None:
         win_size = self.client.original_window_size
         pygame.joystick.init()
@@ -34,6 +31,9 @@ class Start(Scene):
             print(f"Console Controller Detected! [{self.joystick.get_name()}]")
         except:
             self.joystick = None
+        
+        # Load sounds
+        self.laser_1 = pygame.mixer.Sound("Helix\\audio\\laser-1.mp3")
 
         self.wave_manager = HelixWaves(30000)
         self.wave_manager.spawn_points = [
@@ -202,6 +202,7 @@ class Start(Scene):
             offset = Vector(self.player_entity.rect.width/2, self.player_entity.rect.height/2)
             proj = self.player_entity.shoot(offset, self.projectile_entity2.copy(), math.radians(-90), 7)
             if proj is not None:
+                pygame.mixer.Sound.play(self.laser_1)
                 self.entities.append(proj)
         
         for ps in self.player_entity.particle_systems:
