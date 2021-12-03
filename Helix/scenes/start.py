@@ -33,6 +33,7 @@ class Start(Scene):
             self.joystick = None
         
         # Load sounds
+        pygame.mixer.set_num_channels(64)
         self.laser_1 = pygame.mixer.Sound("Helix\\audio\\laser-1.mp3")
 
         self.wave_manager = HelixWaves(30000)
@@ -103,7 +104,7 @@ class Start(Scene):
             custom_hitbox_size = Vector(3, 3),
             obey_gravity = False,
             name = "player",
-            fire_rate=100
+            fire_rate = 100
         )
         self.player_entity.anim_add(player_idle_anim)
         self.player_entity.anim_set("player_idle_anim")
