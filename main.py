@@ -11,6 +11,9 @@ from Helix.SakuyaEngine.scene import SceneManager
 from Helix.scenes.start import Start
 from Helix.scenes.death import Death
 from Helix.scenes.splash import Splash
+
+from Helix.scenes.tests.bullet_test import BulletTest
+
 from Helix.images import player_sprites
 
 # get user's MONITOR RESOLUTION
@@ -30,7 +33,10 @@ HelixSceneManager = SceneManager(HelixClient)
 HelixSceneManager.register_scene(Start)
 HelixSceneManager.register_scene(Death)
 HelixSceneManager.register_scene(Splash)
+
+HelixSceneManager.register_scene(BulletTest)
 HelixClient.max_fps = 60
 
-HelixClient.add_scene("Splash")
+# HelixClient.add_scene("Splash")
+HelixClient.add_scene("BulletTest")
 HelixClient.main()
