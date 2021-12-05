@@ -197,7 +197,6 @@ class Start(Scene):
         self.client.screen.fill((0,0,0))
 
         particles_rendered = 0
-
         # Player shooting
         if controller.is_shooting:
             offset = Vector(self.player_entity.rect.width/2, self.player_entity.rect.height/2)
@@ -242,11 +241,11 @@ class Start(Scene):
                     self.entities.append(proj)
 
             # Test if entity is viewable for bullets
-            # TODO: This seems to be the source for flickering sprites.
+            # NOTE: This seems to be the source for flickering sprites.
+            # self.entities.remove(e) seems to the be main issue here, not colliderect().
             screen_rect = self.client.screen.get_rect()
             if (e.name == "player_projectiles" or e.name == "enemy_projectiles") and not e.rect.colliderect(screen_rect):
                 self.entities.remove(e)
-                continue
 
         for sp in self.wave_manager.spawn_points:
             self.client.screen.set_at(sp.to_list(), (255,255,255))
