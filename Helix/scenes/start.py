@@ -175,7 +175,7 @@ class Start(Scene):
                     controller.is_moving_up = True
                 if self.joystick.get_button(NS_CONTROLLER["down"]) == 1:
                     controller.is_moving_down = True
-                if self.joystick.get_button(NS_CONTROLLER["A"]) == 0:
+                if self.joystick.get_button(NS_CONTROLLER["A"]) == 1:
                     controller.is_shooting = True
 
             if event.type == pygame.JOYBUTTONUP:
@@ -256,7 +256,7 @@ class Start(Scene):
         #print(f"objects:{len(self.entities)} particles:{particles_rendered} fps:{int(self.client.current_fps)}")
         #print(f"events:{len(self.event_system._methods)}")
     
-    def advance_frame(self, delta_time):
+    def advance_frame(self, delta_time: float):
         for object in self.entities[:]:
             object.update(delta_time)
             if object._is_destroyed:
