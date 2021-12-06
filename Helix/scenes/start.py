@@ -124,7 +124,7 @@ class Start(Scene):
         offset = Vector(self.player_entity.rect.width/2, self.player_entity.rect.height/2)
         self.player_bs1 = BulletSpawner(
             self.player_entity, offset, self.player_bullet1, self.entities,
-            starting_angle = -90
+            starting_angle = -90, fire_rate = 100
         )
 
         self.wave_manager.entities = [
@@ -204,7 +204,7 @@ class Start(Scene):
         # Player shooting
         if controller.is_shooting:
             if self.player_bs1.can_shoot:
-                self.player_bs1.shoot(-90)
+                self.player_bs1.shoot_with_firerate(-90)
                 pygame.mixer.Sound.play(self.laser_1)
         for ps in self.player_entity.particle_systems:
             for p in ps.particles:
