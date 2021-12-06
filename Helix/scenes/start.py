@@ -15,6 +15,7 @@ from Helix.SakuyaEngine.math import Vector
 from Helix.SakuyaEngine.particles import Particles
 from Helix.SakuyaEngine.waves import load_wave_file
 from Helix.SakuyaEngine.errors import EntityNotInScene, SceneNotActiveError
+from Helix.SakuyaEngine.bullets import BulletSpawner, Bullet
 
 from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
@@ -66,15 +67,6 @@ class Start(Scene):
             fps = 4
         )
 
-        self.projectile_entity2 = Entity(
-            None,
-            Vector(0, 0),
-            custom_hitbox_size= Vector(3, 3),
-            name = "player_projectiles"
-        )
-        self.projectile_entity2.anim_add(copy(projectile2_anim))
-        self.projectile_entity2.anim_set("projectile2_anim")
-
         enemy_idle_anim = Animation(
             "enemy_idle_anim",
             enemy_sprites,
@@ -123,9 +115,18 @@ class Start(Scene):
                 lifetime = 500
             )
         ]
+
         self.entities = [
             self.player_entity
         ]
+
+        self.player_bullet1 = Bullet(None, 4, (255, 255, 0), 7, custom_hitbox_size = Vector(1, 1))
+        offset = Vector(self.player_entity.rect.width/2, self.player_entity.rect.height/2)
+        self.player_bs1 = BulletSpawner(
+            self.player_entity, offset, self.player_bullet1, self.entities,
+            starting_angle = -90
+        )
+
         self.wave_manager.entities = [
             self.enemy_entity
         ]
@@ -202,12 +203,9 @@ class Start(Scene):
         particles_rendered = 0
         # Player shooting
         if controller.is_shooting:
-            offset = Vector(self.player_entity.rect.width/2, self.player_entity.rect.height/2)
-            proj = self.player_entity.shoot(offset, self.projectile_entity2.copy(), math.radians(-90), 7)
-            if proj is not None:
+            if self.player_bs1.can_shoot:
+                self.player_bs1.shoot(-90)
                 pygame.mixer.Sound.play(self.laser_1)
-                self.entities.insert(0, proj)
-        
         for ps in self.player_entity.particle_systems:
             for p in ps.particles:
                 self.client.screen.set_at((int(p.position.x), int(p.position.y)), p.color)
@@ -233,7 +231,8 @@ class Start(Scene):
             pass
 
         for e in self.entities:
-            self.client.screen.blit(e.sprite, e.position.to_list())
+            if e.sprite is not None:
+                self.client.screen.blit(e.sprite, e.position.to_list())
             if e.name == "enemy":
                 player_rect = self.player_entity.rect
                 offset = Vector(e.rect.width/2, e.rect.height/2)
@@ -246,6 +245,9 @@ class Start(Scene):
 
         for sp in self.wave_manager.spawn_points:
             self.client.screen.set_at(sp.to_list(), (255,255,255))
+
+        for e in self.entities:
+            pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
         
         self.event_system.update(self.client.delta_time)
         self.advance_frame(self.client.delta_time)
