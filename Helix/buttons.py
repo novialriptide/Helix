@@ -4,6 +4,7 @@ This code is licensed under MIT license (see LICENSE for details)
 """
 import pygame
 
+# Keyboard + Mouse
 KEYBOARD = {
     "up": pygame.K_UP, 
     "left": pygame.K_LEFT, 
@@ -15,7 +16,7 @@ KEYBOARD = {
     "start": pygame.K_s
 }
 
-# nintendo switch
+# Nintendo Switch
 NS_CONTROLLER = {
     "up": 11, 
     "left": 13, 
