@@ -1,0 +1,2 @@
+Mods are currently not supported in the current state
+of Helix: Flight Test, but they will be in the future.
