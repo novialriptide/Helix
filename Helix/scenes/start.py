@@ -133,9 +133,8 @@ class Start(Scene):
         self.wave = load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
         self.enemies = []
 
-    def update(self) -> None:
+    def input(self) -> None:
         controller = self.player_entity.controller
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -194,6 +193,10 @@ class Start(Scene):
                 if self.joystick.get_button(NS_CONTROLLER["A"]) == 0:
                     controller.is_shooting = False
 
+    def update(self) -> None:
+        self.input()
+        controller = self.player_entity.controller
+        
         self.client.screen.fill((0,0,0))
 
         particles_rendered = 0
@@ -203,7 +206,7 @@ class Start(Scene):
             proj = self.player_entity.shoot(offset, self.projectile_entity2.copy(), math.radians(-90), 7)
             if proj is not None:
                 pygame.mixer.Sound.play(self.laser_1)
-                self.entities.append(proj)
+                self.entities.insert(0, proj)
         
         for ps in self.player_entity.particle_systems:
             for p in ps.particles:
@@ -238,14 +241,8 @@ class Start(Scene):
                 angle = math.atan2(delta_pos.y, delta_pos.x)
                 proj = e.shoot(offset, self.projectile_entity1.copy(), angle, 2)
                 if proj is not None:
-                    self.entities.append(proj)
-
-            # Test if entity is viewable for bullets
-            # NOTE: This seems to be the source for flickering sprites.
-            # self.entities.remove(e) seems to the be main issue here, not colliderect().
-            screen_rect = self.client.screen.get_rect()
-            if (e.name == "player_projectiles" or e.name == "enemy_projectiles") and not e.rect.colliderect(screen_rect):
-                self.entities.remove(e)
+                    proj.destroy(3000)
+                    self.entities.insert(0, proj)
 
         for sp in self.wave_manager.spawn_points:
             self.client.screen.set_at(sp.to_list(), (255,255,255))
