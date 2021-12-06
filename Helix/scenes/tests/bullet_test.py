@@ -4,7 +4,10 @@ This code is licensed under MIT license (see LICENSE for details)
 """
 import sys
 import pygame
+import json
+from types import SimpleNamespace
 from copy import copy
+
 
 from Helix.SakuyaEngine.entity import Entity
 from Helix.SakuyaEngine.animation import Animation
@@ -45,7 +48,7 @@ class BulletTest(Scene):
             total_bullet_arrays = 6, fire_rate = 100,
             spread_between_bullet_arrays = 60, spread_within_bullet_arrays = 57,
             spin_rate = 3, bullet_lifetime = 1000, max_spin_rate = 10, invert_spin = True,
-            spin_modificator = 0.5
+            spin_modificator = 0.5, bullet_curve = 10
         )
 
     def update(self) -> None:
