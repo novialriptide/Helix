@@ -37,6 +37,5 @@ HelixSceneManager.register_scene(Splash)
 HelixSceneManager.register_scene(BulletTest)
 HelixClient.max_fps = 60
 
-# HelixClient.add_scene("Splash")
-HelixClient.add_scene("BulletTest")
+HelixClient.add_scene("Splash")
 HelixClient.main()
