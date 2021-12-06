@@ -124,7 +124,7 @@ class Start(Scene):
         offset = Vector(self.player_entity.rect.width/2, self.player_entity.rect.height/2)
         self.player_bs1 = BulletSpawner(
             self.player_entity, offset, self.player_bullet1, self.entities,
-            starting_angle = -90, fire_rate = 100
+            starting_angle = -90, fire_rate = 100, bullet_speed = 7
         )
 
         self.wave_manager.entities = [
