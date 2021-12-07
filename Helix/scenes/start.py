@@ -8,7 +8,7 @@ import math
 
 from copy import copy
 
-from Helix.SakuyaEngine.entity import Entity
+from Helix.SakuyaEngine.entity import Entity, load_entity_json
 from Helix.SakuyaEngine.animation import Animation
 from Helix.SakuyaEngine.scene import Scene
 from Helix.SakuyaEngine.math import Vector
@@ -20,8 +20,7 @@ from Helix.SakuyaEngine.bullets import BulletSpawner, Bullet
 from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
 from Helix.playercontroller import PlayerController
-from Helix.enemy import EnemyEntity
-from Helix.images import player_sprites, enemy_sprites, projectile_sprites
+from Helix.images import player_sprites, enemy_sprites
 
 class Start(Scene):
     def on_awake(self) -> None:
@@ -46,43 +45,6 @@ class Start(Scene):
             Vector(int(win_size.x * 4/5), int(win_size.y * 1/4))
         ]
 
-        projectile1_anim = Animation(
-            "projectile1_anim",
-            [projectile_sprites[0], projectile_sprites[1], projectile_sprites[2]],
-            fps = 4
-        )
-
-        self.projectile_entity1 = Entity(
-            None,
-            Vector(0, 0),
-            custom_hitbox_size= Vector(3, 3),
-            name = "enemy_projectiles"
-        )
-        self.projectile_entity1.anim_add(copy(projectile1_anim))
-        self.projectile_entity1.anim_set("projectile1_anim")
-
-        projectile2_anim = Animation(
-            "projectile2_anim",
-            [projectile_sprites[3], projectile_sprites[4], projectile_sprites[5]],
-            fps = 4
-        )
-
-        enemy_idle_anim = Animation(
-            "enemy_idle_anim",
-            enemy_sprites,
-            fps = 1.5
-        )
-
-        self.enemy_entity = EnemyEntity(
-            Vector(0, 0),
-            has_rigidbody = True,
-            fire_rate = 500,
-            custom_hitbox_size = Vector(11, 11),
-            name = "enemy"
-        )
-        self.enemy_entity.anim_add(copy(enemy_idle_anim))
-        self.enemy_entity.anim_set("enemy_idle_anim")
-
         player_idle_anim = Animation(
             "player_idle_anim", 
             player_sprites,
@@ -90,13 +52,13 @@ class Start(Scene):
         )
 
         self.player_entity = Entity(
-            PlayerController,
-            Vector(win_size.x/2, win_size.y/2),
+            controller = PlayerController,
+            speed = 1.5,
+            position = Vector(win_size.x/2, win_size.y/2),
             has_rigidbody = True,
             custom_hitbox_size = Vector(3, 3),
             obey_gravity = False,
-            name = "player",
-            fire_rate = 100
+            name = "player"
         )
         self.player_entity.anim_add(player_idle_anim)
         self.player_entity.anim_set("player_idle_anim")
@@ -128,7 +90,7 @@ class Start(Scene):
         )
 
         self.wave_manager.entities = [
-            self.enemy_entity
+            load_entity_json("Helix\\data\\entity\\ado.json")
         ]
 
         self.wave = load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)

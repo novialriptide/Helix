@@ -1,0 +1,30 @@
+{
+    "custom_hitbox_size": [11, 11],
+    "name": "Ado",
+    "speed": 3,
+    "animations": [
+        {
+            "name": "idle_anim",
+            "sprites": {
+                "width": 32,
+                "height": 32,
+                "image": "Helix\\sprites\\ado_idle_anim.png"
+            },
+            "fps": 1.5
+        }
+    ],
+    "bullet_movesets": [
+        {
+            "spawn_chance": 0.8,
+            "bullet": null,
+            "bullet_spawner_name": {
+
+            }
+        }
+    ],
+    "event_sounds": {
+        "on_shoot": [],
+        "on_death": [],
+        "ambient": []
+    }
+}
