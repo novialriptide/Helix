@@ -1,6 +1,13 @@
 {
     "language_name": "korean",
     "msgs": {
-        
+        "menu_play": "놀다",
+        "menu_options": "",
+        "menu_options_change_language": "",
+        "menu_options_lang_english": "",
+        "menu_options_lang_korean": "",
+        "menu_game_mode0": "",
+        "menu_game_mode1": "",
+        "game_wave_start": "시작합니다"
     }
 }
