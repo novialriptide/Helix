@@ -26,7 +26,7 @@ class HelixWaves(WaveManager):
         e.position = spawn_animations[spawn_anim]["spawn_position_offset"] - e.center_position + self.spawn_points[spawn_key]
 
         def move_spawn_func(entity: Entity, target: Vector):
-            entity.position = entity.position.move_toward(target - e.center_position, entity.controller.speed * delta_time())
+            entity.position = entity.position.move_toward(target - e.center_position, entity.speed * delta_time())
             return entity.position != target - e.center_position
             
         event = RepeatEvent("move_enemy", move_spawn_func, args=[e, self.spawn_points[spawn_key]])
@@ -34,7 +34,7 @@ class HelixWaves(WaveManager):
 
         def move_despawn_func(entity: Entity, spawn_anim: int, spawn_key: int):
             def move_func(_entity: Entity, _target: Vector):
-                _entity.position = _entity.position.move_toward(_target - e.center_position, _entity.controller.speed * delta_time())
+                _entity.position = _entity.position.move_toward(_target - e.center_position, _entity.speed * delta_time())
                 if _entity.position == _target - e.center_position:
                     _entity._is_destroyed = True
                 return _entity.position != _target - e.center_position
