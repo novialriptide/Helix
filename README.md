@@ -9,7 +9,7 @@
 4. Run `main.py`
 
 ## Gameplay
-__Helix: Flight Test__ is a game written in Python3.8 using the SakuyaEngine Engine. You are the best drone pilot on earth. Hired by Helix Industries, fly your way through the "photo-realistic" simulation to defeat the enemy’s mothership. This drone has a very special ability to repair or upgrade itself whenever it sees a salvageable piece of material. There are many waves in this game that you will need to deal with, but you’re able to upgrade your stats. 
+__Helix: Flight Test__ is a game written in Python3.8 using the SakuyaEngine Engine. You are the best drone pilot on earth. Hired by Helix Industries, you must defeat an alien mothership that has entered Earth's atmosphere. This drone has a very special ability to repair or upgrade itself whenever it sees a salvageable piece of material. There are many waves in this game that you will need to deal with, but you’re able to upgrade your stats.
 
 ### Worlds
 1. Earth
