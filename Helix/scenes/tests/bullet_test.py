@@ -37,7 +37,7 @@ class BulletTest(Scene):
             fps = 4
         )
 
-        e = Entity(None, Vector(win_size.x / 2, win_size.y / 2), custom_hitbox_size = Vector(3, 3))
+        e = Entity(custom_hitbox_size = Vector(3, 3), position = Vector(win_size.x / 2, win_size.y / 2))
         b = Bullet(None, 3, (255, 0, 0), 5, custom_hitbox_size = Vector(2, 2), name = "bullet")
         b.anim_add(copy(b_anim))
         b.anim_set("b_anim")
@@ -48,7 +48,7 @@ class BulletTest(Scene):
             total_bullet_arrays = 6, fire_rate = 100,
             spread_between_bullet_arrays = 60, spread_within_bullet_arrays = 57,
             spin_rate = 3, bullet_lifetime = 1000, max_spin_rate = 10, invert_spin = True,
-            spin_modificator = 0.5, bullet_curve = 10
+            spin_modificator = 0.5, bullet_curve = 5
         )
 
     def update(self) -> None:
