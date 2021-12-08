@@ -1,6 +1,7 @@
 # Helix: Flight Test
 ## Contributers
- - Andrew Hong
+ - [Andrew Hong](https://github.com/novialriptide)
+ - [acorm]()
 
 ## How to install and run from source
 1. Clone this repository
@@ -9,30 +10,6 @@
 4. Run `main.py`
 
 ## Gameplay
-__Helix: Flight Test__ is a game written in Python3.8 using the SakuyaEngine Engine. You are the best drone pilot on earth. Hired by Helix Industries, you must defeat an alien mothership that has entered Earth's atmosphere. This drone has a very special ability to repair or upgrade itself whenever it sees a salvageable piece of material. There are many waves in this game that you will need to deal with, but you’re able to upgrade your stats.
-
-### Worlds
-1. Earth
-2. Space
-3. Inside the Mothership
-4. Powercore (1 level, final boss)
-
-### Stats
-```
-Armor
-Shields
-Main Weapon Damage
-Tracking Weapons Damage
-Aim Accuracy
-Repair Speed
-Radio
-```
-
-### Abilities
-```
-EMP       Make enemies drop from the sky, but if you hit their falling corpse you die.
-```
-
 ### Default Controls
 #### Keyboard
 ```
