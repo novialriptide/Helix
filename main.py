@@ -3,6 +3,7 @@ Helix: Flight Test (c) 2021 Andrew Hong
 This code is licensed under MIT license (see LICENSE for details)
 """
 import ctypes
+import argparse
 
 from Helix.SakuyaEngine.client import Client
 from Helix.SakuyaEngine.math import Vector
@@ -37,5 +38,17 @@ HelixSceneManager.register_scene(Death)
 HelixSceneManager.register_scene(BulletTest)
 HelixClient.max_fps = 60
 
-HelixClient.add_scene("Splash")
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    '--load_scene',
+    type=str,
+    help="Load a scene"
+)
+args = parser.parse_args()
+
+if args.load_scene:
+    HelixClient.add_scene(args.load_scene)
+else:
+    HelixClient.add_scene("Splash")
+
 HelixClient.main()
