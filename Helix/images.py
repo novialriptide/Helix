@@ -11,7 +11,7 @@ projectile_sprites = split_image(
 )
 
 player_sprites = split_image(
-    pygame.image.load("Helix\\sprites\\ship.png"), 16, 16
+    pygame.image.load("Helix\\sprites\\player.png"), 16, 16
 )
 
 enemy_sprites = split_image(
