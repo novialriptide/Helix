@@ -1,6 +1,6 @@
 {
-    "custom_hitbox_size": [11, 11],
     "name": "Ado",
+    "custom_hitbox_size": [11, 11],
     "speed": 3,
     "animations": [
         {
@@ -13,13 +13,23 @@
             "fps": 1.5
         }
     ],
-    "bullet_movesets": [
+    "bullet_spawners": [
         {
-            "spawn_chance": 0.8,
-            "bullet": null,
-            "bullet_spawner_name": {
+            "bullet": {
+                "speed": 4,
+                "color": [255, 255, 0],
+                "damage": 7,
+                "custom_hitbox_size": [1, 1]
+            },
 
-            }
+            "iterations": 3,
+            "bullets_per_array": 3,
+            "total_bullet_arrays": 6,
+            "fire_rate": 700,
+            "spread_between_bullet_arrays": 60,
+            "spread_within_bullet_arrays": 57,
+            "bullet_lifetime": 1000,
+            "bullet_curve": 2
         }
     ],
     "event_sounds": {
