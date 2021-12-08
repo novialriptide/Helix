@@ -14,6 +14,7 @@ from Helix.SakuyaEngine.particles import Particles
 from Helix.SakuyaEngine.waves import load_wave_file
 from Helix.SakuyaEngine.errors import EntityNotInScene, SceneNotActiveError
 from Helix.SakuyaEngine.bullets import BulletSpawner, Bullet
+from Helix.SakuyaEngine.text import text
 
 from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
@@ -29,6 +30,7 @@ class Start(Scene):
             print(f"Console Controller Detected! [{self.joystick.get_name()}]")
         
         # Load sounds
+        pygame.mixer.init()
         pygame.mixer.set_num_channels(64)
         self.laser_1 = pygame.mixer.Sound("Helix\\audio\\laser-1.mp3")
 
@@ -81,7 +83,10 @@ class Start(Scene):
                     (255, 224, 70),
                     (255, 78, 65)
                 ],
-                offset = Vector(player_rect.width/2, player_rect.height * 1/4),
+                offset = Vector(
+                    player_rect.width/2,
+                    player_rect.height * 1/4
+                ),
                 particles_num = 10,
                 spread = 1,
                 lifetime = 1000
@@ -91,18 +96,19 @@ class Start(Scene):
         self.entities = [
             self.player_entity
         ]
+        self.enemies = []
 
-        self.player_bullet1 = Bullet(None, 4, (255, 255, 0), 7, custom_hitbox_size = Vector(1, 1))
+        self.player_bullet1 = Bullet(speed = 4, color = (255, 255, 0), damage = 7, custom_hitbox_size = Vector(1, 1))
         offset = Vector(self.player_entity.rect.width/2, self.player_entity.rect.height/2)
         self.player_bs1 = BulletSpawner(
-            self.player_entity, offset, self.player_bullet1, self.entities,
-            starting_angle = -90, fire_rate = 100, bullet_speed = 7
+            self.player_entity, self.player_bullet1, self.entities,
+            starting_angle = -90, fire_rate = 100, bullet_speed = 7,
+            position_offset = offset
         )
 
         self.wave_manager.entities = [
-            load_entity_json("Helix\\data\\entity\\ado.json")
+            load_entity_json("Helix\\data\\entity\\ado.json", self.entities)
         ]
-        self.enemies = []
 
         load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
 
@@ -169,7 +175,7 @@ class Start(Scene):
     def update(self) -> None:
         self.input()
         controller = self.player_entity.controller
-        
+
         self.client.screen.fill((0, 0, 0))
 
         particles_rendered = 0
@@ -217,7 +223,7 @@ class Start(Scene):
 
         # for sp in self.wave_manager.spawn_points: self.client.screen.set_at(sp.to_list(), (255,255,255))
 
-        # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
+        for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
         
         for p in self.particle_systems:
             p.render(self.client.screen)
@@ -226,13 +232,18 @@ class Start(Scene):
         self.event_system.update(self.client.delta_time)
         self.advance_frame(self.client.delta_time)
 
+        fps = text(f"fps: {int(self.client.pg_clock.get_fps())}", 10, "Arial", (0, 255, 0))
+        object_count = text(f"object count: {len(self.entities)}", 10, "Arial", (0, 255, 0))
+        self.client.screen.blit(fps, (0, 0))
+        self.client.screen.blit(object_count, (0, 10))
+
         #print(f"objects:{len(self.entities)} particles:{particles_rendered} fps:{int(self.client.current_fps)}")
         #print(f"events:{len(self.event_system._methods)}")
     
     def advance_frame(self, delta_time: float):
-        for object in self.entities[:]:
-            object.update(delta_time)
-            if object._is_destroyed:
-                self.entities.remove(object)
-                if object in self.enemies:
-                    self.enemies.remove(object)
+        for entity in self.entities[:]:
+            entity.update(delta_time)
+            if entity._is_destroyed:
+                self.entities.remove(entity)
+                if entity in self.enemies:
+                    self.enemies.remove(entity)
