@@ -14,8 +14,8 @@ class Splash(Scene):
     def on_awake(self) -> None:
         pygame.mixer.init()
         pygame.joystick.init()
-        self.joystick = pygame.joystick.Joystick(0)
-        if self.joystick is not None:
+        if pygame.joystick.get_count() > 0:
+            self.joystick = pygame.joystick.Joystick(0)
             print(f"Console Controller Detected! [{self.joystick.get_name()}]")
 
         self.duration = 3000

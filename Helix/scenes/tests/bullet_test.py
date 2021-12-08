@@ -19,9 +19,6 @@ from Helix.SakuyaEngine.text import text
 from Helix.images import projectile_sprites
 
 class BulletTest(Scene):
-    def __init__(self, client):
-        super().__init__(client)
-
     def on_awake(self) -> None:
         win_size = self.client.original_window_size
         pygame.joystick.init()

@@ -14,9 +14,8 @@ class Death(Scene):
 
     def on_awake(self) -> None:
         pygame.joystick.init()
-        self.joystick = pygame.joystick.Joystick(0)
-        if self.joystick is not None:
-            print(f"Console Controller Detected! [{self.joystick.get_name()}]")
+        if pygame.joystick.get_count() > 0:
+            self.joystick = pygame.joystick.Joystick(0)
 
     def update(self) -> None:
         win_size = self.client.original_window_size
