@@ -6,8 +6,6 @@ import sys
 import pygame
 import math
 
-from copy import copy
-
 from Helix.SakuyaEngine.entity import Entity, load_entity_json
 from Helix.SakuyaEngine.animation import Animation
 from Helix.SakuyaEngine.scene import Scene
@@ -20,17 +18,15 @@ from Helix.SakuyaEngine.bullets import BulletSpawner, Bullet
 from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
 from Helix.playercontroller import PlayerController
-from Helix.images import player_sprites, enemy_sprites
+from Helix.images import player_sprites
 
 class Start(Scene):
     def on_awake(self) -> None:
         win_size = self.client.original_window_size
         pygame.joystick.init()
-        try:
-            self.joystick = pygame.joystick.Joystick(0)
+        self.joystick = pygame.joystick.Joystick(0)
+        if self.joystick is not None:
             print(f"Console Controller Detected! [{self.joystick.get_name()}]")
-        except:
-            self.joystick = None
         
         # Load sounds
         pygame.mixer.set_num_channels(64)
@@ -174,7 +170,7 @@ class Start(Scene):
         self.input()
         controller = self.player_entity.controller
         
-        self.client.screen.fill((0,0,0))
+        self.client.screen.fill((0, 0, 0))
 
         particles_rendered = 0
         # Player shooting
@@ -238,6 +234,5 @@ class Start(Scene):
             object.update(delta_time)
             if object._is_destroyed:
                 self.entities.remove(object)
-                try:
+                if object in self.enemies:
                     self.enemies.remove(object)
-                except: pass

@@ -13,6 +13,11 @@ from Helix.images import pygame_powered_logo
 class Splash(Scene):
     def on_awake(self) -> None:
         pygame.mixer.init()
+        pygame.joystick.init()
+        self.joystick = pygame.joystick.Joystick(0)
+        if self.joystick is not None:
+            print(f"Console Controller Detected! [{self.joystick.get_name()}]")
+
         self.duration = 3000
         exit = WaitEvent("transition_to_start", self.duration, self.exit_func)
         self.client.event_system.add(exit)
@@ -24,7 +29,7 @@ class Splash(Scene):
             if event.type == pygame.QUIT:
                 sys.exit()
 
-        self.client.screen.fill((0,0,0))
+        self.client.screen.fill((0, 0, 0))
         pg_logo_rect = pygame_powered_logo.get_rect()
         pg_logo_rect.width *= 1/16
         pg_logo_rect.height *= 1/16
