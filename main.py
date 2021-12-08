@@ -30,9 +30,9 @@ HelixClient = Client(
     window_icon = player_sprites[0]
 )
 HelixSceneManager = SceneManager(HelixClient)
+HelixSceneManager.register_scene(Splash)
 HelixSceneManager.register_scene(Start)
 HelixSceneManager.register_scene(Death)
-HelixSceneManager.register_scene(Splash)
 
 HelixSceneManager.register_scene(BulletTest)
 HelixClient.max_fps = 60
