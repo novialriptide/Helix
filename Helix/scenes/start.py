@@ -45,6 +45,20 @@ class Start(Scene):
             Vector(int(win_size.x * 4/5), int(win_size.y * 1/4))
         ]
 
+        self.particle_systems = [
+            Particles(
+                Vector(-0.5, -0.5),
+                colors = [
+                    (255, 255, 255),
+                    (100, 100, 100)
+                ],
+                particles_num = 10,
+                spread = 5,
+                lifetime = 1000,
+                position = Vector(win_size.x, -10)
+            )
+        ]
+
         player_idle_anim = Animation(
             "player_idle_anim", 
             player_sprites,
@@ -71,10 +85,10 @@ class Start(Scene):
                     (255, 224, 70),
                     (255, 78, 65)
                 ],
-                offset = Vector(player_rect.width/2, player_rect.height * 2/3),
+                offset = Vector(player_rect.width/2, player_rect.height * 1/4),
                 particles_num = 10,
                 spread = 1,
-                lifetime = 500
+                lifetime = 1000
             )
         ]
 
@@ -92,9 +106,9 @@ class Start(Scene):
         self.wave_manager.entities = [
             load_entity_json("Helix\\data\\entity\\ado.json")
         ]
-
-        self.wave = load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
         self.enemies = []
+
+        load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
 
     def input(self) -> None:
         controller = self.player_entity.controller
@@ -205,12 +219,14 @@ class Start(Scene):
                     proj.destroy(3000)
                     self.entities.insert(0, proj)
 
-        for sp in self.wave_manager.spawn_points:
-            self.client.screen.set_at(sp.to_list(), (255,255,255))
+        # for sp in self.wave_manager.spawn_points: self.client.screen.set_at(sp.to_list(), (255,255,255))
 
-        for e in self.entities:
-            pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
+        # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
         
+        for p in self.particle_systems:
+            p.render(self.client.screen)
+            p.update(self.client.delta_time)
+
         self.event_system.update(self.client.delta_time)
         self.advance_frame(self.client.delta_time)
 
