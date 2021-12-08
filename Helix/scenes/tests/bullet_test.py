@@ -43,12 +43,11 @@ class BulletTest(Scene):
         b.anim_set("b_anim")
 
         self.bullet_spawner_test = BulletSpawner(
-            e, Vector(0, 0), b, self.entities,
-            iterations = 0, bullets_per_array = 3,
-            total_bullet_arrays = 6, fire_rate = 100,
+            e, b, self.entities,
+            iterations = 3, bullets_per_array = 3,
+            total_bullet_arrays = 6, fire_rate = 700,
             spread_between_bullet_arrays = 60, spread_within_bullet_arrays = 57,
-            spin_rate = 3, bullet_lifetime = 1000, max_spin_rate = 10, invert_spin = True,
-            spin_modificator = 0.5, bullet_curve = 5
+            bullet_lifetime = 1000, bullet_curve = 2
         )
 
     def update(self) -> None:
