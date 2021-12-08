@@ -32,7 +32,10 @@ class HelixWaves(WaveManager):
         event = RepeatEvent("move_enemy", move_spawn_func, args=[e, self.spawn_points[spawn_key]])
         event_system._methods.append(event)
 
+        # Event that will wait until it's time for it to despawn and execute the despawn movement.
         def move_despawn_func(entity: Entity, spawn_anim: int, spawn_key: int):
+
+            # Event that will move the entity to its eventual deletion.
             def move_func(_entity: Entity, _target: Vector):
                 _entity.position = _entity.position.move_toward(_target - e.center_position, _entity.speed * delta_time())
                 if _entity.position == _target - e.center_position:
