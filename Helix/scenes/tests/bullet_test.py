@@ -16,8 +16,6 @@ from Helix.SakuyaEngine.scene import Scene
 from Helix.SakuyaEngine.bullets import BulletSpawner, Bullet
 from Helix.SakuyaEngine.text import text
 
-from Helix.images import projectile_sprites
-
 class BulletTest(Scene):
     def on_awake(self) -> None:
         win_size = self.client.original_window_size
