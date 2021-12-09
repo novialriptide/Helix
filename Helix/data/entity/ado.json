@@ -22,7 +22,7 @@
                 "custom_hitbox_size": [1, 1]
             },
 
-            "iterations": 3,
+            "iterations": 10,
             "bullets_per_array": 3,
             "total_bullet_arrays": 6,
             "fire_rate": 700,

@@ -25,8 +25,8 @@ class Start(Scene):
     def on_awake(self) -> None:
         win_size = self.client.original_window_size
         pygame.joystick.init()
-        self.joystick = pygame.joystick.Joystick(0)
-        if self.joystick is not None:
+        if pygame.joystick.get_count() > 0:
+            self.joystick = pygame.joystick.Joystick(0)
             print(f"Console Controller Detected! [{self.joystick.get_name()}]")
         
         # Load sounds
@@ -70,7 +70,8 @@ class Start(Scene):
             has_rigidbody = True,
             custom_hitbox_size = Vector(3, 3),
             obey_gravity = False,
-            name = "player"
+            name = "player",
+            update_bullet_spawners = False
         )
         self.player_entity.anim_add(player_idle_anim)
         self.player_entity.anim_set("player_idle_anim")
@@ -98,13 +99,21 @@ class Start(Scene):
         ]
         self.enemies = []
 
-        self.player_bullet1 = Bullet(speed = 4, color = (255, 255, 0), damage = 7, custom_hitbox_size = Vector(1, 1))
-        offset = Vector(self.player_entity.rect.width/2, self.player_entity.rect.height/2)
-        self.player_bs1 = BulletSpawner(
-            self.player_entity, self.player_bullet1, self.entities,
-            starting_angle = -90, fire_rate = 100, bullet_speed = 7,
-            position_offset = offset
+        player_bullet1 = Bullet(
+            speed = 4,
+            color = (255, 255, 0),
+            damage = 7,
+            custom_hitbox_size = Vector(1, 1)
         )
+        offset = Vector(
+            self.player_entity.rect.width/2, 
+            self.player_entity.rect.height/2
+        )
+        player_bs1 = BulletSpawner(
+            player_bullet1,
+            starting_angle = -90, fire_rate = 100, bullet_speed = 7
+        )
+        self.player_entity.bullet_spawners.append(player_bs1)
 
         self.wave_manager.entities = [
             load_entity_json("Helix\\data\\entity\\ado.json", self.entities)
@@ -181,8 +190,10 @@ class Start(Scene):
         particles_rendered = 0
         # Player shooting
         if controller.is_shooting:
-            if self.player_bs1.can_shoot:
-                self.player_bs1.shoot_with_firerate(-90)
+            bs = self.player_entity.bullet_spawners[0]
+            if bs.can_shoot:
+                self.bullets.append(bs.shoot_with_firerate(-90))
+                print(self.entities[-1].custom_hitbox)
                 pygame.mixer.Sound.play(self.laser_1)
         for ps in self.player_entity.particle_systems:
             for p in ps.particles:
@@ -223,7 +234,9 @@ class Start(Scene):
 
         # for sp in self.wave_manager.spawn_points: self.client.screen.set_at(sp.to_list(), (255,255,255))
 
-        for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
+        # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
+
+        for b in self.bullets: pygame.draw.rect(self.client.screen, (0, 255, 0), b.custom_hitbox, 1)
         
         for p in self.particle_systems:
             p.render(self.client.screen)
@@ -247,3 +260,16 @@ class Start(Scene):
                 self.entities.remove(entity)
                 if entity in self.enemies:
                     self.enemies.remove(entity)
+
+            # Update Bullet Spawners
+            # TODO: Move this in the Entity.update()
+            for bs in entity.bullet_spawners:
+                bs.position = entity.position + entity.center_position
+                if entity.update_bullet_spawners:
+                    self.bullets.extend(bs.update(delta_time))
+
+        for bullet in self.bullets[:]:
+            bullet.update(delta_time)
+            if bullet._is_destroyed:
+                self.bullets.remove(bullet)
+                
