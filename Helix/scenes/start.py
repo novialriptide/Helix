@@ -6,8 +6,7 @@ import sys
 import pygame
 import math
 
-from Helix.SakuyaEngine.entity import Entity, load_entity_json
-from Helix.SakuyaEngine.animation import Animation
+from Helix.SakuyaEngine.entity import load_entity_json
 from Helix.SakuyaEngine.scene import Scene
 from Helix.SakuyaEngine.math import Vector
 from Helix.SakuyaEngine.particles import Particles
@@ -19,7 +18,6 @@ from Helix.SakuyaEngine.text import text
 from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
 from Helix.playercontroller import PlayerController
-from Helix.images import player_sprites
 
 class Start(Scene):
     def on_awake(self) -> None:
@@ -57,24 +55,10 @@ class Start(Scene):
             )
         ]
 
-        player_idle_anim = Animation(
-            "player_idle_anim", 
-            player_sprites,
-            fps = 2
-        )
-
-        self.player_entity = Entity(
-            controller = PlayerController,
-            speed = 1.5,
-            position = Vector(win_size.x/2, win_size.y/2),
-            has_rigidbody = True,
-            custom_hitbox_size = Vector(3, 3),
-            obey_gravity = False,
-            name = "player",
-            update_bullet_spawners = False
-        )
-        self.player_entity.anim_add(player_idle_anim)
-        self.player_entity.anim_set("player_idle_anim")
+        self.player_entity = load_entity_json("Helix\\data\\entity\\helix.json")
+        self.player_entity.position = Vector(win_size.x/2, win_size.y/2)
+        self.player_entity.controller = PlayerController()
+        self.player_entity.anim_set("idle_anim")
         player_rect = self.player_entity.rect
         self.player_entity.particle_systems = [
             Particles(
@@ -111,12 +95,13 @@ class Start(Scene):
         )
         player_bs1 = BulletSpawner(
             player_bullet1,
-            starting_angle = -90, fire_rate = 100, bullet_speed = 7
+            starting_angle = -90, fire_rate = 100, 
+            bullet_speed = 7
         )
         self.player_entity.bullet_spawners.append(player_bs1)
 
         self.wave_manager.entities = [
-            load_entity_json("Helix\\data\\entity\\ado.json", self.entities)
+            load_entity_json("Helix\\data\\entity\\ado.json")
         ]
 
         load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
