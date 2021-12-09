@@ -8,7 +8,7 @@ import pygame
 
 from Helix.SakuyaEngine.scene import Scene
 
-from Helix.images import pygame_powered_logo
+from Helix.const import pygame_powered_logo
 
 class Splash(Scene):
     def on_awake(self) -> None:

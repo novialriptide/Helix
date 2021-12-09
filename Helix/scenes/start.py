@@ -13,11 +13,12 @@ from Helix.SakuyaEngine.particles import Particles
 from Helix.SakuyaEngine.waves import load_wave_file
 from Helix.SakuyaEngine.errors import EntityNotInScene, SceneNotActiveError
 from Helix.SakuyaEngine.bullets import BulletSpawner, Bullet
-from Helix.SakuyaEngine.text import text
+from Helix.SakuyaEngine.text import text2
 
 from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
 from Helix.playercontroller import PlayerController
+from Helix.const import *
 
 class Start(Scene):
     def on_awake(self) -> None:
@@ -212,8 +213,8 @@ class Start(Scene):
         self.event_system.update(self.client.delta_time)
         self.advance_frame(self.client.delta_time)
 
-        fps = text(f"fps: {int(self.client.pg_clock.get_fps())}", 10, "Arial", (0, 255, 0))
-        object_count = text(f"object count: {len(self.entities)}", 10, "Arial", (0, 255, 0))
+        fps = text2(f"fps: {int(self.client.pg_clock.get_fps())}", 10, font5x3, (0, 255, 0))
+        object_count = text2(f"object count: {len(self.entities)}", 10, font5x3, (0, 255, 0))
         self.client.screen.blit(fps, (0, 0))
         self.client.screen.blit(object_count, (0, 10))
 
