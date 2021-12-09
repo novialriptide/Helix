@@ -193,7 +193,6 @@ class Start(Scene):
             bs = self.player_entity.bullet_spawners[0]
             if bs.can_shoot:
                 self.bullets.append(bs.shoot_with_firerate(-90))
-                print(self.entities[-1].custom_hitbox)
                 pygame.mixer.Sound.play(self.laser_1)
         for ps in self.player_entity.particle_systems:
             for p in ps.particles:
