@@ -83,23 +83,6 @@ class Start(Scene):
         ]
         self.enemies = []
 
-        player_bullet1 = Bullet(
-            speed = 4,
-            color = (255, 255, 0),
-            damage = 7,
-            custom_hitbox_size = Vector(1, 1)
-        )
-        offset = Vector(
-            self.player_entity.rect.width/2, 
-            self.player_entity.rect.height/2
-        )
-        player_bs1 = BulletSpawner(
-            player_bullet1,
-            starting_angle = -90, fire_rate = 100, 
-            bullet_speed = 7
-        )
-        self.player_entity.bullet_spawners.append(player_bs1)
-
         self.wave_manager.entities = [
             load_entity_json("Helix\\data\\entity\\ado.json")
         ]
