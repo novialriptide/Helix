@@ -39,11 +39,7 @@ HelixSceneManager.register_scene(BulletTest)
 HelixClient.max_fps = 60
 
 parser = argparse.ArgumentParser()
-parser.add_argument(
-    '--load_scene',
-    type=str,
-    help="Load a scene"
-)
+parser.add_argument("--load_scene", type=str, help="Load a scene")
 args = parser.parse_args()
 
 if args.load_scene:
