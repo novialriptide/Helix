@@ -15,7 +15,7 @@ from Helix.scenes.splash import Splash
 
 from Helix.scenes.tests.bullet_test import BulletTest
 
-from Helix.images import player_sprites
+from Helix.const import player_sprites
 
 # get user's MONITOR RESOLUTION
 user32 = ctypes.windll.user32
