@@ -171,6 +171,11 @@ class Start(Scene):
         for e in self.entities:
             if e.sprite is not None:
                 self.client.screen.blit(e.sprite, e.position.to_list())
+                bar_pos = e.position + e.healthbar_position_offset
+                display_hp = (e.healthbar.display_health / e._max_health) * e.rect.width * 0.7
+                pygame.draw.rect(self.client.screen, (0, 255, 0), pygame.Rect(
+                    bar_pos.x, bar_pos.y, display_hp, 1
+                ))
 
         # for sp in self.wave_manager.spawn_points: self.client.screen.set_at(sp.to_list(), (255,255,255))
         # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
