@@ -29,8 +29,6 @@
                     "index": 1
                 }
             },
-            
-            "starting_angle": -90,
             "fire_rate": 100,
             "bullet_speed": 7
         }
