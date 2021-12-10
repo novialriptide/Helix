@@ -4,6 +4,7 @@
     "obey_gravity": false,
     "update_bullet_spawners": false,
     "speed": 1.5,
+    "draw_healthbar": false,
     "animations": [
         {
             "name": "idle_anim",
