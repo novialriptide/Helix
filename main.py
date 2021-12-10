@@ -36,11 +36,16 @@ HelixSceneManager.register_scene(Start)
 HelixSceneManager.register_scene(Death)
 
 HelixSceneManager.register_scene(BulletTest)
-HelixClient.max_fps = 60
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--load_scene", type=str, help="Load a scene")
+parser.add_argument("--fps", type=int, help="Set the game fps")
 args = parser.parse_args()
+
+HelixClient.max_fps = 60
+
+if args.fps:
+    HelixClient.max_fps = args.fps
 
 if args.load_scene:
     HelixClient.add_scene(args.load_scene)
