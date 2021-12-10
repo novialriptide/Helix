@@ -16,9 +16,9 @@
     "bullet_spawners": [
         {
             "bullet": {
-                "speed": 4,
+                "speed": 0,
                 "color": [255, 255, 0],
-                "damage": 7,
+                "damage": 2,
                 "custom_hitbox_size": [1, 1],
                 "static_sprite": {
                     "path": "Helix\\sprites\\projectilesredraw.png",
@@ -34,8 +34,8 @@
             "fire_rate": 700,
             "spread_between_bullet_arrays": 60,
             "spread_within_bullet_arrays": 57,
-            "bullet_lifetime": 3000,
-            "bullet_curve": 1
+            "bullet_lifetime": 10000,
+            "bullet_speed": 1
         }
     ],
     "event_sounds": {
