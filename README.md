@@ -1,4 +1,6 @@
 # Helix: Flight Test
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/FirstLevelGames/Helix.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/FirstLevelGames/Helix/alerts/)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/FirstLevelGames/Helix.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/FirstLevelGames/Helix/context:python)
 ## Contributers
  - [Andrew Hong](https://github.com/novialriptide)
  - [acorm]()
