@@ -21,7 +21,13 @@
                 "speed": 4,
                 "color": [255, 255, 0],
                 "damage": 7,
-                "custom_hitbox_size": [1, 1]
+                "custom_hitbox_size": [1, 1],
+                "static_sprite": {
+                    "path": "Helix\\sprites\\projectilesredraw.png",
+                    "width": 8,
+                    "height": 8,
+                    "index": 1
+                }
             },
             
             "starting_angle": -90,
