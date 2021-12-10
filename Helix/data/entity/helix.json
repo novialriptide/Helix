@@ -31,7 +31,8 @@
                 }
             },
             "fire_rate": 100,
-            "bullet_speed": 7
+            "bullet_speed": 7,
+            "bullet_lifetime": 1000
         }
     ],
     "event_sounds": {
