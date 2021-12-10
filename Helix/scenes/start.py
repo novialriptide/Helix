@@ -42,19 +42,7 @@ class Start(Scene):
             Vector(int(win_size.x * 4/5), int(win_size.y * 1/4))
         ]
 
-        self.particle_systems = [
-            Particles(
-                Vector(-0.5, -0.5),
-                colors = [
-                    (255, 255, 255),
-                    (100, 100, 100)
-                ],
-                particles_num = 10,
-                spread = 5,
-                lifetime = 1000,
-                position = Vector(win_size.x, -10)
-            )
-        ]
+        # self.particle_systems.append(Particles(Vector(-0.5, -0.5), colors = [(255, 255, 255), (100, 100, 100)], particles_num = 10, spread = 5, lifetime = 1000, position = Vector(win_size.x, -10)))
 
         self.player_entity = load_entity_json("Helix\\data\\entity\\helix.json")
         self.player_entity.position = Vector(win_size.x/2, win_size.y/2)
@@ -82,7 +70,6 @@ class Start(Scene):
         self.entities = [
             self.player_entity
         ]
-        self.enemies = []
 
         self.wave_manager.entities = [
             load_entity_json("Helix\\data\\entity\\ado.json")
@@ -154,7 +141,7 @@ class Start(Scene):
         self.input()
         controller = self.player_entity.controller
 
-        self.client.screen.fill((0, 0, 0))
+        self.client.screen.fill((100, 118, 236))
 
         particles_rendered = 0
         # Player shooting
@@ -164,9 +151,7 @@ class Start(Scene):
                 self.bullets.append(bs.shoot_with_firerate(-90))
                 pygame.mixer.Sound.play(self.laser_1)
         for ps in self.player_entity.particle_systems:
-            for p in ps.particles:
-                self.client.screen.set_at((int(p.position.x), int(p.position.y)), p.color)
-                particles_rendered += 1
+            ps.render(self.client.screen)
 
         # Test for collisions
         try:
@@ -178,14 +163,12 @@ class Start(Scene):
                     except SceneNotActiveError:
                         pass
                     self.entities.remove(c)
-            
-            for e in self.enemies:
-                collided = self.test_collisions(e)
-                for c in collided:
-                    if c.name == "player_projectiles":
-                        self.entities.remove(c)
         except EntityNotInScene:
             pass
+
+        for b in self.bullets:
+            self.client.screen.blit(b.sprite, b.position.to_list())
+            #pygame.draw.rect(self.client.screen, (0, 255, 0), b.custom_hitbox, 1)
 
         for e in self.entities:
             if e.sprite is not None:
@@ -203,8 +186,6 @@ class Start(Scene):
         # for sp in self.wave_manager.spawn_points: self.client.screen.set_at(sp.to_list(), (255,255,255))
 
         # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
-
-        for b in self.bullets: pygame.draw.rect(self.client.screen, (0, 255, 0), b.custom_hitbox, 1)
         
         for p in self.particle_systems:
             p.render(self.client.screen)
@@ -217,27 +198,3 @@ class Start(Scene):
         object_count = text2(f"object count: {len(self.entities)}", 10, font5x3, (0, 255, 0))
         self.client.screen.blit(fps, (0, 0))
         self.client.screen.blit(object_count, (0, 10))
-
-        #print(f"objects:{len(self.entities)} particles:{particles_rendered} fps:{int(self.client.current_fps)}")
-        #print(f"events:{len(self.event_system._methods)}")
-    
-    def advance_frame(self, delta_time: float):
-        for entity in self.entities[:]:
-            entity.update(delta_time)
-            if entity._is_destroyed:
-                self.entities.remove(entity)
-                if entity in self.enemies:
-                    self.enemies.remove(entity)
-
-            # Update Bullet Spawners
-            # TODO: Move this in the Entity.update()
-            for bs in entity.bullet_spawners:
-                bs.position = entity.position + entity.center_position
-                if entity.update_bullet_spawners:
-                    self.bullets.extend(bs.update(delta_time))
-
-        for bullet in self.bullets[:]:
-            bullet.update(delta_time)
-            if bullet._is_destroyed:
-                self.bullets.remove(bullet)
-                
