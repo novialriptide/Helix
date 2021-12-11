@@ -23,8 +23,6 @@ class HelixWaves(WaveManager):
         delta_time: float
     ) -> Entity:
         e = self.entities[entity_key].copy()
-        spawn_anim = spawn_animations[spawn_anim]
-        e.position = spawn_anim["spawn_position_offset"] - e.center_offset + self.spawn_points[spawn_key]
 
         def move_spawn_func(entity: Entity, target: Vector):
             # Event that will move the entity to its target position upon spawning.
@@ -45,6 +43,8 @@ class HelixWaves(WaveManager):
             ])
             event_system._methods.append(move_back_event)
 
+        spawn_anim = spawn_animations[spawn_anim]
+        e.position = spawn_anim["spawn_position_offset"] - e.center_offset + self.spawn_points[spawn_key]
         event = RepeatEvent("move_enemy", move_spawn_func, args=[e, self.spawn_points[spawn_key]])
         event_system._methods.append(event)
             
