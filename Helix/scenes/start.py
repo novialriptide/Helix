@@ -4,7 +4,6 @@ This code is licensed under MIT license (see LICENSE for details)
 """
 import sys
 import pygame
-import math
 
 from Helix.SakuyaEngine.entity import load_entity_json
 from Helix.SakuyaEngine.scene import Scene
