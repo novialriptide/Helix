@@ -47,7 +47,7 @@ class HelixWaves(WaveManager):
         e.position = spawn_anim["spawn_position_offset"] - e.center_offset + self.spawn_points[spawn_key]
         event = RepeatEvent("move_enemy", move_spawn_func, args=[e, self.spawn_points[spawn_key]])
         event_system._methods.append(event)
-            
+
         if lifetime != 0:
             wait_moveback_enemy = WaitEvent("wait_moveback_enemy", lifetime, move_despawn_func, args=[e, spawn_anim, spawn_key])
             event_system._methods.append(wait_moveback_enemy)
