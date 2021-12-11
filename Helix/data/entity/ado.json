@@ -1,5 +1,7 @@
 {
     "name": "Ado",
+    "tags": ["enemy"],
+    "max_health": 25,
     "custom_hitbox_size": [11, 11],
     "speed": 3,
     "animations": [
@@ -16,6 +18,7 @@
     "bullet_spawners": [
         {
             "bullet": {
+                "tags": ["enemy_bullet"],
                 "speed": 0,
                 "color": [255, 255, 0],
                 "damage": 2,

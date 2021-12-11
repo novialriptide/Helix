@@ -1,5 +1,6 @@
 {
     "name": "Helix",
+    "tags": ["player"],
     "custom_hitbox_size": [3, 3],
     "obey_gravity": false,
     "update_bullet_spawners": false,
@@ -19,6 +20,7 @@
     "bullet_spawners": [
         {
             "bullet": {
+                "tags": ["player_bullet"],
                 "speed": 0,
                 "color": [255, 255, 0],
                 "damage": 7,
