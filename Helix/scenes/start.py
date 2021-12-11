@@ -10,7 +10,8 @@ from Helix.SakuyaEngine.scene import Scene
 from Helix.SakuyaEngine.math import Vector
 from Helix.SakuyaEngine.particles import Particles
 from Helix.SakuyaEngine.waves import load_wave_file
-from Helix.SakuyaEngine.errors import EntityNotInScene, SceneNotActiveError
+from Helix.SakuyaEngine.errors import SceneNotActiveError
+from Helix.SakuyaEngine.lights import spotlight
 from Helix.SakuyaEngine.text import text2
 
 from Helix.wavemanager import HelixWaves
@@ -47,7 +48,7 @@ class Start(Scene):
         player_rect = self.player_entity.rect
         self.player_entity.particle_systems = [
             Particles(
-                Vector(0, 5),
+                Vector(0, 2),
                 colors = [
                     (249, 199, 63),
                     (255, 224, 70),
@@ -57,7 +58,7 @@ class Start(Scene):
                     player_rect.width/2,
                     player_rect.height * 1/4
                 ),
-                particles_num = 10,
+                particles_num = 20,
                 spread = 1,
                 lifetime = 1000
             )
@@ -160,11 +161,12 @@ class Start(Scene):
 
         for b in self.bullets:
             self.client.screen.blit(b.sprite, b.position.to_list())
+            spotlight(self.client.screen, b.position + b.center_offset, (20, 0, 20), 10)
             #pygame.draw.rect(self.client.screen, (0, 255, 0), b.custom_hitbox, 1)
 
-        # TODO: Optimize this. This is one of the reasons why the game is capped at 30fps.
         for e in self.entities:
             # Update health
+            # TODO: Optimize this. This is the main reason why the game is capped at 30fps.
             if "enemy" in e.tags:
                 collided = self.test_collisions(e)
                 for c in collided:
