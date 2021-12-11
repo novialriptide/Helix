@@ -189,7 +189,7 @@ class Start(Scene):
             p.render(self.client.screen)
             p.update(self.client.delta_time)
 
-        self.event_system.update(self.client.delta_time)
+        self.event_system.update()
         self.advance_frame(self.client.delta_time)
 
         fps = text2(f"fps: {int(self.client.pg_clock.get_fps())}", 10, font5x3, (0, 255, 0))
