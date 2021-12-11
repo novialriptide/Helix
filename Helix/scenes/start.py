@@ -63,9 +63,7 @@ class Start(Scene):
             )
         ]
 
-        self.entities = [
-            self.player_entity
-        ]
+        self.entities.append(self.player_entity)
 
         self.wave_manager.entities = [
             load_entity_json("Helix\\data\\entity\\ado.json")
@@ -151,36 +149,45 @@ class Start(Scene):
             ps.render(self.client.screen)
 
         # Test for collisions
-        try:
-            collided = self.test_collisions(self.player_entity)
-            for c in collided:
-                if c.name == "enemy_projectiles":
-                    try:
-                        self.client.replace_scene("Start", "Death")
-                    except SceneNotActiveError:
-                        pass
-                    self.entities.remove(c)
-        except EntityNotInScene:
-            pass
+        collided = self.test_collisions(self.player_entity)
+        for c in collided:
+            if "enemy_bullet" in c.tags:
+                try:
+                    self.client.replace_scene("Start", "Death")
+                except SceneNotActiveError:
+                    pass
+                self.bullets.remove(c)
 
         for b in self.bullets:
             self.client.screen.blit(b.sprite, b.position.to_list())
             #pygame.draw.rect(self.client.screen, (0, 255, 0), b.custom_hitbox, 1)
 
+        # TODO: Optimize this. This is one of the reasons why the game is capped at 30fps.
         for e in self.entities:
-            if e.sprite is not None:
-                self.client.screen.blit(e.sprite, e.position.to_list())
-                # TODO: Somehow implement this in Entity
-                if e.draw_healthbar:
-                    bar_length = e.rect.width * 0.7
-                    bar_pos = e.position + e.healthbar_position_offset + e.center_offset - Vector(bar_length / 2 - 1, e.rect.height * (2 / 3))
-                    display_hp = (e.healthbar.display_health / e._max_health) * bar_length
-                    pygame.draw.rect(self.client.screen, (0, 230, 0), pygame.Rect(
-                        bar_pos.x, bar_pos.y, display_hp, 1
-                    ))
-                    pygame.draw.rect(self.client.screen, (0, 190, 0), pygame.Rect(
-                        bar_pos.x, bar_pos.y + 1, display_hp, 1
-                    ))
+            # Update health
+            if "enemy" in e.tags:
+                collided = self.test_collisions(e)
+                for c in collided:
+                    if "player_bullet" in c.tags:
+                        e.current_health -= c.damage
+                        self.bullets.remove(c)
+
+                        if e.current_health <= 0:
+                            e._is_destroyed = True
+
+            # Draw
+            self.client.screen.blit(e.sprite, e.position.to_list())
+            # TODO: Implement this in Entity
+            if e.draw_healthbar:
+                bar_length = e.rect.width * 0.7
+                bar_pos = e.position + e.healthbar_position_offset + e.center_offset - Vector(bar_length / 2 - 1, e.rect.height * (2 / 3))
+                display_hp = (e.healthbar.display_health / e._max_health) * bar_length
+                pygame.draw.rect(self.client.screen, (0, 230, 0), pygame.Rect(
+                    bar_pos.x, bar_pos.y, display_hp, 1
+                ))
+                pygame.draw.rect(self.client.screen, (0, 190, 0), pygame.Rect(
+                    bar_pos.x, bar_pos.y + 1, display_hp, 1
+                ))
 
         # for sp in self.wave_manager.spawn_points: self.client.screen.set_at(sp.to_list(), (255,255,255))
         # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
