@@ -11,7 +11,7 @@ from copy import copy
 
 from Helix.SakuyaEngine.entity import Entity
 from Helix.SakuyaEngine.animation import Animation
-from Helix.SakuyaEngine.math import Vector
+
 from Helix.SakuyaEngine.scene import Scene
 from Helix.SakuyaEngine.bullets import BulletSpawner, Bullet
 from Helix.SakuyaEngine.text import text
@@ -32,8 +32,8 @@ class BulletTest(Scene):
             fps = 4
         )
 
-        e = Entity(custom_hitbox_size = Vector(3, 3), position = Vector(win_size.x / 2, win_size.y / 2))
-        b = Bullet(None, 3, (255, 0, 0), 5, custom_hitbox_size = Vector(2, 2), name = "bullet")
+        e = Entity(custom_hitbox_size = pygame.math.Vector2(3, 3), position = pygame.math.Vector2(win_size.x / 2, win_size.y / 2))
+        b = Bullet(None, 3, (255, 0, 0), 5, custom_hitbox_size = pygame.math.Vector2(2, 2), name = "bullet")
         b.anim_add(copy(b_anim))
         b.anim_set("b_anim")
 
