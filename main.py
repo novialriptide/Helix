@@ -45,10 +45,10 @@ args = parser.parse_args()
 
 HelixClient.max_fps = 60
 
-if args.fps:
+if args.fps is not None:
     HelixClient.max_fps = args.fps
 
-if args.scene:
+if args.scene is not None:
     HelixClient.add_scene(args.scene)
 else:
     HelixClient.add_scene("Splash")
