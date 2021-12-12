@@ -42,7 +42,7 @@ parser.add_argument("--load_scene", type=str, help="Load a scene")
 parser.add_argument("--fps", type=int, help="Set the game fps")
 args = parser.parse_args()
 
-HelixClient.max_fps = 30
+HelixClient.max_fps = 60
 
 if args.fps:
     HelixClient.max_fps = args.fps

@@ -149,8 +149,8 @@ class Start(Scene):
         for ps in self.player_entity.particle_systems:
             ps.render(self.client.screen)
 
-        # Test for collisions
-        collided = self.test_collisions(self.player_entity)
+        # Test for collisions with player
+        collided = self.test_collisions_rect(self.player_entity)
         for c in collided:
             if "enemy_bullet" in c.tags:
                 try:
@@ -160,6 +160,8 @@ class Start(Scene):
                 self.bullets.remove(c)
 
         for b in self.bullets:
+            if b.position.y < 0 or b.position.y > self.client.screen.get_height() or b.position.x < 0 or b.position.x > self.client.screen.get_width():
+                b._is_destroyed = True
             self.client.screen.blit(b.sprite, b.position.to_list())
             spotlight(self.client.screen, b.position + b.center_offset, (20, 0, 20), 10)
             #pygame.draw.rect(self.client.screen, (0, 255, 0), b.custom_hitbox, 1)
@@ -168,7 +170,7 @@ class Start(Scene):
             # Update health
             # TODO: Optimize this. This is the main reason why the game is capped at 30fps.
             if "enemy" in e.tags:
-                collided = self.test_collisions(e)
+                collided = self.test_collisions_rect(e)
                 for c in collided:
                     if "player_bullet" in c.tags:
                         e.current_health -= c.damage
