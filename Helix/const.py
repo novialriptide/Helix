@@ -12,6 +12,7 @@ player_sprites = split_image(
 
 pygame_powered_logo = pygame.image.load("Helix\\sprites\\pygame_powered.png")
 flg_logo = pygame.image.load("Helix\\sprites\\flg_logo.png")
+flg_logo2 = pygame.image.load("Helix\\sprites\\flg_logo2.png")
 
 font5x3 = "Helix\\fonts\\bit5x3.ttf"
 font5x5 = "Helix\\fonts\\bit5x5.ttf"

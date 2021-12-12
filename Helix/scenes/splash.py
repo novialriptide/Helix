@@ -8,7 +8,7 @@ import pygame
 
 from Helix.SakuyaEngine.scene import Scene
 
-from Helix.const import pygame_powered_logo, flg_logo
+from Helix.const import pygame_powered_logo, flg_logo2
 
 class Splash(Scene):
     def on_awake(self) -> None:
@@ -30,11 +30,8 @@ class Splash(Scene):
                 sys.exit()
 
         self.client.screen.fill((0, 0, 0))
-        flg_logo_rect = flg_logo.get_rect()
-        flg_logo_rect.width *= 2
-        flg_logo_rect.height *= 2
-        _flg_logo = pygame.transform.scale(flg_logo, flg_logo_rect.size)
-        self.client.screen.blit(_flg_logo, (
+        flg_logo_rect = flg_logo2.get_rect()
+        self.client.screen.blit(flg_logo2, (
             self.client.screen.get_width() / 2 - flg_logo_rect.width / 2,
             self.client.screen.get_height() * (1 / 2) - flg_logo_rect.height / 2,
         ))
