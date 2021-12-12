@@ -26,7 +26,7 @@
                 "damage": 7,
                 "custom_hitbox_size": [1, 1],
                 "static_sprite": {
-                    "path": "Helix\\sprites\\projectilesredraw.png",
+                    "path": "Helix\\sprites\\projectiles.png",
                     "width": 8,
                     "height": 8,
                     "index": 1
