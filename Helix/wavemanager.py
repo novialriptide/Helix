@@ -29,7 +29,8 @@ class HelixWaves(WaveManager):
         def move_spawn_func(entity: Entity, target: pygame.math.Vector2):
             # Event that will move the entity to its target position upon spawning.
             entity.position = vector2_move_toward(
-                entity.position, target - e.center_offset,
+                entity.position,
+                target - e.center_offset,
                 entity.speed * delta_time()
             )
             return entity.position != target - e.center_offset
@@ -37,7 +38,8 @@ class HelixWaves(WaveManager):
         def move_func(_entity: Entity, _target: pygame.math.Vector2):
             # Event that will move the entity to its eventual deletion.
             _entity.position = vector2_move_toward(
-                _entity.position, _target - e.center_offset,
+                _entity.position,
+                _target - e.center_offset,
                 _entity.speed * delta_time()
             )
             if _entity.position == _target - e.center_offset:

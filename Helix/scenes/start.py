@@ -167,8 +167,6 @@ class Start(Scene):
             #pygame.draw.rect(self.client.screen, (0, 255, 0), b.custom_hitbox, 1)
 
         for e in self.entities:
-            # Update health
-            # TODO: Optimize this. This is the main reason why the game is capped at 30fps.
             if "enemy" in e.tags:
                 collided = self.test_collisions_rect(e)
                 for c in collided:
