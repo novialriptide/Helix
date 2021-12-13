@@ -58,7 +58,7 @@ class Start(Scene):
                     player_rect.width/2,
                     player_rect.height * 1/4
                 ),
-                particles_num = 20,
+                particles_num = 10,
                 spread = 1,
                 lifetime = 1000
             )
