@@ -1,6 +1,7 @@
 {
     "language_name": "english",
     "msgs": {
+        "window_caption": "Helix",
         "menu_play": "Play",
         "menu_options": "Options",
         "menu_close_game": "Exit",
