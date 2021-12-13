@@ -1,13 +1,14 @@
 {
     "language_name": "english",
     "msgs": {
-        "menu_play": "Start",
+        "menu_play": "Play",
         "menu_options": "Options",
+        "menu_close_game": "Exit",
         "menu_options_change_language": "Change Language",
-        "menu_options_lang_english": "English",
-        "menu_options_lang_korean": "Korean",
-        "menu_game_mode0": "Lives",
-        "menu_game_mode1": "No Lives",
-        "game_wave_start": "Start!" 
+        "menu_gamemode0": "Lives",
+        "menu_gamemode1": "No Lives",
+        "game_wave_start": "Start!",
+        "game_game_over": "Game Over",
+        "menu_try_again": "Try again"
     }
 }

@@ -1,13 +1,14 @@
 {
-    "language_name": "korean",
+    "language_name": "한국인",
     "msgs": {
         "menu_play": "놀다",
         "menu_options": "",
+        "menu_close_game": "",
         "menu_options_change_language": "",
-        "menu_options_lang_english": "",
-        "menu_options_lang_korean": "",
-        "menu_game_mode0": "",
-        "menu_game_mode1": "",
-        "game_wave_start": "시작합니다"
+        "menu_gamemode0": "",
+        "menu_gamemode1": "",
+        "game_wave_start": "시작합니다",
+        "game_game_over": "게임 오버",
+        "menu_try_again": ""
     }
 }
