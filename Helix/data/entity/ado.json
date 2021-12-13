@@ -41,6 +41,20 @@
             "bullet_speed": 1
         }
     ],
+    "particle_systems": [
+        {
+            "velocity": [0, -2],
+            "colors": [
+                [249, 199, 63],
+                [255, 244, 70],
+                [255, 78, 65]
+            ],
+            "offset": [16, 16],
+            "particles_num": 0,
+            "spread": 1,
+            "lifetime": 500
+        }
+    ],
     "event_sounds": {
         "on_shoot": [],
         "on_death": [],

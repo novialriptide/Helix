@@ -124,10 +124,6 @@ class Start(Scene):
             if bs.can_shoot:
                 self.bullets.append(bs.shoot_with_firerate(-90))
                 pygame.mixer.Sound.play(self.laser_1)
-        
-        # Render Player Particles
-        for ps in self.player_entity.particle_systems:
-            ps.render(self.client.screen)
 
         # Test for collisions with player
         collided = self.test_collisions_rect(self.player_entity)
@@ -158,6 +154,12 @@ class Start(Scene):
                         if e.current_health <= 0:
                             e._is_destroyed = True
 
+            # Render Player Particles
+            e.particle_systems[0].particles_num = int(
+                ((e._max_health - e.current_health) / e._max_health) * 10
+            )
+            for ps in e.particle_systems:
+                ps.render(self.client.screen)
             # Draw
             self.client.screen.blit(e.sprite, e.position)
             # TODO: Implement this in Entity

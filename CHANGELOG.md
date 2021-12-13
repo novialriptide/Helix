@@ -6,6 +6,8 @@
 5. Optimizations to bullets have been made.
 6. FPS has been capped to 60.
 7. CHANGELOG.md has been created.
+8. Particle lifetime has been reduced.
+9. Ado now emits particles depending on its health.
 
 ## version 0.2
 1. SakuyaEngine patches.
@@ -14,7 +16,7 @@
 4. Players and enemies can now die.
 5. Healthbar added to enemies.
 6. Added ambient particles.
-7. Renamed "\" to "\\" in file paths.
+7. Renamed `"\"` to `"\\"` in file paths.
 8. Entities can partially load from JSON files.
 9. Added fire rates.
 10. Reimplemented shooting mechanics for the Player.
