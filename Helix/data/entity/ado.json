@@ -30,7 +30,6 @@
                     "index": 2
                 }
             },
-
             "iterations": 10,
             "bullets_per_array": 3,
             "total_bullet_arrays": 3,
@@ -38,7 +37,8 @@
             "spread_between_bullet_arrays": 120,
             "spread_within_bullet_arrays": 57,
             "bullet_lifetime": 7000,
-            "bullet_speed": 1
+            "bullet_speed": 1,
+            "aim": true
         }
     ],
     "particle_systems": [

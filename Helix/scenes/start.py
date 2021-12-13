@@ -47,7 +47,7 @@ class Start(Scene):
         self.entities.append(self.player_entity)
 
         self.wave_manager.entities = [
-            load_entity_json("Helix\\data\\entity\\ado.json")
+            load_entity_json("Helix\\data\\entity\\ado.json", bullet_target = self.player_entity)
         ]
 
         load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
