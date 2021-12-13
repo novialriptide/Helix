@@ -7,12 +7,10 @@ import pygame
 
 from Helix.SakuyaEngine.entity import load_entity_json
 from Helix.SakuyaEngine.scene import Scene
-
 from Helix.SakuyaEngine.particles import Particles
 from Helix.SakuyaEngine.waves import load_wave_file
 from Helix.SakuyaEngine.errors import SceneNotActiveError
 from Helix.SakuyaEngine.lights import spotlight
-from Helix.SakuyaEngine.text import text2
 
 from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
@@ -45,24 +43,6 @@ class Start(Scene):
         self.player_entity.position = pygame.math.Vector2(win_size.x/2, win_size.y/2)
         self.player_entity.controller = PlayerController()
         self.player_entity.anim_set("idle_anim")
-        player_rect = self.player_entity.rect
-        self.player_entity.particle_systems = [
-            Particles(
-                pygame.math.Vector2(0, 2),
-                colors = [
-                    (249, 199, 63),
-                    (255, 224, 70),
-                    (255, 78, 65)
-                ],
-                offset = pygame.math.Vector2(
-                    player_rect.width/2,
-                    player_rect.height * 1/4
-                ),
-                particles_num = 10,
-                spread = 1,
-                lifetime = 500
-            )
-        ]
 
         self.entities.append(self.player_entity)
 
@@ -202,10 +182,10 @@ class Start(Scene):
         self.event_system.update()
         self.advance_frame(self.client.delta_time)
 
-        fps = text2(f"fps: {int(self.client.pg_clock.get_fps())}", 10, font5x3, (0, 255, 0))
-        object_count = text2(f"object count: {len(self.entities)}", 10, font5x3, (0, 255, 0))
-        bullet_count = text2(f"bullet count: {len(self.bullets)}", 10, font5x3, (0, 255, 0))
-        self.client.screen.blit(fps, (0, 0))
-        self.client.screen.blit(object_count, (0, 10))
-        self.client.screen.blit(bullet_count, (0, 20))
+        #fps = text2(f"fps: {int(self.client.pg_clock.get_fps())}", 10, font5x3, (0, 255, 0))
+        #object_count = text2(f"object count: {len(self.entities)}", 10, font5x3, (0, 255, 0))
+        #bullet_count = text2(f"bullet count: {len(self.bullets)}", 10, font5x3, (0, 255, 0))
+        #self.client.screen.blit(fps, (0, 0))
+        #self.client.screen.blit(object_count, (0, 10))
+        #self.client.screen.blit(bullet_count, (0, 20))
         pygame.display.set_caption(f"{self.client._window_name} (fps: {int(self.client.pg_clock.get_fps())})")
