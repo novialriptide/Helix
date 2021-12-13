@@ -160,7 +160,8 @@ class Start(Scene):
                 self.bullets.remove(c)
 
         for b in self.bullets:
-            if b.position.y < 0 or b.position.y > self.client.screen.get_height() or b.position.x < 0 or b.position.x > self.client.screen.get_width():
+            rect = b.rect
+            if b.position.y < - rect.height or b.position.y > self.client.screen.get_height() or b.position.x + rect.width < 0 or b.position.x > self.client.screen.get_width():
                 b._is_destroyed = True
             self.client.screen.blit(b.sprite, b.position)
             spotlight(self.client.screen, b.position + b.center_offset, (20, 0, 20), 10)
