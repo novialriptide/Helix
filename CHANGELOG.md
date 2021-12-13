@@ -1,3 +1,12 @@
+## version 0.3
+1. SakuyaEngine patches.
+2. First Level Games deprecation.
+3. Caption displays fps.
+4. Renamed load_scene arg to scene.
+5. Optimizations to bullets have been made.
+6. FPS has been capped to 60.
+7. CHANGELOG.md has been created.
+
 ## version 0.2
 1. SakuyaEngine patches.
 2. Lights added to bullets.
@@ -15,12 +24,3 @@
 14. Fixed a bug where the Nintendo Switch Controller would fire involuntarily.
 15. Fixed a bug where entities would spawn before the player loads in the map.
 16. Fixed a bug where only 8 sounds would play in 1 frame.
-
-## version 0.3
-1. SakuyaEngine patches.
-2. First Level Games deprecation.
-3. Caption displays fps.
-4. Renamed load_scene arg to scene.
-5. Optimizations to bullets have been made.
-6. FPS has been capped to 60.
-7. CHANGELOG.md has been created.
