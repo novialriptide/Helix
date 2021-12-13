@@ -8,6 +8,8 @@ import pygame
 from Helix.SakuyaEngine.scene import Scene
 from Helix.SakuyaEngine.text import text2
 
+from Helix.const import font5x3
+
 class Death(Scene):
     def __init__(self, client):
         super().__init__(client)
@@ -24,5 +26,5 @@ class Death(Scene):
                 sys.exit()
 
         self.client.screen.fill((0, 0, 0))
-        game_over_text = text2("gae owr", 25, (255, 255, 255))
+        game_over_text = text2("gae owr", 25, font5x3, (255, 255, 255))
         self.client.screen.blit(game_over_text, (win_size.x/2, win_size.y/2))
