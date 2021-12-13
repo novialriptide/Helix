@@ -8,6 +8,8 @@
 7. CHANGELOG.md has been created.
 8. Particle lifetime has been reduced.
 9. Ado now emits particles depending on its health.
+10. Entity optimizations.
+11. Some enemies can now aim.
 
 ## version 0.2
 1. SakuyaEngine patches.
