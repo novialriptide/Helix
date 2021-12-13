@@ -34,7 +34,8 @@
             },
             "fire_rate": 100,
             "bullet_speed": 7,
-            "bullet_lifetime": 1000
+            "bullet_lifetime": 1000,
+            "is_active": true
         }
     ],
     "particle_systems": [
