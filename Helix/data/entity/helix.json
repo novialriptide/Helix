@@ -46,7 +46,7 @@
                 [255, 78, 65]
             ],
             "offset": [8, 4],
-            "particles_num": 10,
+            "particles_num": 0,
             "spread": 1,
             "lifetime": 500
         }
