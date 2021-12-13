@@ -207,3 +207,4 @@ class Start(Scene):
         self.client.screen.blit(fps, (0, 0))
         self.client.screen.blit(object_count, (0, 10))
         self.client.screen.blit(bullet_count, (0, 20))
+        pygame.display.set_caption(f"{self.client._window_name} (fps: {int(self.client.pg_clock.get_fps())})")
