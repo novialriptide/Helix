@@ -60,7 +60,7 @@ class Start(Scene):
                 ),
                 particles_num = 10,
                 spread = 1,
-                lifetime = 1000
+                lifetime = 500
             )
         ]
 
