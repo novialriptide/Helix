@@ -24,14 +24,22 @@ class BulletTest(Scene):
             self.joystick = None
 
         self.mp = Entity()
-        b = Bullet(None, 3, (255, 0, 0), 5, custom_hitbox_size = pygame.math.Vector2(2, 2), name = "bullet")
+        b = Bullet(
+            None,
+            3,
+            (255, 0, 0),
+            5,
+            custom_hitbox_size = pygame.math.Vector2(2, 2),
+            name = "bullet"
+        )
 
         self.bullet_spawner_test = BulletSpawner(
             b,
-            iterations = 0, bullets_per_array = 1,
-            total_bullet_arrays = 1, fire_rate = 200,
+            iterations = 0, bullets_per_array = 4,
+            total_bullet_arrays = 6, fire_rate = 0,
             bullet_lifetime = 1000, target = self.mp, is_active = True, aim = True,
-            position = pygame.math.Vector2(win_size.x / 2, win_size.y / 2)
+            position = pygame.math.Vector2(win_size.x / 2, win_size.y / 2),
+            spread_between_bullet_arrays = 60, spread_within_bullet_arrays = 40
         )
 
     def update(self) -> None:
@@ -49,3 +57,4 @@ class BulletTest(Scene):
         
         self.bullets.extend(self.bullet_spawner_test.update(self.client.delta_time))
         self.advance_frame(self.client.delta_time)
+        pygame.display.set_caption(f"{self.client._window_name} (fps: {int(self.client.pg_clock.get_fps())})")
