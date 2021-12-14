@@ -181,12 +181,6 @@ class Start(Scene):
             p.update(self.client.delta_time)
 
         self.event_system.update()
-        self.advance_frame(self.client.delta_time)
+        self.advance_frame(self.client.delta_time, collision_rects = self.collision_rects)
 
-        #fps = text2(f"fps: {int(self.client.pg_clock.get_fps())}", 10, font5x3, (0, 255, 0))
-        #object_count = text2(f"object count: {len(self.entities)}", 10, font5x3, (0, 255, 0))
-        #bullet_count = text2(f"bullet count: {len(self.bullets)}", 10, font5x3, (0, 255, 0))
-        #self.client.screen.blit(fps, (0, 0))
-        #self.client.screen.blit(object_count, (0, 10))
-        #self.client.screen.blit(bullet_count, (0, 20))
         pygame.display.set_caption(f"{self.client._window_name} (fps: {int(self.client.pg_clock.get_fps())})")
