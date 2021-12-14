@@ -7,7 +7,6 @@ import pygame
 
 from Helix.SakuyaEngine.entity import load_entity_json
 from Helix.SakuyaEngine.scene import Scene
-from Helix.SakuyaEngine.particles import Particles
 from Helix.SakuyaEngine.waves import load_wave_file
 from Helix.SakuyaEngine.errors import SceneNotActiveError
 from Helix.SakuyaEngine.lights import spotlight
