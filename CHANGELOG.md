@@ -12,6 +12,7 @@
 11. Some enemies can now aim.
 12. Resolution has been changed from 256x224 pixels to 256x336 pixels.
 13. Bullets now face the right direction.
+14. Increased player default speed from 1.5 to 2.
 
 ## version 0.2
 1. SakuyaEngine patches.
