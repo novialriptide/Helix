@@ -10,6 +10,8 @@
 9. Ado now emits particles depending on its health.
 10. Entity optimizations.
 11. Some enemies can now aim.
+12. Resolution has been changed from 256x224 pixels to 256x336 pixels.
+13. Bullets now face the right direction.
 
 ## version 0.2
 1. SakuyaEngine patches.
