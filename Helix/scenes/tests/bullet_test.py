@@ -4,10 +4,7 @@ This code is licensed under MIT license (see LICENSE for details)
 """
 import sys
 import pygame
-import json
-from types import SimpleNamespace
-from copy import copy
-
+import math
 
 from Helix.SakuyaEngine.entity import Entity
 from Helix.SakuyaEngine.animation import Animation
@@ -31,9 +28,8 @@ class BulletTest(Scene):
 
         self.bullet_spawner_test = BulletSpawner(
             b,
-            iterations = 0, bullets_per_array = 3,
-            total_bullet_arrays = 6, fire_rate = 700,
-            spread_between_bullet_arrays = 60, spread_within_bullet_arrays = 57,
+            iterations = 0, bullets_per_array = 1,
+            total_bullet_arrays = 1, fire_rate = 200,
             bullet_lifetime = 1000, target = self.mp, is_active = True, aim = True,
             position = pygame.math.Vector2(win_size.x / 2, win_size.y / 2)
         )
@@ -43,10 +39,9 @@ class BulletTest(Scene):
             if event.type == pygame.QUIT:
                 sys.exit()
 
-        new_pos = pygame.math.Vector2(pygame.mouse.get_pos())
+        new_pos = pygame.math.Vector2(self.client.mouse_position)
         self.mp.position = new_pos
-        print(self.bullet_spawner_test.target.position)
-
+        
         self.client.screen.fill((0,0,0))
 
         for e in self.bullets:
