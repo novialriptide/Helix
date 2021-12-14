@@ -27,11 +27,11 @@
                     "path": "Helix\\sprites\\projectiles.png",
                     "width": 8,
                     "height": 8,
-                    "index": 2
+                    "index": 3
                 }
             },
             "iterations": 0,
-            "bullets_per_array": 3,
+            "bullets_per_array": 4,
             "total_bullet_arrays": 6,
             "fire_rate": 500,
             "spread_between_bullet_arrays": 60,
