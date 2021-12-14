@@ -49,6 +49,14 @@ class Start(Scene):
             load_entity_json("Helix\\data\\entity\\ado.json", bullet_target = self.player_entity)
         ]
 
+        screen_width, screen_height = self.client.screen.get_width(), self.client.screen.get_height()
+        self.collision_rects = [
+            pygame.Rect(0, 0, 4, screen_height),
+            pygame.Rect(0, 0, screen_width, 4),
+            pygame.Rect(screen_width, 0, 4, screen_height),
+            pygame.Rect(0, screen_height - 4, screen_width, 4)
+        ]
+
         load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
 
     def input(self) -> None:
