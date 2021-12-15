@@ -31,7 +31,7 @@
                 }
             },
             "iterations": 0,
-            "bullets_per_array": 4,
+            "bullets_per_array": 5,
             "total_bullet_arrays": 6,
             "fire_rate": 500,
             "spread_between_bullet_arrays": 60,
@@ -39,7 +39,8 @@
             "bullet_lifetime": 10000,
             "bullet_speed": 1,
             "aim": true,
-            "is_active": true
+            "is_active": true,
+            "starting_angle": 90
         }
     ],
     "particle_systems": [
