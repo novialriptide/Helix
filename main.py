@@ -6,15 +6,12 @@ import argparse
 import pygame
 
 from Helix.SakuyaEngine.client import Client
-
 from Helix.SakuyaEngine.scene import SceneManager
 
 from Helix.scenes.start import Start
 from Helix.scenes.death import Death
 from Helix.scenes.splash import Splash
-
 from Helix.scenes.tests.bullet_test import BulletTest
-
 from Helix.const import player_sprites
 
 HelixClient = Client(
