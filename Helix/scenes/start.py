@@ -53,7 +53,7 @@ class Start(Scene):
         self.collision_rects = [
             pygame.Rect(0, 0, 4, screen_height),
             pygame.Rect(0, 0, screen_width, 4),
-            pygame.Rect(screen_width, 0, 4, screen_height),
+            pygame.Rect(screen_width - 4, 0, 4, screen_height),
             pygame.Rect(0, screen_height - 4, screen_width, 4)
         ]
 
