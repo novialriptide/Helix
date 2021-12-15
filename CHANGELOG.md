@@ -15,6 +15,7 @@
 14. Increased player default speed from 1.5 to 2.
 15. Out of bounds collision added.
 16. BulletSpawners are now accurate with targets
+17. More spawn points added.
 
 ## version 0.2
 1. SakuyaEngine patches.

@@ -31,15 +31,20 @@ class Start(Scene):
 
         self.wave_manager = HelixWaves(30000)
         self.wave_manager.spawn_points = [
-            pygame.Vector2(int(win_size.x * 1/5), int(win_size.y * 1/4)),
-            pygame.Vector2(int(win_size.x * 1/3), int(win_size.y * 1/7)),
-            pygame.Vector2(int(win_size.x * 1/2), int(win_size.y * 1/7)),
-            pygame.Vector2(int(win_size.x * 2/3), int(win_size.y * 1/7)),
-            pygame.Vector2(int(win_size.x * 4/5), int(win_size.y * 1/4))
+            pygame.Vector2(int(win_size.x * 1/10), int(win_size.y * 1/7)),
+            pygame.Vector2(int(win_size.x * 3/10), int(win_size.y * 1/7)),
+            pygame.Vector2(int(win_size.x * 5/10), int(win_size.y * 1/7)),
+            pygame.Vector2(int(win_size.x * 7/10), int(win_size.y * 1/7)),
+            pygame.Vector2(int(win_size.x * 9/10), int(win_size.y * 1/7)),
+            pygame.Vector2(int(win_size.x * 1/10), int(win_size.y * 2.5/7)),
+            pygame.Vector2(int(win_size.x * 3/10), int(win_size.y * 2.5/7)),
+            pygame.Vector2(int(win_size.x * 5/10), int(win_size.y * 2.5/7)),
+            pygame.Vector2(int(win_size.x * 7/10), int(win_size.y * 2.5/7)),
+            pygame.Vector2(int(win_size.x * 9/10), int(win_size.y * 2.5/7)),
         ]
 
         self.player_entity = load_entity_json("Helix\\data\\entity\\helix.json")
-        self.player_entity.position = pygame.Vector2(win_size.x/2, win_size.y/2)
+        self.player_entity.position = pygame.Vector2(win_size.x/2, win_size.y * (2 / 3)) - self.player_entity.center_offset
         self.player_entity.controller = PlayerController()
         self.player_entity.anim_set("idle_anim")
 
@@ -181,7 +186,7 @@ class Start(Scene):
                     bar_pos.x, bar_pos.y + 1, display_hp, 1
                 ))
 
-        # for sp in self.wave_manager.spawn_points: self.client.screen.set_at(sp, (255,255,255))
+        # for sp in self.wave_manager.spawn_points: self.client.screen.set_at((int(sp.x), int(sp.y)), (255,255,255))
         # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
 
         for p in self.particle_systems:
