@@ -29,7 +29,7 @@ class BulletTest(Scene):
             3,
             (255, 0, 0),
             5,
-            custom_hitbox_size = pygame.math.Vector2(2, 2),
+            custom_hitbox_size = pygame.Vector2(2, 2),
             name = "bullet"
         )
 
@@ -38,7 +38,7 @@ class BulletTest(Scene):
             iterations = 0, bullets_per_array = 4,
             total_bullet_arrays = 6, fire_rate = 0,
             bullet_lifetime = 1000, target = self.mp, is_active = True, aim = True,
-            position = pygame.math.Vector2(win_size.x / 2, win_size.y / 2),
+            position = pygame.Vector2(win_size.x / 2, win_size.y / 2),
             spread_between_bullet_arrays = 60, spread_within_bullet_arrays = 40
         )
 
@@ -47,7 +47,7 @@ class BulletTest(Scene):
             if event.type == pygame.QUIT:
                 sys.exit()
 
-        new_pos = pygame.math.Vector2(self.client.mouse_position)
+        new_pos = pygame.Vector2(self.client.mouse_position)
         self.mp.position = new_pos
         
         self.client.screen.fill((0,0,0))

@@ -10,7 +10,7 @@ from Helix.SakuyaEngine.math import vector2_move_toward
 import pygame
 
 spawn_animations = [
-    {"spawn_position_offset": pygame.math.Vector2(0, -100),
+    {"spawn_position_offset": pygame.Vector2(0, -100),
     "allowed_spawnpoints": [0, 1, 2, 3, 4]}
 ]
 
@@ -26,7 +26,7 @@ class HelixWaves(WaveManager):
     ) -> Entity:
         e = self.entities[entity_key].copy()
 
-        def move_spawn_func(entity: Entity, target: pygame.math.Vector2):
+        def move_spawn_func(entity: Entity, target: pygame.Vector2):
             # Event that will move the entity to its target position upon spawning.
             entity.position = vector2_move_toward(
                 entity.position,
@@ -35,7 +35,7 @@ class HelixWaves(WaveManager):
             )
             return entity.position != target - e.center_offset
 
-        def move_func(_entity: Entity, _target: pygame.math.Vector2):
+        def move_func(_entity: Entity, _target: pygame.Vector2):
             # Event that will move the entity to its eventual deletion.
             _entity.position = vector2_move_toward(
                 _entity.position,

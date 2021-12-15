@@ -19,7 +19,7 @@ from Helix.const import player_sprites
 
 HelixClient = Client(
     "Helix",
-    pygame.math.Vector2(256, 336),
+    pygame.Vector2(256, 336),
     window_icon = player_sprites[0]
 )
 HelixSceneManager = SceneManager(HelixClient)

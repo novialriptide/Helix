@@ -31,15 +31,15 @@ class Start(Scene):
 
         self.wave_manager = HelixWaves(30000)
         self.wave_manager.spawn_points = [
-            pygame.math.Vector2(int(win_size.x * 1/5), int(win_size.y * 1/4)),
-            pygame.math.Vector2(int(win_size.x * 1/3), int(win_size.y * 1/7)),
-            pygame.math.Vector2(int(win_size.x * 1/2), int(win_size.y * 1/7)),
-            pygame.math.Vector2(int(win_size.x * 2/3), int(win_size.y * 1/7)),
-            pygame.math.Vector2(int(win_size.x * 4/5), int(win_size.y * 1/4))
+            pygame.Vector2(int(win_size.x * 1/5), int(win_size.y * 1/4)),
+            pygame.Vector2(int(win_size.x * 1/3), int(win_size.y * 1/7)),
+            pygame.Vector2(int(win_size.x * 1/2), int(win_size.y * 1/7)),
+            pygame.Vector2(int(win_size.x * 2/3), int(win_size.y * 1/7)),
+            pygame.Vector2(int(win_size.x * 4/5), int(win_size.y * 1/4))
         ]
 
         self.player_entity = load_entity_json("Helix\\data\\entity\\helix.json")
-        self.player_entity.position = pygame.math.Vector2(win_size.x/2, win_size.y/2)
+        self.player_entity.position = pygame.Vector2(win_size.x/2, win_size.y/2)
         self.player_entity.controller = PlayerController()
         self.player_entity.anim_set("idle_anim")
 
@@ -172,7 +172,7 @@ class Start(Scene):
             # TODO: Implement this in Entity
             if e.draw_healthbar:
                 bar_length = e.rect.width * 0.7
-                bar_pos = e.position + e.healthbar_position_offset + e.center_offset - pygame.math.Vector2(bar_length / 2 - 1, e.rect.height * (2 / 3))
+                bar_pos = e.position + e.healthbar_position_offset + e.center_offset - pygame.Vector2(bar_length / 2 - 1, e.rect.height * (2 / 3))
                 display_hp = (e.healthbar.display_health / e._max_health) * bar_length
                 pygame.draw.rect(self.client.screen, (0, 230, 0), pygame.Rect(
                     bar_pos.x, bar_pos.y, display_hp, 1
