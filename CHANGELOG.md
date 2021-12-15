@@ -14,6 +14,7 @@
 13. Bullets now face the right direction.
 14. Increased player default speed from 1.5 to 2.
 15. Out of bounds collision added.
+16. BulletSpawners are now accurate with targets
 
 ## version 0.2
 1. SakuyaEngine patches.
