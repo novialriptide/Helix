@@ -35,11 +35,12 @@ class BulletTest(Scene):
 
         self.bullet_spawner_test = BulletSpawner(
             b,
-            iterations = 0, bullets_per_array = 4,
-            total_bullet_arrays = 6, fire_rate = 0,
+            iterations = 4, bullets_per_array = 4,
+            total_bullet_arrays = 6, fire_rate = 200,
             bullet_lifetime = 1000, target = self.mp, is_active = True, aim = True,
             position = pygame.Vector2(win_size.x / 2, win_size.y / 2),
-            spread_between_bullet_arrays = 60, spread_within_bullet_arrays = 40
+            spread_between_bullet_arrays = 60, spread_within_bullet_arrays = 40,
+            wait_until_reset = 2000, repeat = True
         )
 
     def update(self) -> None:
