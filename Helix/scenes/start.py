@@ -51,7 +51,8 @@ class Start(Scene):
         self.entities.append(self.player_entity)
 
         self.wave_manager.entities = [
-            load_entity_json("Helix\\data\\entity\\ado.json", bullet_target = self.player_entity)
+            load_entity_json("Helix\\data\\entity\\ado.json", bullet_target = self.player_entity),
+            load_entity_json("Helix\\data\\entity\\berserk.json", bullet_target = self.player_entity)
         ]
 
         screen_width, screen_height = self.client.screen.get_width(), self.client.screen.get_height()
@@ -168,7 +169,7 @@ class Start(Scene):
 
             # Render Player Particles
             e.particle_systems[0].particles_num = int(
-                ((e._max_health - e.current_health) / e._max_health) * 10
+                ((e.max_health - e.current_health) / e.max_health) * 10
             )
             for ps in e.particle_systems:
                 ps.render(self.client.screen, offset = self.camera.position)
@@ -178,7 +179,7 @@ class Start(Scene):
             if e.draw_healthbar:
                 bar_length = e.rect.width * 0.7
                 bar_pos = e.position + e.healthbar_position_offset + e.center_offset - pygame.Vector2(bar_length / 2 - 1, e.rect.height * (2 / 3)) + self.camera.position
-                display_hp = (e.healthbar.display_health / e._max_health) * bar_length
+                display_hp = (e.healthbar.display_health / e.max_health) * bar_length
                 pygame.draw.rect(self.client.screen, (0, 230, 0), pygame.Rect(
                     bar_pos.x, bar_pos.y, display_hp, 1
                 ))
