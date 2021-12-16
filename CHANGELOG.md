@@ -19,6 +19,7 @@
 18. Proper "AI" has been implemented for the basic enemies.
 19. Ado's bullet patterns have been changed.
 20. Berserk (Enemy) has been created.
+21. Added Pause Menu
 
 ## version 0.2
 1. SakuyaEngine patches.

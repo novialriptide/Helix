@@ -65,6 +65,10 @@ class Start(Scene):
 
         load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
 
+    def pause(self) -> None:
+        self.paused = True
+        self.client.add_scene("Pause", scene = self)
+
     def input(self) -> None:
         controller = self.player_entity.controller
         for event in pygame.event.get():
@@ -96,6 +100,8 @@ class Start(Scene):
                     self.player_entity.velocity.y = 0
                 if event.key == KEYBOARD["A"]:
                     controller.is_shooting = False
+                if event.key == KEYBOARD["start"]:
+                    self.pause()
 
             if event.type == pygame.JOYBUTTONDOWN:
                 if self.joystick.get_button(NS_CONTROLLER["left"]) == 1:
@@ -124,6 +130,8 @@ class Start(Scene):
                     self.player_entity.velocity.y = 0
                 if self.joystick.get_button(NS_CONTROLLER["A"]) == 0:
                     controller.is_shooting = False
+                if self.joystick.get_button(NS_CONTROLLER["start"]) == 0:
+                    self.pause()
 
     def update(self) -> None:
         self.input()
