@@ -16,7 +16,7 @@ class Pause(Scene):
             self.joystick = pygame.joystick.Joystick(0)
             print(f"Console Controller Detected! [{self.joystick.get_name()}]")
         
-        self.exit_scene = kwargs["scene"]
+        self.exit_scene = kwargs["exit_scene"]
 
     def exit(self) -> None:
         self.exit_scene.paused = False

@@ -6,7 +6,7 @@ import sys
 import pygame
 
 from Helix.SakuyaEngine.entity import load_entity_json
-from Helix.SakuyaEngine.scene import Scene
+from Helix.SakuyaEngine.scene import Scene, ScrollBackgroundSprite
 from Helix.SakuyaEngine.waves import load_wave_file
 from Helix.SakuyaEngine.errors import SceneNotActiveError
 from Helix.SakuyaEngine.lights import spotlight
@@ -28,6 +28,13 @@ class Start(Scene):
         pygame.mixer.init()
         pygame.mixer.set_num_channels(64)
         self.laser_1 = pygame.mixer.Sound("Helix\\audio\\laser-1.mp3")
+
+        self.scroll_bgs.append(
+            ScrollBackgroundSprite(
+                pygame.image.load("Helix\\sprites\\ocean_scroll.png"),
+                pygame.Vector2(0, 2), infinite = True
+            )
+        )
 
         self.wave_manager = HelixWaves(30000)
         self.wave_manager.spawn_points = [
@@ -67,7 +74,7 @@ class Start(Scene):
 
     def pause(self) -> None:
         self.paused = True
-        self.client.add_scene("Pause", scene = self)
+        self.client.add_scene("Pause", exit_scene = self)
 
     def input(self) -> None:
         controller = self.player_entity.controller
@@ -137,7 +144,7 @@ class Start(Scene):
         self.input()
         controller = self.player_entity.controller
 
-        self.client.screen.fill((100, 118, 236))
+        self.draw_scroll_bg()
 
         # Player shooting
         if controller.is_shooting:

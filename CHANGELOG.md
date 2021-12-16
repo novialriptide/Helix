@@ -20,6 +20,7 @@
 19. Ado's bullet patterns have been changed.
 20. Berserk (Enemy) has been created.
 21. Added Pause Menu
+22. Scrolling ocean background added.
 
 ## version 0.2
 1. SakuyaEngine patches.
