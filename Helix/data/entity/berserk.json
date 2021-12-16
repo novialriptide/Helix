@@ -1,0 +1,66 @@
+{
+    "name": "Bersek",
+    "tags": ["enemy"],
+    "max_health": 8,
+    "custom_hitbox_size": [6, 6],
+    "speed": 4,
+    "animations": [
+        {
+            "name": "idle_anim",
+            "sprites": {
+                "width": 16,
+                "height": 16,
+                "image": "Helix\\sprites\\berserk_idle_anim.png"
+            },
+            "fps": 2
+        }
+    ],
+    "bullet_spawners": [
+        {
+            "bullet": {
+                "tags": ["enemy_bullet"],
+                "speed": 0,
+                "color": [255, 255, 0],
+                "damage": 2,
+                "custom_hitbox_size": [1, 1],
+                "static_sprite": {
+                    "path": "Helix\\sprites\\projectiles2.png",
+                    "width": 3,
+                    "height": 3,
+                    "index": 0
+                }
+            },
+            "iterations": 4,
+            "bullets_per_array": 3,
+            "total_bullet_arrays": 1,
+            "fire_rate": 400,
+            "spread_between_bullet_arrays": 0,
+            "spread_within_bullet_arrays": 0,
+            "bullet_lifetime": 10000,
+            "bullet_speed": 1,
+            "aim": true,
+            "is_active": true,
+            "wait_until_reset": 4000,
+            "repeat": true
+        }
+    ],
+    "particle_systems": [
+        {
+            "velocity": [0, -2],
+            "colors": [
+                [249, 199, 63],
+                [255, 244, 70],
+                [255, 78, 65]
+            ],
+            "offset": [16, 16],
+            "particles_num": 0,
+            "spread": 1,
+            "lifetime": 500
+        }
+    ],
+    "event_sounds": {
+        "on_shoot": [],
+        "on_death": [],
+        "ambient": []
+    }
+}
