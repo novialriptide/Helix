@@ -35,7 +35,7 @@
             "total_bullet_arrays": 1,
             "fire_rate": 400,
             "spread_between_bullet_arrays": 0,
-            "spread_within_bullet_arrays": 0,
+            "spread_within_bullet_arrays": 20,
             "bullet_lifetime": 10000,
             "bullet_speed": 1,
             "aim": true,
