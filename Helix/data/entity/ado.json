@@ -1,7 +1,7 @@
 {
     "name": "Ado",
     "tags": ["enemy"],
-    "max_health": 25,
+    "max_health": 24,
     "custom_hitbox_size": [11, 11],
     "speed": 3,
     "animations": [
