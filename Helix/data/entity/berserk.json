@@ -31,7 +31,7 @@
                 }
             },
             "iterations": 4,
-            "bullets_per_array": 3,
+            "bullets_per_array": 1,
             "total_bullet_arrays": 1,
             "fire_rate": 400,
             "spread_between_bullet_arrays": 0,
