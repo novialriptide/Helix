@@ -1,3 +1,6 @@
+## version 0.4
+1. Optimized background scrolling
+
 ## version 0.3
 1. SakuyaEngine patches.
 2. First Level Games deprecation.

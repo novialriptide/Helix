@@ -31,7 +31,7 @@ class Start(Scene):
 
         self.scroll_bgs.append(
             ScrollBackgroundSprite(
-                pygame.image.load("Helix\\sprites\\ocean_scroll.png"),
+                pygame.image.load("Helix\\sprites\\ocean_scroll.png").convert_alpha(),
                 pygame.Vector2(0, 2), infinite = True
             )
         )
