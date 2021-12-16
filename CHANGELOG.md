@@ -7,7 +7,7 @@
 6. FPS has been capped to 60.
 7. CHANGELOG.md has been created.
 8. Particle lifetime has been reduced.
-9. Ado now emits particles depending on its health.
+9. Enemies now emits particles depending on its health.
 10. Entity optimizations.
 11. Some enemies can now aim.
 12. Resolution has been changed from 256x224 pixels to 256x336 pixels.
@@ -16,6 +16,7 @@
 15. Out of bounds collision added.
 16. BulletSpawners are now accurate with targets
 17. More spawn points added.
+18. Proper "AI" has been implemented for the basic enemies.
 
 ## version 0.2
 1. SakuyaEngine patches.

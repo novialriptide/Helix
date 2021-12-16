@@ -30,8 +30,8 @@
                     "index": 3
                 }
             },
-            "iterations": 0,
-            "bullets_per_array": 5,
+            "iterations": 3,
+            "bullets_per_array": 3,
             "total_bullet_arrays": 6,
             "fire_rate": 500,
             "spread_between_bullet_arrays": 60,
@@ -40,7 +40,36 @@
             "bullet_speed": 1,
             "aim": true,
             "is_active": true,
-            "starting_angle": 90
+            "starting_angle": 90,
+            "wait_until_reset": 1000,
+            "repeat": true
+        },
+        {
+            "bullet": {
+                "tags": ["enemy_bullet"],
+                "speed": 0,
+                "color": [255, 255, 0],
+                "damage": 2,
+                "custom_hitbox_size": [1, 1],
+                "static_sprite": {
+                    "path": "Helix\\sprites\\projectiles.png",
+                    "width": 8,
+                    "height": 8,
+                    "index": 0
+                }
+            },
+            "iterations": 5,
+            "bullets_per_array": 1,
+            "total_bullet_arrays": 1,
+            "fire_rate": 200,
+            "spread_between_bullet_arrays": 0,
+            "spread_within_bullet_arrays": 0,
+            "bullet_lifetime": 10000,
+            "bullet_speed": 2,
+            "aim": true,
+            "is_active": true,
+            "wait_until_reset": 1000,
+            "repeat": true
         }
     ],
     "particle_systems": [
