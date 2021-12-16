@@ -34,7 +34,7 @@
                 }
             },
             "fire_rate": 100,
-            "bullet_speed": 10,
+            "bullet_speed": 15,
             "bullet_lifetime": 1000,
             "is_active": true
         }
