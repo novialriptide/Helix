@@ -3,7 +3,7 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/FirstLevelGames/Helix.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/FirstLevelGames/Helix/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/FirstLevelGames/Helix.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/FirstLevelGames/Helix/context:python)
 
-<img src="https://user-images.githubusercontent.com/35881688/146322033-7b601af5-9220-43b7-ad13-0432bfcac1ac.png" width="256" height="336"/><img src="https://user-images.githubusercontent.com/35881688/146322228-478481fb-8726-4c4e-80f9-1bd4af10cecb.png" width="256" height="336"/>
+<img src="https://user-images.githubusercontent.com/35881688/146456718-2f479c93-b26f-42d6-8ffc-a3a2c2c11e22.png" width="256" height="336"/><img src="https://user-images.githubusercontent.com/35881688/146322228-478481fb-8726-4c4e-80f9-1bd4af10cecb.png" width="256" height="336"/>
 
 ## Running From Source
 1. Clone this repository
