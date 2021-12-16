@@ -24,10 +24,10 @@
                 "damage": 2,
                 "custom_hitbox_size": [1, 1],
                 "static_sprite": {
-                    "path": "Helix\\sprites\\projectiles.png",
-                    "width": 8,
-                    "height": 8,
-                    "index": 3
+                    "path": "Helix\\sprites\\projectiles2.png",
+                    "width": 3,
+                    "height": 3,
+                    "index": 0
                 }
             },
             "iterations": 3,
@@ -50,7 +50,7 @@
                 "speed": 0,
                 "color": [255, 255, 0],
                 "damage": 2,
-                "custom_hitbox_size": [1, 1],
+                "custom_hitbox_size": [3, 3],
                 "static_sprite": {
                     "path": "Helix\\sprites\\projectiles.png",
                     "width": 8,

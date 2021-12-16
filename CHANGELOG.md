@@ -17,6 +17,7 @@
 16. BulletSpawners are now accurate with targets
 17. More spawn points added.
 18. Proper "AI" has been implemented for the basic enemies.
+19. Ado's bullet patterns have been changed.
 
 ## version 0.2
 1. SakuyaEngine patches.
