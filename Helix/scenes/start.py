@@ -23,7 +23,7 @@ class Start(Scene):
         if pygame.joystick.get_count() > 0:
             self.joystick = pygame.joystick.Joystick(0)
             print(f"Console Controller Detected! [{self.joystick.get_name()}]")
-        
+
         # Load sounds
         pygame.mixer.init()
         pygame.mixer.set_num_channels(64)
@@ -151,8 +151,8 @@ class Start(Scene):
             rect = b.rect
             if b.position.y < - rect.height or b.position.y > self.client.screen.get_height() or b.position.x + rect.width < 0 or b.position.x > self.client.screen.get_width():
                 b._is_destroyed = True
-            self.client.screen.blit(b.sprite, b.position)
-            spotlight(self.client.screen, b.position + b.center_offset, (20, 0, 20), 10)
+            self.client.screen.blit(b.sprite, b.position + self.camera.position)
+            spotlight(self.client.screen, b.position + b.center_offset + self.camera.position, (20, 0, 20), 10)
             #pygame.draw.rect(self.client.screen, (0, 255, 0), b.custom_hitbox, 1)
 
         for e in self.entities:
@@ -171,13 +171,13 @@ class Start(Scene):
                 ((e._max_health - e.current_health) / e._max_health) * 10
             )
             for ps in e.particle_systems:
-                ps.render(self.client.screen)
+                ps.render(self.client.screen, offset = self.camera.position)
             # Draw
-            self.client.screen.blit(e.sprite, e.position)
+            self.client.screen.blit(e.sprite, e.position + self.camera.position)
             # TODO: Implement this in Entity
             if e.draw_healthbar:
                 bar_length = e.rect.width * 0.7
-                bar_pos = e.position + e.healthbar_position_offset + e.center_offset - pygame.Vector2(bar_length / 2 - 1, e.rect.height * (2 / 3))
+                bar_pos = e.position + e.healthbar_position_offset + e.center_offset - pygame.Vector2(bar_length / 2 - 1, e.rect.height * (2 / 3)) + self.camera.position
                 display_hp = (e.healthbar.display_health / e._max_health) * bar_length
                 pygame.draw.rect(self.client.screen, (0, 230, 0), pygame.Rect(
                     bar_pos.x, bar_pos.y, display_hp, 1
@@ -190,7 +190,7 @@ class Start(Scene):
         # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
 
         for p in self.particle_systems:
-            p.render(self.client.screen)
+            p.render(self.client.screen, offset = self.camera.position)
             p.update(self.client.delta_time)
 
         self.event_system.update()
