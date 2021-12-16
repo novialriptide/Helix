@@ -12,8 +12,10 @@ KEYBOARD = {
     "right": pygame.K_RIGHT, 
     "A": pygame.K_z,
     "B": pygame.K_x,
-    "select": pygame.K_a,
-    "start": pygame.K_s
+    "X": pygame.K_a,
+    "Y": pygame.K_s,
+    "select": None,
+    "start": pygame.K_ESCAPE
 }
 
 # Nintendo Switch
@@ -24,6 +26,8 @@ NS_CONTROLLER = {
     "right": 14, 
     "A": 0,
     "B": 1,
+    "X": None,
+    "Y": None,
     "select": 4,
     "start": 6
 }
