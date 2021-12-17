@@ -26,17 +26,6 @@ class HelixWaves(WaveManager):
     ) -> Entity:
         e = self.entities[entity_key].copy()
 
-        def move_func(_entity: Entity, _target: pygame.Vector2):
-            # Event that will move the entity to its eventual deletion.
-            _entity.position = vector2_move_toward(
-                _entity.position,
-                _target - e.center_offset,
-                _entity.speed * delta_time()
-            )
-            if _entity.position == _target - e.center_offset:
-                _entity._is_destroyed = True
-            return _entity.position != _target - e.center_offset
-
         def move_despawn_func(entity: Entity, spawn_anim: int, spawn_key: int):
             # Event that will wait until it's time for it to despawn and execute the despawn movement.
             entity.target_position = spawn_anim["spawn_position_offset"] + self.spawn_points[spawn_key]
