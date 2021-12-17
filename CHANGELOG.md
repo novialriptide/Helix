@@ -3,6 +3,7 @@
 2. Dialogue scene has been created.
 3. Player no longer moves faster than it should if moving diagonally.
 4. Increased Berserk's hitbox size.
+5. Waves Manager spawning has been rewritten.
 
 ## version 0.3
 1. SakuyaEngine patches.
