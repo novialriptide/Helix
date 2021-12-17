@@ -1,5 +1,6 @@
 ## version 0.4
-1. Optimized background scrolling
+1. Optimized background scrolling.
+2. Dialogue scene has been created.
 
 ## version 0.3
 1. SakuyaEngine patches.
