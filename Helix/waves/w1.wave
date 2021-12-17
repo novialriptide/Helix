@@ -19,4 +19,11 @@ spawn 0 2 0 4000
 
 wait 6000
 
-spawn 0 2 0 4000
+spawn 1 2 0 4000
+spawn 0 0 0 10000
+spawn 1 4 0 4000
+
+wait 2000
+
+spawn 1 0 0 4000
+spawn 1 5 0 4000
