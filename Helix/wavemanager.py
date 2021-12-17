@@ -26,15 +26,6 @@ class HelixWaves(WaveManager):
     ) -> Entity:
         e = self.entities[entity_key].copy()
 
-        def move_spawn_func(entity: Entity, target: pygame.Vector2):
-            # Event that will move the entity to its target position upon spawning.
-            entity.position = vector2_move_toward(
-                entity.position,
-                target - e.center_offset,
-                entity.speed * delta_time()
-            )
-            return entity.position != target - e.center_offset
-
         def move_func(_entity: Entity, _target: pygame.Vector2):
             # Event that will move the entity to its eventual deletion.
             _entity.position = vector2_move_toward(
@@ -48,15 +39,11 @@ class HelixWaves(WaveManager):
 
         def move_despawn_func(entity: Entity, spawn_anim: int, spawn_key: int):
             # Event that will wait until it's time for it to despawn and execute the despawn movement.
-            move_back_event = RepeatEvent("move_enemy", move_func, args=[
-                entity, spawn_anim["spawn_position_offset"] + self.spawn_points[spawn_key]
-            ])
-            event_system._methods.append(move_back_event)
+            entity.target_position = spawn_anim["spawn_position_offset"] + self.spawn_points[spawn_key]
 
         spawn_anim = spawn_animations[spawn_anim]
         e.position = spawn_anim["spawn_position_offset"] - e.center_offset + self.spawn_points[spawn_key]
-        event = RepeatEvent("move_enemy", move_spawn_func, args=[e, self.spawn_points[spawn_key]])
-        event_system._methods.append(event)
+        e.target_position = self.spawn_points[spawn_key] - e.center_offset
 
         if lifetime != 0:
             wait_moveback_enemy = WaitEvent("wait_moveback_enemy", lifetime, move_despawn_func, args=[e, spawn_anim, spawn_key])
