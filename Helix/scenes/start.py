@@ -31,7 +31,7 @@ class Start(Scene):
 
         self.scroll_bgs.append(
             ScrollBackgroundSprite(
-                pygame.image.load("Helix\\sprites\\ocean_scroll.png").convert_alpha(),
+                pygame.image.load("Helix\\sprites\\ocean_scroll.png").convert(),
                 pygame.Vector2(0, 2), infinite = True
             )
         )
@@ -72,6 +72,18 @@ class Start(Scene):
 
         load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
 
+    def add_dialogue(self, **kwargs) -> None:
+        """Adds a Dialogue scene.
+
+        Parameters:
+            msgs (List[str]): List of messages that will be said.
+            char_data (dict): Character data for the person speaking.
+            expression (str): The expression upon awake.
+
+        """
+        self.paused = True
+        self.client.add_scene("Dialogue", exit_scene = self, **kwargs)
+
     def pause(self) -> None:
         self.paused = True
         self.client.add_scene("Pause", exit_scene = self)
@@ -82,6 +94,12 @@ class Start(Scene):
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    self.add_dialogue(
+                        msgs = ["Bro, what the fuck are you doing?"],
+                        char_data = "Helix\\data\\characters\\eunji.json",
+                        expression = "unsure"
+                    )
                 if event.key == KEYBOARD["left"]:
                     controller.is_moving_left = True
                 if event.key == KEYBOARD["right"]:
