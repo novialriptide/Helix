@@ -2,7 +2,7 @@
     "name": "Bersek",
     "tags": ["enemy"],
     "max_health": 8,
-    "custom_hitbox_size": [6, 6],
+    "custom_hitbox_size": [8, 8],
     "speed": 4,
     "animations": [
         {

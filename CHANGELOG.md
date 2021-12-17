@@ -2,6 +2,7 @@
 1. Optimized background scrolling.
 2. Dialogue scene has been created.
 3. Player no longer moves faster than it should if moving diagonally.
+4. Increased Berserk's hitbox size.
 
 ## version 0.3
 1. SakuyaEngine patches.
