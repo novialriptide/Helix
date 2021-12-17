@@ -1,0 +1,8 @@
+{
+    "name": "Eun-Ji",
+    "portaits": {
+        "fine": "Helix\\sprites\\eunji_fine.png",
+        "happy": "Helix\\sprites\\eunji_happy.png",
+        "unsure": "Helix\\sprites\\eunji_unsure.png"
+    }
+}
