@@ -9,6 +9,8 @@
 8. All entities now load from .py files instead of JSON files to prevent partial entity loads.
 9. Window resizing is fixed.
 10. Entity hitboxes are now 50% faster.
+11. Added rain.
+12. Fixed the fullscreen option.
 
 ## version 0.3
 1. SakuyaEngine patches.
