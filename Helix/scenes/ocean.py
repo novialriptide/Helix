@@ -20,7 +20,7 @@ from Helix.data.entity.helix import HELIX
 from Helix.data.entity.ado import ADO
 from Helix.data.entity.berserk import BERSERK
 
-class Start(Scene):
+class Ocean(Scene):
     def on_awake(self) -> None:
         win_size = self.client.original_window_size
         pygame.joystick.init()
@@ -191,7 +191,7 @@ class Start(Scene):
         for c in collided:
             if "enemy_bullet" in c.tags:
                 try:
-                    self.client.replace_scene("Start", "Death")
+                    self.client.replace_scene("Ocean", "Death")
                 except SceneNotActiveError:
                     pass
                 self.bullets.remove(c)
