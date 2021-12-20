@@ -5,16 +5,20 @@ This code is licensed under MIT license (see LICENSE for details)
 import sys
 import pygame
 
-from Helix.SakuyaEngine.entity import load_entity_json
 from Helix.SakuyaEngine.scene import Scene, ScrollBackgroundSprite
 from Helix.SakuyaEngine.waves import load_wave_file
 from Helix.SakuyaEngine.errors import SceneNotActiveError
 from Helix.SakuyaEngine.lights import spotlight
+from Helix.SakuyaEngine.effects import EnlargingCircle
 
 from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
 from Helix.playercontroller import PlayerController
 from Helix.const import *
+
+from Helix.data.entity.helix import HELIX
+from Helix.data.entity.ado import ADO
+from Helix.data.entity.berserk import BERSERK
 
 class Start(Scene):
     def on_awake(self) -> None:
@@ -61,8 +65,8 @@ class Start(Scene):
             pygame.Vector2(int(win_size.x * 7/10), int(win_size.y)),
             pygame.Vector2(int(win_size.x * 9/10), int(win_size.y)),
         ]
-
-        self.player_entity = load_entity_json("Helix\\data\\entity\\helix.json")
+        
+        self.player_entity = HELIX
         self.player_entity.position = pygame.Vector2(win_size.x/2, win_size.y * (2 / 3)) - self.player_entity.center_offset
         self.player_entity.controller = PlayerController()
         self.player_entity.anim_set("idle_anim")
@@ -70,8 +74,7 @@ class Start(Scene):
         self.entities.append(self.player_entity)
 
         self.wave_manager.entities = [
-            load_entity_json("Helix\\data\\entity\\ado.json", bullet_target = self.player_entity),
-            load_entity_json("Helix\\data\\entity\\berserk.json", bullet_target = self.player_entity)
+            ADO, BERSERK
         ]
 
         screen_width, screen_height = self.client.screen.get_width(), self.client.screen.get_height()
@@ -195,8 +198,12 @@ class Start(Scene):
 
         for b in self.bullets:
             rect = b.rect
+            
+            # Delete bullet if out of screen's view
             if b.position.y < - rect.height or b.position.y > self.client.screen.get_height() or b.position.x + rect.width < 0 or b.position.x > self.client.screen.get_width():
                 b._is_destroyed = True
+                
+            # Draw bullet + lights
             self.client.screen.blit(b.sprite, b.position + self.camera.position)
             spotlight(self.client.screen, b.position + b.center_offset + self.camera.position, (20, 0, 20), 10)
             #pygame.draw.rect(self.client.screen, (0, 255, 0), b.custom_hitbox, 1)
@@ -250,4 +257,4 @@ class Start(Scene):
         self.event_system.update()
         self.advance_frame(self.client.delta_time, collision_rects = self.collision_rects)
 
-        pygame.display.set_caption(f"{self.client._window_name} (fps: {int(self.client.pg_clock.get_fps())})")        pygame.display.set_caption(f"{self.client._window_name} (fps: {int(self.client.pg_clock.get_fps())}, bullets: {int(len(self.bullets))})")
+        pygame.display.set_caption(f"{self.client._window_name} (fps: {int(self.client.pg_clock.get_fps())}, bullets: {int(len(self.bullets))})")

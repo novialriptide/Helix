@@ -5,6 +5,8 @@
 4. Increased Berserk's hitbox size.
 5. Waves Manager spawning has been rewritten.
 6. Entities now despawn and move to the bottom of the screen to despawn.
+7. Added "explosions" to every enemy dying. This will later be changed to work with specific enemies.
+8. All entities now load from .py files instead of JSON files to prevent partial entity loads.
 
 ## version 0.3
 1. SakuyaEngine patches.
