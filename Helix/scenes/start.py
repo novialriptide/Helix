@@ -198,7 +198,7 @@ class Start(Scene):
 
         for b in self.bullets:
             rect = b.rect
-            
+
             # Delete bullet if out of screen's view
             if b.position.y < - rect.height or b.position.y > self.client.screen.get_height() or b.position.x + rect.width < 0 or b.position.x > self.client.screen.get_width():
                 b._destroy_queue = True
