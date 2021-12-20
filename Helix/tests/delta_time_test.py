@@ -1,3 +1,7 @@
+"""
+Helix: Flight Test (c) 2021 Andrew Hong
+This code is licensed under MIT license (see LICENSE for details)
+"""
 import pygame
 import sys
 
