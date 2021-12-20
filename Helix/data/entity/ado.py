@@ -28,7 +28,7 @@ ADO = Entity(
                 )[0]
             ),
             iterations = 3,
-            bullets_per_array = 10,
+            bullets_per_array = 3,
             total_bullet_arrays = 6,
             fire_rate = 500,
             spread_between_bullet_arrays = 60,
