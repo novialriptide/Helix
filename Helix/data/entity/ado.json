@@ -3,7 +3,7 @@
     "tags": ["enemy"],
     "max_health": 24,
     "custom_hitbox_size": [11, 11],
-    "speed": 3,
+    "speed": 1,
     "animations": [
         {
             "name": "idle_anim",
