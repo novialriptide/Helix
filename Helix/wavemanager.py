@@ -27,7 +27,8 @@ class HelixWaves(WaveManager):
 
         def move_despawn_func(entity: Entity, spawn_anim: int, spawn_key: int):
             # Event that will wait until it's time for it to despawn and execute the despawn movement.
-            entity.target_position = spawn_anim["spawn_position_offset"] + self.spawn_points[spawn_key] - e.center_offset
+            entity.target_position = self.despawn_points[spawn_key] - e.center_offset
+            entity.destroy_position = self.despawn_points[spawn_key] - e.center_offset
 
         spawn_anim = spawn_animations[spawn_anim]
         e.position = spawn_anim["spawn_position_offset"] - e.center_offset + self.spawn_points[spawn_key]

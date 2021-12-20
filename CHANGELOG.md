@@ -4,6 +4,7 @@
 3. Player no longer moves faster than it should if moving diagonally.
 4. Increased Berserk's hitbox size.
 5. Waves Manager spawning has been rewritten.
+6. Entities now despawn and move to the bottom of the screen to despawn.
 
 ## version 0.3
 1. SakuyaEngine patches.
