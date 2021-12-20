@@ -85,7 +85,7 @@ class Ocean(Scene):
             pygame.Rect(0, screen_height - 4, screen_width, 4)
         ]
         
-        self.rain = Rain(30, self.client.screen, self.effects)
+        self.rain = Rain(10, self.client.screen, self.effects, velocity = pygame.Vector2(1, 1))
 
         load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
 
@@ -180,6 +180,17 @@ class Ocean(Scene):
         controller = self.player_entity.controller
 
         self.draw_scroll_bg()
+        
+        # Render effects
+        self.rain.draw(self.client.screen, offset = self.camera.position)
+        self.rain.update(self.client.delta_time)
+
+        for ef in self.effects:
+            ef.draw(self.client.screen, offset = self.camera.position)
+
+        for p in self.particle_systems:
+            p.render(self.client.screen, offset = self.camera.position)
+            p.update(self.client.delta_time)
 
         # Player shooting
         if controller.is_shooting:
@@ -243,21 +254,11 @@ class Ocean(Scene):
                 pygame.draw.rect(self.client.screen, (0, 190, 0), pygame.Rect(
                     bar_pos.x, bar_pos.y + 1, display_hp, 1
                 ))
-        
-        # Render effects
-        self.rain.draw(self.client.screen, offset = self.camera.position)
-        self.rain.update(self.client.delta_time)
-
-        for ef in self.effects:
-            ef.draw(self.client.screen, offset = self.camera.position)
 
         # for sp in self.wave_manager.spawn_points: self.client.screen.set_at((int(sp.x), int(sp.y)), (255,255,255))
         # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
         # for e in self.bullets: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
 
-        for p in self.particle_systems:
-            p.render(self.client.screen, offset = self.camera.position)
-            p.update(self.client.delta_time)
         
 
         self.event_system.update()
