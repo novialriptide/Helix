@@ -210,6 +210,9 @@ class Start(Scene):
                         self.bullets.remove(c)
 
                         if e.current_health <= 0:
+                            self.effects.append(
+                                EnlargingCircle(e.position + e.center_offset, (255, 255, 255), 2, 500, 8)
+                            )
                             e._is_destroyed = True
 
             # Render Player Particles
@@ -231,6 +234,10 @@ class Start(Scene):
                 pygame.draw.rect(self.client.screen, (0, 190, 0), pygame.Rect(
                     bar_pos.x, bar_pos.y + 1, display_hp, 1
                 ))
+        
+        # Render effects
+        for ef in self.effects:
+            ef.draw(self.client.screen, offset = self.camera.position)
 
         # for sp in self.wave_manager.spawn_points: self.client.screen.set_at((int(sp.x), int(sp.y)), (255,255,255))
         # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
@@ -243,4 +250,4 @@ class Start(Scene):
         self.event_system.update()
         self.advance_frame(self.client.delta_time, collision_rects = self.collision_rects)
 
-        pygame.display.set_caption(f"{self.client._window_name} (fps: {int(self.client.pg_clock.get_fps())})")
+        pygame.display.set_caption(f"{self.client._window_name} (fps: {int(self.client.pg_clock.get_fps())})")        pygame.display.set_caption(f"{self.client._window_name} (fps: {int(self.client.pg_clock.get_fps())}, bullets: {int(len(self.bullets))})")
