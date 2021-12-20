@@ -257,4 +257,4 @@ class Start(Scene):
         self.event_system.update()
         self.advance_frame(self.client.delta_time, collision_rects = self.collision_rects)
 
-        pygame.display.set_caption(f"{self.client._window_name} (fps: {int(self.client.pg_clock.get_fps())}, bullets: {int(len(self.bullets))})")
+        pygame.display.set_caption(f"{self.client._window_name} (fps: {int(self.client.pg_clock.get_fps())}, bullets: {int(len(self.bullets))}, entities: {len(self.entities)})")
