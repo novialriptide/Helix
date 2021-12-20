@@ -23,7 +23,7 @@ BERSERK = Entity(
                 damage = 2,
                 custom_hitbox_size = pygame.Vector2(1, 1),
                 static_sprite = split_image(
-                    pygame.image.load("Helix\\sprites\\projectiles2.png"),
+                    pygame.image.load("Helix\\sprites\\projectiles2.png").convert_alpha(),
                     3, 3
                 )[0],
             ),
@@ -62,7 +62,7 @@ BERSERK.anim_add(
     Animation(
         "idle_anim",
         split_image(
-            pygame.image.load("Helix\\sprites\\berserk_idle_anim.png"),
+            pygame.image.load("Helix\\sprites\\berserk_idle_anim.png").convert_alpha(),
             16, 16
         ),
         fps = 2

@@ -8,27 +8,22 @@ import pygame
 from Helix.SakuyaEngine.client import Client
 from Helix.SakuyaEngine.scene import SceneManager
 
+HelixClient = Client(
+    "Helix",
+    pygame.Vector2(256, 336)
+)
+
 from Helix.scenes.start import Start
 from Helix.scenes.death import Death
 from Helix.scenes.splash import Splash
 from Helix.scenes.dialogue import Dialogue
 from Helix.scenes.pause import Pause
 from Helix.scenes.tests.bullet_test import BulletTest
-from Helix.const import player_sprites
 
-HelixClient = Client(
-    "Helix",
-    pygame.Vector2(256, 336),
-    window_icon = player_sprites[0]
-)
+scenes = [Splash, Start, Death, Pause, Dialogue, BulletTest]
 HelixSceneManager = SceneManager(HelixClient)
-HelixSceneManager.register_scene(Splash)
-HelixSceneManager.register_scene(Start)
-HelixSceneManager.register_scene(Death)
-HelixSceneManager.register_scene(Pause)
-HelixSceneManager.register_scene(Dialogue)
-
-HelixSceneManager.register_scene(BulletTest)
+for s in scenes:
+    HelixSceneManager.register_scene(s)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--scene", type=str, help="Load a scene")

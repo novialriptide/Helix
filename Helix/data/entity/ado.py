@@ -23,12 +23,12 @@ ADO = Entity(
                 damage = 2,
                 custom_hitbox_size = pygame.Vector2(1, 1),
                 static_sprite = split_image(
-                    pygame.image.load("Helix\\sprites\\projectiles2.png"),
+                    pygame.image.load("Helix\\sprites\\projectiles2.png").convert_alpha(),
                     3, 3
                 )[0]
             ),
             iterations = 3,
-            bullets_per_array = 3,
+            bullets_per_array = 10,
             total_bullet_arrays = 6,
             fire_rate = 500,
             spread_between_bullet_arrays = 60,
@@ -63,7 +63,7 @@ ADO.anim_add(
     Animation(
         "idle_anim",
         split_image(
-            pygame.image.load("Helix\\sprites\\ado_idle_anim.png"),
+            pygame.image.load("Helix\\sprites\\ado_idle_anim.png").convert_alpha(),
             32, 32
         ),
         fps = 1.5

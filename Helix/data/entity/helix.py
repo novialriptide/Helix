@@ -24,7 +24,7 @@ HELIX = Entity(
                 damage = 2,
                 custom_hitbox_size = pygame.Vector2(1, 1),
                 static_sprite = split_image(
-                    pygame.image.load("Helix\\sprites\\projectiles.png"),
+                    pygame.image.load("Helix\\sprites\\projectiles.png").convert_alpha(),
                     8, 8
                 )[1]
             ),
@@ -54,7 +54,7 @@ HELIX.anim_add(
     Animation(
         "idle_anim",
         split_image(
-            pygame.image.load("Helix\\sprites\\helix_idle_anim.png"),
+            pygame.image.load("Helix\\sprites\\helix_idle_anim.png").convert_alpha(),
             16, 16
         ),
         fps = 2
