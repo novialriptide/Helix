@@ -201,7 +201,7 @@ class Start(Scene):
             
             # Delete bullet if out of screen's view
             if b.position.y < - rect.height or b.position.y > self.client.screen.get_height() or b.position.x + rect.width < 0 or b.position.x > self.client.screen.get_width():
-                b._is_destroyed = True
+                b._destroy_queue = True
                 
             # Draw bullet + lights
             self.client.screen.blit(b.sprite, b.position + self.camera.position)
@@ -220,7 +220,7 @@ class Start(Scene):
                             self.effects.append(
                                 EnlargingCircle(e.position + e.center_offset, (255, 255, 255), 2, 500, 8)
                             )
-                            e._is_destroyed = True
+                            e._destroy_queue = True
 
             # Render Player Particles
             e.particle_systems[0].particles_num = int(
