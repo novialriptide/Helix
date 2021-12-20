@@ -9,7 +9,7 @@ from Helix.SakuyaEngine.scene import Scene, ScrollBackgroundSprite
 from Helix.SakuyaEngine.waves import load_wave_file
 from Helix.SakuyaEngine.errors import SceneNotActiveError
 from Helix.SakuyaEngine.lights import spotlight
-from Helix.SakuyaEngine.effects import EnlargingCircle
+from Helix.SakuyaEngine.effects import EnlargingCircle, Rain
 
 from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
@@ -84,6 +84,8 @@ class Ocean(Scene):
             pygame.Rect(screen_width - 4, 0, 4, screen_height),
             pygame.Rect(0, screen_height - 4, screen_width, 4)
         ]
+        
+        self.rain = Rain(30, self.client.screen, self.effects)
 
         load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
 
@@ -243,6 +245,9 @@ class Ocean(Scene):
                 ))
         
         # Render effects
+        self.rain.draw(self.client.screen, offset = self.camera.position)
+        self.rain.update(self.client.delta_time)
+
         for ef in self.effects:
             ef.draw(self.client.screen, offset = self.camera.position)
 
@@ -253,6 +258,7 @@ class Ocean(Scene):
         for p in self.particle_systems:
             p.render(self.client.screen, offset = self.camera.position)
             p.update(self.client.delta_time)
+        
 
         self.event_system.update()
         self.advance_frame(self.client.delta_time, collision_rects = self.collision_rects)
