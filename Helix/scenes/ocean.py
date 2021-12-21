@@ -4,6 +4,7 @@ This code is licensed under MIT license (see LICENSE for details)
 """
 import sys
 import pygame
+import random
 
 from Helix.SakuyaEngine.scene import Scene, ScrollBackgroundSprite
 from Helix.SakuyaEngine.waves import load_wave_file
@@ -85,7 +86,7 @@ class Ocean(Scene):
             pygame.Rect(0, screen_height - 4, screen_width, 4)
         ]
         
-        self.rain = Rain(80, self.client.screen, self.effects, velocity = pygame.Vector2(0.2, 0.2), length = 8)
+        self.rain = Rain(1, self.client.screen, self.effects, velocity = pygame.Vector2(3, 3), length = 8, color = (200, 200, 200))
 
         load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
 
@@ -236,7 +237,7 @@ class Ocean(Scene):
 
                         if e.current_health <= 0:
                             self.effects.append(
-                                EnlargingCircle(e.position + e.center_offset, (255, 255, 255), 2, 500, 8)
+                                EnlargingCircle(e.position + e.center_offset, random.choice(explosion_colors), 2, 500, 8)
                             )
                             e._destroy_queue = True
 
