@@ -1,20 +1,27 @@
-## version 0.4
-1. Optimized background scrolling.
-2. Dialogue scene has been created.
-3. Player no longer moves faster than it should if moving diagonally.
-4. Increased Berserk's hitbox size.
-5. Waves Manager spawning has been rewritten.
-6. Entities now despawn and move to the bottom of the screen to despawn.
-7. Added "explosions" to every enemy dying. This will later be changed to work with specific enemies.
-8. All entities now load from .py files instead of JSON files to prevent partial entity loads.
-9. Window resizing is fixed.
-10. Entity hitboxes are now 50% faster.
-11. Added rain.
-12. Fixed the fullscreen option.
-13. Added shadows.
-14. Some enemies will now spawn bullets when they're not moving.
+# version 0.4
+### New Features / Changes
+1. Dialogue scene has been created.
+2. Increased Berserk's hitbox size.
+3. Waves Manager spawning has been rewritten.
+4. All entities now load from .py files instead of JSON files to prevent partial entity loads.
+5. Some enemies will no longer spawn bullets when they're moving.
+6. Added "explosions" to every enemy dying. This will later be changed to work with specific enemies.
+7. Added rain to Ocean.
+8. Added shadows to entities.
+9. Window caption displays entity and bullet count.
+10. Ocean background has been darkened.
 
-## version 0.3
+### Bug Fixes
+1. Player no longer moves faster than it should if moving diagonally.
+2. Entities now despawn and move to the bottom of the screen to despawn.
+3. Window now resizes without crashing.
+4. Fixed fullscreen option.
+
+### Optimiziations
+1. Background scrolling
+2. Entity hitboxes are now 50% faster.
+
+# version 0.3
 1. SakuyaEngine patches.
 2. First Level Games deprecation.
 3. Caption displays fps.
@@ -38,7 +45,7 @@
 21. Added Pause Menu
 22. Scrolling ocean background added.
 
-## version 0.2
+# version 0.2
 1. SakuyaEngine patches.
 2. Lights added to bullets.
 3. FPS has been capped to 30.
