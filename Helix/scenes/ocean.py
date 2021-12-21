@@ -23,7 +23,6 @@ from Helix.data.entity.berserk import BERSERK
 
 class Ocean(Scene):
     def on_awake(self) -> None:
-        win_size = self.client.original_window_size
         pygame.joystick.init()
         if pygame.joystick.get_count() > 0:
             self.joystick = pygame.joystick.Joystick(0)
@@ -41,7 +40,9 @@ class Ocean(Scene):
             )
         )
 
-        self.wave_manager = HelixWaves(30000)
+        win_size = self.client.original_window_size
+        self.wave_manager = HelixWaves(0)
+        # Load spawnpoints via json file
         self.wave_manager.spawn_points = [
             pygame.Vector2(int(win_size.x * 1/10), int(win_size.y * 1/7)),
             pygame.Vector2(int(win_size.x * 3/10), int(win_size.y * 1/7)),
