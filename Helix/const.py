@@ -15,3 +15,10 @@ pygame_powered_logo = pygame.image.load("Helix\\sprites\\pygame_powered.png").co
 
 font5x3 = "Helix\\fonts\\bit5x3.ttf"
 font5x5 = "Helix\\fonts\\bit5x5.ttf"
+
+explosion_colors = [
+    [249, 199, 63],
+    [255, 244, 70],
+    [255, 78, 65],
+    [89, 89, 89]
+]
