@@ -41,6 +41,31 @@ ADO = Entity(
             starting_angle = 90,
             wait_until_reset = 1000,
             repeat = True,
+        ),
+        BulletSpawner(
+            Bullet(
+                tags = ["enemy_bullet"],
+                speed = 0,
+                color = [255, 255, 0],
+                damage = 2,
+                custom_hitbox_size = pygame.Vector2(3, 3),
+                static_sprite = split_image(
+                    pygame.image.load("Helix\\sprites\\projectiles.png").convert_alpha(),
+                    8, 8
+                )[0]
+            ),
+            iterations = 5,
+            bullets_per_array = 1,
+            total_bullet_arrays = 1,
+            fire_rate = 200,
+            spread_between_bullet_arrays = 0,
+            spread_within_bullet_arrays = 0,
+            bullet_lifetime = 2000,
+            aim = True,
+            target = HELIX,
+            is_active = True,
+            wait_until_reset = 1000,
+            repeat = True
         )
     ],
     particle_systems = [
