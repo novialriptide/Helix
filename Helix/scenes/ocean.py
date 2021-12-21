@@ -8,7 +8,7 @@ import pygame
 from Helix.SakuyaEngine.scene import Scene, ScrollBackgroundSprite
 from Helix.SakuyaEngine.waves import load_wave_file
 from Helix.SakuyaEngine.errors import SceneNotActiveError
-from Helix.SakuyaEngine.lights import light
+from Helix.SakuyaEngine.lights import light, shadow
 from Helix.SakuyaEngine.effects import EnlargingCircle, Rain
 
 from Helix.wavemanager import HelixWaves
@@ -85,7 +85,7 @@ class Ocean(Scene):
             pygame.Rect(0, screen_height - 4, screen_width, 4)
         ]
         
-        self.rain = Rain(10, self.client.screen, self.effects, velocity = pygame.Vector2(1, 1), length = 8)
+        self.rain = Rain(40, self.client.screen, self.effects, velocity = pygame.Vector2(0.7, 0.7), length = 8)
 
         load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
 
@@ -181,6 +181,11 @@ class Ocean(Scene):
 
         self.draw_scroll_bg()
         
+        # Render shadows
+        shadow_offset = pygame.Vector2(6, 6)
+        for e in self.entities:
+            shadow(self.client.screen, e.center_position + shadow_offset, 25, int(e.rect.width / 2 * 5 / 6))
+
         # Render effects
         self.rain.draw(self.client.screen, offset = self.camera.position)
         self.rain.update(self.client.delta_time)
