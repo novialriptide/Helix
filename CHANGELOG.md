@@ -11,6 +11,8 @@
 10. Entity hitboxes are now 50% faster.
 11. Added rain.
 12. Fixed the fullscreen option.
+13. Added shadows.
+14. Some enemies will now spawn bullets when they're not moving.
 
 ## version 0.3
 1. SakuyaEngine patches.
