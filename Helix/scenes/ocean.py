@@ -35,7 +35,7 @@ class Ocean(Scene):
 
         self.scroll_bgs.append(
             ScrollBackgroundSprite(
-                pygame.image.load("Helix\\sprites\\ocean_scroll.png").convert(),
+                pygame.image.load("Helix\\sprites\\ocean_scroll_dark.png").convert(),
                 pygame.Vector2(0, 2), infinite = True
             )
         )
@@ -85,7 +85,7 @@ class Ocean(Scene):
             pygame.Rect(0, screen_height - 4, screen_width, 4)
         ]
         
-        self.rain = Rain(40, self.client.screen, self.effects, velocity = pygame.Vector2(0.7, 0.7), length = 8)
+        self.rain = Rain(80, self.client.screen, self.effects, velocity = pygame.Vector2(0.2, 0.2), length = 8)
 
         load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
 
@@ -269,4 +269,4 @@ class Ocean(Scene):
         self.event_system.update()
         self.advance_frame(self.client.delta_time, collision_rects = self.collision_rects)
 
-        pygame.display.set_caption(f"{self.client._window_name} (fps: {int(self.client.pg_clock.get_fps())}, bullets: {int(len(self.bullets))}, entities: {len(self.entities)})")
+        pygame.display.set_caption(f"{self.client._window_name} (fps: {int(self.client.pg_clock.get_fps())}, bullets: {int(len(self.bullets))}, entities: {len(self.entities)}, effects: {len(self.effects)})")
