@@ -19,8 +19,9 @@ from Helix.scenes.splash import Splash
 from Helix.scenes.dialogue import Dialogue
 from Helix.scenes.pause import Pause
 from Helix.scenes.tests.bullet_test import BulletTest
+from Helix.scenes.tests.editor import Editor
 
-scenes = [Splash, Ocean, Death, Pause, Dialogue, BulletTest]
+scenes = [Splash, Ocean, Death, Pause, Dialogue, BulletTest, Editor]
 HelixSceneManager = SceneManager(HelixClient)
 for s in scenes:
     HelixSceneManager.register_scene(s)
