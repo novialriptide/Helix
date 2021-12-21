@@ -28,6 +28,8 @@ class Splash(Scene):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+        self.client.screen.fill((43, 43, 43))
+                
         pg_logo_rect = pygame_powered_logo.get_rect()
         pg_logo_rect.width *= 1/16
         pg_logo_rect.height *= 1/16
