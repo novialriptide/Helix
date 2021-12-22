@@ -65,7 +65,6 @@ class MainMenu(Scene):
                     self.move_selection(pygame.Vector2(0, 1))
                 if event.key == KEYBOARD["A"]:
                     sel_button = self.button_layout[int(self.selected_button.y)][int(self.selected_button.x)]
-                    print(sel_button)
                     sel_button.execute()
 
     def update(self) -> None:
