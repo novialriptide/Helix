@@ -39,7 +39,6 @@ class Death(Scene):
                 sys.exit()
 
         self.client.screen.fill((0, 0, 0))
-        print(self.client.running_scenes)
         
         b = self.try_again_button
         self.client.screen.blit(b.sprite, (b.rect.x, b.rect.y))
