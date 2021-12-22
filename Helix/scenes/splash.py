@@ -20,7 +20,7 @@ class Splash(Scene):
 
         self.duration = 3000
         exit = WaitEvent("transition_to_start", self.duration, self.exit_func)
-        self.client.event_system.add(exit)
+        self.event_system.add(exit)
         self.startup_beep = pygame.mixer.Sound("Helix\\audio\\menu-chime-1.mp3")
         pygame.mixer.Sound.play(self.startup_beep)
 
