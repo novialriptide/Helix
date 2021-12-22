@@ -28,6 +28,11 @@ class Splash(Scene):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            if event.type == pygame.KEYDOWN:
+                self.exit_func()
+            if event.type == pygame.JOYBUTTONDOWN:
+                self.exit_func()
+                
         self.client.screen.fill((15, 15, 15))
                 
         pg_logo_rect = pygame_powered_logo.get_rect()
