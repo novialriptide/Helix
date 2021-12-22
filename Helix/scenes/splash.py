@@ -3,9 +3,9 @@ Helix: Flight Test (c) 2021 Andrew Hong
 This code is licensed under MIT license (see LICENSE for details)
 """
 import sys
-from Helix.SakuyaEngine.events import WaitEvent
 import pygame
 
+from Helix.SakuyaEngine.events import WaitEvent
 from Helix.SakuyaEngine.scene import Scene
 
 from Helix.const import pygame_powered_logo
@@ -28,13 +28,10 @@ class Splash(Scene):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-        self.client.screen.fill((43, 43, 43))
+        self.client.screen.fill((15, 15, 15))
                 
         pg_logo_rect = pygame_powered_logo.get_rect()
-        pg_logo_rect.width *= 1/16
-        pg_logo_rect.height *= 1/16
-        _pg_logo = pygame.transform.scale(pygame_powered_logo, pg_logo_rect.size)
-        self.client.screen.blit(_pg_logo, (
+        self.client.screen.blit(pygame_powered_logo, (
             self.client.screen.get_width() / 2 - pg_logo_rect.width / 2,
             self.client.screen.get_height() / 2 - pg_logo_rect.height / 2
         ))
