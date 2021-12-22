@@ -4,6 +4,8 @@ from Helix.SakuyaEngine.animation import Animation
 from Helix.SakuyaEngine.particles import Particles
 from Helix.SakuyaEngine.tile import split_image
 
+from Helix.playercontroller import PlayerController
+
 import pygame
 
 HELIX = Entity(
@@ -15,6 +17,7 @@ HELIX = Entity(
     update_bullet_spawners = False,
     speed = 2.5,
     draw_healthbar = False,
+    controller = PlayerController,
     bullet_spawners = [
         BulletSpawner(
             Bullet(

@@ -14,7 +14,6 @@ from Helix.SakuyaEngine.effects import EnlargingCircle, Rain
 
 from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
-from Helix.playercontroller import PlayerController
 from Helix.const import *
 
 from Helix.data.entity.helix import HELIX
@@ -77,7 +76,6 @@ class Ocean(Scene):
         
         self.player_entity = HELIX
         self.player_entity.position = pygame.Vector2(win_size.x/2, win_size.y * (2 / 3)) - self.player_entity.center_offset
-        self.player_entity.controller = PlayerController()
         self.player_entity.anim_set("idle_anim")
 
         self.entities.append(self.player_entity)
