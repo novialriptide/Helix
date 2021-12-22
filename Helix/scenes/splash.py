@@ -37,4 +37,4 @@ class Splash(Scene):
         ))
 
     def exit_func(self) -> None:
-        self.client.replace_scene("Splash", "Ocean")
+        self.client.replace_scene("Splash", "MainMenu")
