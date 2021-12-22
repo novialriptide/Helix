@@ -13,7 +13,7 @@ HELIX = Entity(
     custom_hitbox_size = pygame.Vector2(3, 3),
     obey_gravity = False,
     update_bullet_spawners = False,
-    speed = 2,
+    speed = 2.5,
     draw_healthbar = False,
     bullet_spawners = [
         BulletSpawner(
