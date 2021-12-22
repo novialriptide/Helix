@@ -63,7 +63,7 @@ BERSERK.anim_add(
         "idle_anim",
         split_image(
             pygame.image.load("Helix\\sprites\\berserk_idle_anim.png").convert_alpha(),
-            16, 16
+            14, 12
         ),
         fps = 2
     )
