@@ -7,17 +7,30 @@ import pygame
 
 from Helix.SakuyaEngine.scene import Scene
 from Helix.SakuyaEngine.text import text2
+from Helix.SakuyaEngine.button import Button
 
-from Helix.const import font5x3
+from Helix.const import *
 
 class Death(Scene):
     def __init__(self, client):
         super().__init__(client)
 
+    def retry(self) -> None:
+        # add reset scene here
+        self.client.add_scene("Ocean")
+        self.client.remove_scene(self.name)
+
     def on_awake(self) -> None:
         pygame.joystick.init()
         if pygame.joystick.get_count() > 0:
             self.joystick = pygame.joystick.Joystick(0)
+            
+        win_size = self.client.original_window_size
+        self.try_again_button = Button(
+            pygame.Rect(win_size.x / 2 - 32, win_size.y * (3 / 5) - 8, 64, 16),
+            [{"func": self.retry, "args": [], "kwargs": {}}]
+        )
+        self.try_again_button.sprite = try_again_button
 
     def update(self) -> None:
         win_size = self.client.original_window_size
@@ -26,5 +39,9 @@ class Death(Scene):
                 sys.exit()
 
         self.client.screen.fill((0, 0, 0))
-        game_over_text = text2("gae owr", 25, font5x3, (255, 255, 255))
-        self.client.screen.blit(game_over_text, (win_size.x/2, win_size.y/2))
+        print(self.client.running_scenes)
+        
+        b = self.try_again_button
+        self.client.screen.blit(b.sprite, (b.rect.x, b.rect.y))
+        if b.is_pressing_mousedown_instant(self.client.mouse_position):
+            b.execute()
