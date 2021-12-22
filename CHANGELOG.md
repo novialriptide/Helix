@@ -3,13 +3,16 @@
 1. Dialogue scene has been created.
 2. Increased Berserk's hitbox size.
 3. Waves Manager spawning has been rewritten.
-4. All entities now load from .py files instead of JSON files to prevent partial entity loads.
+4. All entities now load from `.py` files instead of `JSON` files to prevent partial entity loads.
 5. Some enemies will no longer spawn bullets when they're moving.
 6. Added "explosions" to every enemy dying. This will later be changed to work with specific enemies.
 7. Added rain to Ocean.
 8. Added shadows to entities.
 9. Window caption displays entity and bullet count.
 10. Ocean background has been darkened.
+11. Berserk reskin.
+12. `"pygame powered"` logo has been cleaned up.
+13. Helix's speed has been changed from `2.0` to `2.5`.
 
 ### Bug Fixes
 1. Player no longer moves faster than it should if moving diagonally.
@@ -19,23 +22,23 @@
 
 ### Optimiziations
 1. Background scrolling
-2. Entity hitboxes are now 50% faster.
+2. Entity hitboxes are now `50%` faster.
 
 # version 0.3
 1. SakuyaEngine patches.
 2. First Level Games deprecation.
 3. Caption displays fps.
-4. Renamed load_scene arg to scene.
+4. Renamed `load_scene` arg to `scene`.
 5. Optimizations to bullets have been made.
-6. FPS has been capped to 60.
-7. CHANGELOG.md has been created.
+6. FPS has been capped to `60`.
+7. `CHANGELOG.md` has been created.
 8. Particle lifetime has been reduced.
 9. Enemies now emits particles depending on its health.
 10. Entity optimizations.
 11. Some enemies can now aim.
-12. Resolution has been changed from 256x224 pixels to 256x336 pixels.
+12. Resolution has been changed from `256x224` pixels to `256x336` pixels.
 13. Bullets now face the right direction.
-14. Increased player default speed from 1.5 to 2.
+14. Increased player default speed from `1.5` to `2`.
 15. Out of bounds collision added.
 16. BulletSpawners are now accurate with targets
 17. More spawn points added.
@@ -53,12 +56,12 @@
 5. Healthbar added to enemies.
 6. Added ambient particles.
 7. Renamed `"\"` to `"\\"` in file paths.
-8. Entities can partially load from JSON files.
+8. Entities can partially load from `JSON` files.
 9. Added fire rates.
 10. Reimplemented shooting mechanics for the Player.
 11. Created `BulletTest` scene.
 12. Added player shoot sound effect.
 13. Created `Splash` scene.
-14. Fixed a bug where the Nintendo Switch Controller would fire involuntarily.
+14. Fixed a bug where the `Nintendo Switch Controller` would fire involuntarily.
 15. Fixed a bug where entities would spawn before the player loads in the map.
-16. Fixed a bug where only 8 sounds would play in 1 frame.
+16. Fixed a bug where only `8` sounds would play in 1 frame.
