@@ -95,3 +95,5 @@ ADO.anim_add(
     )
 )
 ADO.anim_set("idle_anim")
+
+ADO.shake_screen_on_death = True
