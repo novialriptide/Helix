@@ -49,6 +49,13 @@ class Ocean(Scene):
             pygame.Vector2(int(win_size.x * 5/10), int(win_size.y * 1/7)),
             pygame.Vector2(int(win_size.x * 7/10), int(win_size.y * 1/7)),
             pygame.Vector2(int(win_size.x * 9/10), int(win_size.y * 1/7)),
+
+            pygame.Vector2(int(win_size.x * 1/10), int(win_size.y * 1.75/7)),
+            pygame.Vector2(int(win_size.x * 3/10), int(win_size.y * 1.75/7)),
+            pygame.Vector2(int(win_size.x * 5/10), int(win_size.y * 1.75/7)),
+            pygame.Vector2(int(win_size.x * 7/10), int(win_size.y * 1.75/7)),
+            pygame.Vector2(int(win_size.x * 9/10), int(win_size.y * 1.75/7)),
+
             pygame.Vector2(int(win_size.x * 1/10), int(win_size.y * 2.5/7)),
             pygame.Vector2(int(win_size.x * 3/10), int(win_size.y * 2.5/7)),
             pygame.Vector2(int(win_size.x * 5/10), int(win_size.y * 2.5/7)),
@@ -265,8 +272,6 @@ class Ocean(Scene):
         # for sp in self.wave_manager.spawn_points: self.client.screen.set_at((int(sp.x), int(sp.y)), (255,255,255))
         # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
         # for e in self.bullets: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
-
-        
 
         self.event_system.update()
         self.advance_frame(self.client.delta_time, collision_rects = self.collision_rects)
