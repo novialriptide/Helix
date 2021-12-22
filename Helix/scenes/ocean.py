@@ -120,12 +120,6 @@ class Ocean(Scene):
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    self.add_dialogue(
-                        msgs = ["Bro, what the fuck are you doing?"],
-                        char_data = "Helix\\data\\characters\\eunji.json",
-                        expression = "unsure"
-                    )
                 if event.key == KEYBOARD["left"]:
                     controller.is_moving_left = True
                 if event.key == KEYBOARD["right"]:
