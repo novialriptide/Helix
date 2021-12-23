@@ -13,6 +13,9 @@ HelixClient = Client(
     pygame.Vector2(256, 336)
 )
 
+pygame.mixer.init()
+pygame.mixer.set_num_channels(64)
+
 from Helix.scenes.ocean import Ocean
 from Helix.scenes.death import Death
 from Helix.scenes.splash import Splash
