@@ -13,7 +13,16 @@ spawn_animations = [
     "allowed_spawnpoints": [0, 1, 2, 3, 4]}
 ]
 
+spawn_chances = [
+    70,
+    30
+]
+
 class HelixWaves(WaveManager):
+    def __init__(self, ms_between_waves: int, endless: bool = True):
+        super().__init__(ms_between_waves)
+        self.endless = endless
+    
     def spawn(
         self,
         entity_key: int,
@@ -39,3 +48,8 @@ class HelixWaves(WaveManager):
             event_system._methods.append(wait_moveback_enemy)
 
         return e
+    
+    def update(self) -> None:
+        
+        
+        return super().update()

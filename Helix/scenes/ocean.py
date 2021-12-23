@@ -264,6 +264,7 @@ class Ocean(Scene):
         # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
         # for e in self.bullets: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
 
+        self.wave_manager.update()
         self.event_system.update()
         self.advance_frame(self.client.delta_time, collision_rects = self.collision_rects)
 
