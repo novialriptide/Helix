@@ -27,11 +27,6 @@ class Ocean(Scene):
             self.joystick = pygame.joystick.Joystick(0)
             print(f"Console Controller Detected! [{self.joystick.get_name()}]")
 
-        # Load sounds
-        pygame.mixer.init()
-        pygame.mixer.set_num_channels(64)
-        self.laser_1 = pygame.mixer.Sound("Helix\\audio\\laser-1.mp3")
-
         self.scroll_bgs.append(
             ScrollBackgroundSprite(
                 pygame.image.load("Helix\\sprites\\ocean_scroll_dark.png").convert(),
@@ -203,7 +198,6 @@ class Ocean(Scene):
             bs = self.player_entity.bullet_spawners[0]
             if bs.can_shoot:
                 self.bullets.append(bs.shoot_with_firerate(-90))
-                pygame.mixer.Sound.play(self.laser_1)
 
         # Test for collisions with player
         collided = self.test_collisions_rect(self.player_entity)

@@ -5,6 +5,7 @@ from Helix.SakuyaEngine.particles import Particles
 from Helix.SakuyaEngine.tile import split_image
 
 from Helix.playercontroller import PlayerController
+from Helix.data.const_bullets import *
 
 import pygame
 
@@ -20,17 +21,7 @@ HELIX = Entity(
     controller = PlayerController,
     bullet_spawners = [
         BulletSpawner(
-            Bullet(
-                tags = ["player_bullet"],
-                speed = 0,
-                color = [255, 255, 0],
-                damage = 2,
-                custom_hitbox_size = pygame.Vector2(1, 1),
-                static_sprite = split_image(
-                    pygame.image.load("Helix\\sprites\\projectiles.png").convert_alpha(),
-                    8, 8
-                )[1]
-            ),
+            player_big_bullet1,
             fire_rate = 100,
             bullet_speed = 15,
             bullet_lifetime = 1000,

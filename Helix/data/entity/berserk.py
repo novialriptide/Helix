@@ -5,6 +5,7 @@ from Helix.SakuyaEngine.particles import Particles
 from Helix.SakuyaEngine.tile import split_image
 
 from Helix.data.entity.helix import HELIX
+from Helix.data.const_bullets import *
 
 import pygame
 
@@ -16,17 +17,7 @@ BERSERK = Entity(
     speed = 1,
     bullet_spawners = [
         BulletSpawner(
-            Bullet(
-                tags = ["enemy_bullet"],
-                speed = 0,
-                color = [255, 255, 0],
-                damage = 2,
-                custom_hitbox_size = pygame.Vector2(1, 1),
-                static_sprite = split_image(
-                    pygame.image.load("Helix\\sprites\\projectiles2.png").convert_alpha(),
-                    3, 3
-                )[0],
-            ),
+            small_bullet1,
             iterations = 4,
             bullets_per_array = 1,
             total_bullet_arrays = 1,
