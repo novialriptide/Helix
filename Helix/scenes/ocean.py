@@ -237,7 +237,11 @@ class Ocean(Scene):
 
                         if e.current_health <= 0:
                             self.effects.append(
-                                EnlargingCircle(e.position + e.center_offset, random.choice(explosion_colors), 2, 500, 8)
+                                EnlargingCircle(
+                                    e.position + e.center_offset,
+                                    random.choice(explosion_colors),
+                                    2, 500, 8
+                                )
                             )
                             e._destroy_queue = True
 
