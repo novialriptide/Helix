@@ -23,6 +23,7 @@
 2. Entities now despawn and move to the bottom of the screen to despawn.
 3. Window now resizes without crashing.
 4. Fixed fullscreen option.
+5. Entity particles now render behind the entity.
 
 ### Optimiziations
 1. Background scrolling

@@ -228,6 +228,9 @@ class Ocean(Scene):
             #pygame.draw.rect(self.client.screen, (0, 255, 0), b.custom_hitbox, 1)
 
         for e in self.entities:
+            for ps in e.particle_systems:
+                ps.render(self.client.screen, offset = self.camera.position)
+
             if "enemy" in e.tags:
                 collided = self.test_collisions_rect(e)
                 for c in collided:
@@ -249,8 +252,6 @@ class Ocean(Scene):
             e.particle_systems[0].particles_num = int(
                 ((e.max_health - e.current_health) / e.max_health) * 10
             )
-            for ps in e.particle_systems:
-                ps.render(self.client.screen, offset = self.camera.position)
             # Draw
             self.client.screen.blit(e.sprite, e.position + self.camera.position)
             # TODO: Implement this in Entity
