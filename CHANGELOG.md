@@ -16,6 +16,7 @@
 14. The `Splash` scene can be skipped by pressing any button on the keyboard or controller.
 15. `Try Again` button has been added.
 16. Primitive title screen has been created.
+17. Placeholder game logo created.
 
 ### Bug Fixes
 1. Player no longer moves faster than it should if moving diagonally.

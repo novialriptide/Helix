@@ -23,6 +23,8 @@ explosion_colors = [
     [89, 89, 89]
 ]
 
-start_button = pygame.image.load("Helix\\sprites\\button_start.png")
-endless_button = pygame.image.load("Helix\\sprites\\button_endless.png")
-try_again_button = pygame.image.load("Helix\\sprites\\button_try_again.png")
+start_button = pygame.image.load("Helix\\sprites\\button_start.png").convert_alpha()
+endless_button = pygame.image.load("Helix\\sprites\\button_endless.png").convert_alpha()
+try_again_button = pygame.image.load("Helix\\sprites\\button_try_again.png").convert_alpha()
+
+game_logo = pygame.image.load("Helix\\sprites\\game_logo.png").convert_alpha()
