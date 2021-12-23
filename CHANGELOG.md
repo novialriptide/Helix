@@ -14,6 +14,8 @@
 12. `"pygame powered"` logo has been cleaned up.
 13. Helix's speed has been changed from `2.0` to `2.5`.
 14. The `Splash` scene can be skipped by pressing any button on the keyboard or controller.
+15. `Try Again` button has been added.
+16. Primitive title screen has been created.
 
 ### Bug Fixes
 1. Player no longer moves faster than it should if moving diagonally.
