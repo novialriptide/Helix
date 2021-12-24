@@ -218,7 +218,7 @@ class Ocean(Scene):
                 
             # Draw bullet + lights
             self.client.screen.blit(b.sprite, b.position + self.camera.position)
-            light(self.client.screen, b.position + b.center_offset + self.camera.position, (20, 0, 20), 10)
+            light(self.client.screen, b.center_position + self.camera.position, (20, 0, 20), 10, brightness = 3)
             #pygame.draw.rect(self.client.screen, (0, 255, 0), b.custom_hitbox, 1)
 
         for e in self.entities:
@@ -235,7 +235,7 @@ class Ocean(Scene):
                         if e.current_health <= 0:
                             self.effects.append(
                                 EnlargingCircle(
-                                    e.position + e.center_offset,
+                                    e.center_position,
                                     random.choice(explosion_colors),
                                     2, 500, 8
                                 )
@@ -251,8 +251,11 @@ class Ocean(Scene):
             # TODO: Implement this in Entity
             if e.draw_healthbar:
                 bar_length = e.rect.width * 0.7
-                bar_pos = e.position + e.healthbar_position_offset + e.center_offset - pygame.Vector2(bar_length / 2 - 1, e.rect.height * (2 / 3)) + self.camera.position
-                display_hp = (e.healthbar.display_health / e.max_health) * bar_length
+                bar_pos = e.center_position + e.healthbar_position_offset - pygame.Vector2(bar_length / 2 - 1, e.rect.height * (2 / 3)) + self.camera.position
+                display_hp = int((e.healthbar.display_health / e.max_health) * bar_length)
+                if display_hp % 2 == 1:
+                    bar_pos.x -= 1
+                    display_hp += 1
                 pygame.draw.rect(self.client.screen, (0, 230, 0), pygame.Rect(
                     bar_pos.x, bar_pos.y, display_hp, 1
                 ))
