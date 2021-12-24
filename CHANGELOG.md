@@ -17,6 +17,7 @@
 15. `Try Again` button has been added.
 16. Primitive title screen has been created.
 17. Placeholder game logo created.
+18. Improved bullet lighting.
 
 ### Bug Fixes
 1. Player no longer moves faster than it should if moving diagonally.
@@ -24,6 +25,7 @@
 3. Window now resizes without crashing.
 4. Fixed fullscreen option.
 5. Entity particles now render behind the entity.
+6. Berserk's healthbar is now centered properly.
 
 ### Optimiziations
 1. Background scrolling
