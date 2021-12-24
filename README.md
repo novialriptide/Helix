@@ -15,3 +15,21 @@
 ```
 pygame==2.1.0
 ```
+
+## Quotes
+```
+"wow, looking good"
+ - bitcraft (pytmx & pyscroll creator, pygame org member, Tuxemon maintainer)
+
+n/a
+ - Starbuck5 (pygame org member)
+
+n/a
+ - Ghast_NEOH (game developer)
+
+n/a
+ - Ankith (pygame org member)
+
+n/a
+ - bydariogamer (pygame org contributor)
+```
