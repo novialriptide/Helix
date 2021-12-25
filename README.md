@@ -21,6 +21,9 @@ pygame==2.1.0
 "wow, looking good"
  - bitcraft (pytmx & pyscroll creator, pygame org member, Tuxemon maintainer)
 
+"can't wait to play it"
+ - lucysir (developer of Heat2D, pygame Video, PyQt5 Custom Widgets)
+
 n/a
  - Starbuck5 (pygame org member)
 
