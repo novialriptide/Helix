@@ -1,7 +1,7 @@
 from Helix.SakuyaEngine.entity import Entity
 from Helix.SakuyaEngine.bullets import Bullet, BulletSpawner
 from Helix.SakuyaEngine.animation import Animation
-from Helix.SakuyaEngine.particles import Particles
+from Helix.SakuyaEngine.effect_particles import Particles
 from Helix.SakuyaEngine.tile import split_image
 
 from Helix.playercontroller import PlayerController

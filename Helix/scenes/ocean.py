@@ -10,7 +10,8 @@ from Helix.SakuyaEngine.scene import Scene, ScrollBackgroundSprite
 from Helix.SakuyaEngine.waves import load_wave_file
 from Helix.SakuyaEngine.errors import SceneNotActiveError
 from Helix.SakuyaEngine.lights import light, shadow
-from Helix.SakuyaEngine.effects import EnlargingCircle, Rain
+from Helix.SakuyaEngine.effect_circle import EnlargingCircle
+from Helix.SakuyaEngine.effect_rain import Rain
 
 from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
