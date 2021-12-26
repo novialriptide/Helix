@@ -91,6 +91,11 @@ class Ocean(Scene):
         self.rain = Rain(1, self.client.screen, self.effects, velocity = pygame.Vector2(3, 3), length = 8, color = (200, 200, 200))
 
         load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
+        
+        HELIX.controller.is_moving_left = False
+        HELIX.controller.is_moving_right = False
+        HELIX.controller.is_moving_up = False
+        HELIX.controller.is_moving_down = False
 
     def add_dialogue(self, **kwargs) -> None:
         """Adds a Dialogue scene.
