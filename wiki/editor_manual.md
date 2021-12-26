@@ -1,20 +1,20 @@
 # Manual
-To add a path, use `CTRL N` and click on the spawn position, then the target, then the despawn.
+To add a path, use `N` and click on the spawn position, then the target, then the despawn.
 If you want to move to a different timeframe, use the `-`/`+` keys.
 
 To preview your enemy moving, press the `SPACEBAR` to watch your stage enemies move.
 
 # Keyboard Shortcuts
-### `CTRL C` // `CTRL V`
+### `C` // `V`
 Copy the selected object's data for a different enemy to use or move the copied path and position it elsewhere.
 
-### `CTRL S`
+### `S`
 Save your progress.
 
-### `CTRL N`
+### `N`
 Create a new path from spawn, target, then despawn point.
 
-### `CTRL M`
+### `M`
 Enable or disable magnetic snapping for positioning.
 
 ### `DELETE`
