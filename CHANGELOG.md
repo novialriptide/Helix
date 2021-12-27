@@ -25,8 +25,7 @@
 2. Entities now despawn and move to the bottom of the screen to despawn.
 3. Window now resizes without crashing.
 4. Fixed fullscreen option.
-5. Entity particles now render behind the entity.
-6. Berserk's healthbar is now centered properly.
+5. Berserk's healthbar is now centered properly.
 
 ### Optimiziations
 1. Background scrolling
