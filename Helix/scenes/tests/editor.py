@@ -2,8 +2,9 @@
 Helix: Flight Test (c) 2021 Andrew Hong
 This code is licensed under MIT license (see LICENSE for details)
 """
-from typing import List
+from typing import List, Tuple
 
+import json
 import sys
 import pygame
 import string
@@ -21,7 +22,7 @@ class PathSelector:
         self.points = []
         self._destroy_queue = False
     
-    def set_point(self, point: pygame.Vector2) -> None:
+    def set_point(self, point: Tuple[int, int]) -> None:
         self.points.append(point)
     
     def draw(self, surface) -> str:
@@ -30,11 +31,20 @@ class PathSelector:
                 pygame.draw.line(surface, (255, 255, 255), self.points[i], self.points[i + 1])
 
 class Stage:
-    def __init__(self, entities: List[str]) -> None:
+    def __init__(self, name: str, entities: List[str]) -> None:
+        self.name = name
         self.time = 0
         self.max_time = 60000
         
         self.paths = {}
+        self.waves = {}
+    
+    def save(self) -> None:
+        path = "Helix\\data\\stages\\"
+        print(self.__dict__)
+        with open(path + f"{self.name}.json", "w") as outfile:
+            json.dump(self.__dict__, outfile)
+            # use pickle to dump this
 
 class Editor(Scene):
     def on_awake(self) -> None:
@@ -44,6 +54,8 @@ class Editor(Scene):
             print(f"Console Controller Detected! [{self.joystick.get_name()}]")
         except:
             self.joystick = None
+
+        stage_name = input("Stage name > ")
 
         win_size = self.client.original_window_size
         self.wave_manager = HelixWaves(0)
@@ -67,9 +79,9 @@ class Editor(Scene):
             pygame.Vector2(int(win_size.x * 9/10), int(win_size.y * 2.5/7)),
         ]
         
-        self.menu_size = pygame.Vector2(self.client.screen.get_width(), 128)
+        self.menu_size = (self.client.screen.get_width(), 128)
         self.menu = pygame.Surface(self.menu_size)
-        self.menu_pos = pygame.Vector2(0, win_size.y - self.menu.get_height())
+        self.menu_pos = (0, win_size.y - self.menu.get_height())
         self.draw_menu = False
 
         radius = 10
@@ -80,7 +92,8 @@ class Editor(Scene):
             )
         
         self.stage_name = ""
-        self.stage = Stage(["ADO", "BERSERK"])
+        self.stage = Stage(stage_name, ["ADO", "BERSERK"])
+        self.default_lifetime = 10000
 
         self.loaded_enemies = [ADO, BERSERK]
         self.selected_enemy_key = 0
@@ -98,17 +111,17 @@ class Editor(Scene):
             Button(pygame.Rect(48, 32, 16, 16), [{"func": self.select_path, "args": [1], "kwargs": {}}], color = (0, 100, 0))
         ]
         
-    def axis_points(self, axis: str) -> pygame.Vector2:
+    def axis_points(self, axis: str) -> Tuple[int, int]:
         mp = self.client.mouse_position
         win_size = self.client.original_window_size
         if axis == "up":
-            return pygame.Vector2(mp.x, 0)
+            return (mp.x, 0)
         if axis == "down":
-            return pygame.Vector2(mp.x, win_size.y)
+            return (mp.x, win_size.y)
         if axis == "left":
-            return pygame.Vector2(0, mp.y)
+            return (0, mp.y)
         if axis == "right":
-            return pygame.Vector2(win_size.x, mp.y)
+            return (win_size.x, mp.y)
         
     def update_enemy_sprite(self):
         self.selected_enemy_img = self.loaded_enemies[self.selected_enemy_key].sprite
@@ -139,7 +152,7 @@ class Editor(Scene):
                     self.draw_menu = not self.draw_menu                
                 if event.key == pygame.K_s:
                     # Save
-                    pass
+                    self.stage.save()
                 if event.key == pygame.K_n:
                     # New path
                     self.path_selector = PathSelector()
@@ -157,7 +170,17 @@ class Editor(Scene):
                     pass
                 if event.key == pygame.K_RETURN:
                     # Add enemy to path
-                    pass
+                    enemy_key = self.selected_enemy_key
+                    new_data = {"enemy": enemy_key, "path": self.selected_path_key}
+                    
+                    if str(self.stage.time) not in self.stage.waves.keys():
+                        self.stage.waves[str(self.stage.time)] = [new_data]
+                        print(f"Added new wave + enemy ({enemy_key}) to path ({self.selected_path_key})")
+
+                    if str(self.stage.time) in self.stage.waves.keys() and enemy_key not in self.stage.waves[str(self.stage.time)]:
+                        self.stage.waves[str(self.stage.time)].append(new_data)
+                        print(f"Added new enemy ({enemy_key}) to path ({self.selected_path_key})")
+                    
                 if event.key == pygame.K_SPACE:
                     # Play stage
                     pass
@@ -176,7 +199,7 @@ class Editor(Scene):
                         self.path_selector._destroy_queue = True
 
                     if len(self.path_selector.points) == 1:
-                        self.path_selector.set_point(self.client.mouse_position)
+                        self.path_selector.set_point((self.client.mouse_position.x, self.client.mouse_position.y))
 
                     if len(self.path_selector.points) == 0:
                         self.path_selector.set_point(self.axis_points(self.selected_axis))
