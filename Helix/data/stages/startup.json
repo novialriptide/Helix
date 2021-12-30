@@ -1,0 +1,31 @@
+{
+    "name": "startup", 
+    "time": 0, 
+    "max_time": 60000, 
+    "paths": {
+        "lhyddgxvnupsoulb": {
+            "paths": [
+                [87.0, 0],
+                [108.0, 88.0],
+                [112.0, 336.0]
+            ]
+        }, 
+        "ftcwdrwjsrbeixxv": {
+            "paths": [
+                [159.0, 336.0],
+                [159.0, 82.0],
+                [191.0, 0]
+            ]
+        }
+    }, 
+    "waves": {
+        "0": {
+            "lhyddgxvnupsoulb": {
+                "enemies": [0]
+            }, 
+            "ftcwdrwjsrbeixxv": {
+                "enemies": [0]
+            }
+        }
+    }
+}

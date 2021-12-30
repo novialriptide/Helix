@@ -13,7 +13,6 @@ import random
 from Helix.SakuyaEngine.scene import Scene
 from Helix.SakuyaEngine.button import Button
 
-from Helix.wavemanager import HelixWaves
 from Helix.data.entity.ado import ADO
 from Helix.data.entity.berserk import BERSERK
 
@@ -58,7 +57,6 @@ class Editor(Scene):
         stage_name = input("Stage name > ")
 
         win_size = self.client.original_window_size
-        self.wave_manager = HelixWaves(0)
         self.spawn_points = [
             pygame.Vector2(int(win_size.x * 1/10), int(win_size.y * 1/7)),
             pygame.Vector2(int(win_size.x * 3/10), int(win_size.y * 1/7)),
@@ -144,6 +142,9 @@ class Editor(Scene):
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
+                if self.path_selector is not None:
+                    if event.key == pygame.K_ESCAPE:
+                        self.path_selector = None
                 if event.key == pygame.K_c:
                     # Copy
                     pass
@@ -164,12 +165,6 @@ class Editor(Scene):
                     pass
                 if event.key == pygame.K_BACKSPACE:
                     # Delete
-                    pass
-                if event.key == pygame.K_PLUS:
-                    # Advance in stage
-                    pass
-                if event.key == pygame.K_MINUS:
-                    # Go back in stage
                     pass
                 if event.key == pygame.K_RETURN:
                     # Add enemy to path

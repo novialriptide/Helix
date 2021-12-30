@@ -7,13 +7,12 @@ import pygame
 import random
 
 from Helix.SakuyaEngine.scene import Scene, ScrollBackgroundSprite
-from Helix.SakuyaEngine.waves import load_wave_file
+from Helix.SakuyaEngine.waves import WaveManager, load_stage_json
 from Helix.SakuyaEngine.errors import SceneNotActiveError
 from Helix.SakuyaEngine.lights import light, shadow
 from Helix.SakuyaEngine.effect_circle import EnlargingCircle
 from Helix.SakuyaEngine.effect_rain import Rain
 
-from Helix.wavemanager import HelixWaves
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
 from Helix.const import *
 
@@ -36,39 +35,7 @@ class Ocean(Scene):
         )
 
         win_size = self.client.original_window_size
-        self.wave_manager = HelixWaves(0)
-        # Load spawnpoints via json file
-        self.wave_manager.spawn_points = [
-            pygame.Vector2(int(win_size.x * 1/10), int(win_size.y * 1/7)),
-            pygame.Vector2(int(win_size.x * 3/10), int(win_size.y * 1/7)),
-            pygame.Vector2(int(win_size.x * 5/10), int(win_size.y * 1/7)),
-            pygame.Vector2(int(win_size.x * 7/10), int(win_size.y * 1/7)),
-            pygame.Vector2(int(win_size.x * 9/10), int(win_size.y * 1/7)),
-
-            pygame.Vector2(int(win_size.x * 1/10), int(win_size.y * 1.75/7)),
-            pygame.Vector2(int(win_size.x * 3/10), int(win_size.y * 1.75/7)),
-            pygame.Vector2(int(win_size.x * 5/10), int(win_size.y * 1.75/7)),
-            pygame.Vector2(int(win_size.x * 7/10), int(win_size.y * 1.75/7)),
-            pygame.Vector2(int(win_size.x * 9/10), int(win_size.y * 1.75/7)),
-
-            pygame.Vector2(int(win_size.x * 1/10), int(win_size.y * 2.5/7)),
-            pygame.Vector2(int(win_size.x * 3/10), int(win_size.y * 2.5/7)),
-            pygame.Vector2(int(win_size.x * 5/10), int(win_size.y * 2.5/7)),
-            pygame.Vector2(int(win_size.x * 7/10), int(win_size.y * 2.5/7)),
-            pygame.Vector2(int(win_size.x * 9/10), int(win_size.y * 2.5/7)),
-        ]
-        self.wave_manager.despawn_points = [
-            pygame.Vector2(int(win_size.x * 1/10), int(win_size.y)),
-            pygame.Vector2(int(win_size.x * 3/10), int(win_size.y)),
-            pygame.Vector2(int(win_size.x * 5/10), int(win_size.y)),
-            pygame.Vector2(int(win_size.x * 7/10), int(win_size.y)),
-            pygame.Vector2(int(win_size.x * 9/10), int(win_size.y)),
-            pygame.Vector2(int(win_size.x * 1/10), int(win_size.y)),
-            pygame.Vector2(int(win_size.x * 3/10), int(win_size.y)),
-            pygame.Vector2(int(win_size.x * 5/10), int(win_size.y)),
-            pygame.Vector2(int(win_size.x * 7/10), int(win_size.y)),
-            pygame.Vector2(int(win_size.x * 9/10), int(win_size.y)),
-        ]
+        self.wave_manager = WaveManager()
         
         self.player_entity = HELIX
         self.player_entity.position = pygame.Vector2(win_size.x/2, win_size.y * (2 / 3)) - self.player_entity.center_offset
@@ -90,8 +57,8 @@ class Ocean(Scene):
         
         self.rain = Rain(1, self.client.screen, self.effects, velocity = pygame.Vector2(3, 3), length = 8, color = (200, 200, 200))
 
-        load_wave_file("Helix\waves\w1.wave", self.wave_manager, self)
-        
+        load_stage_json("Helix\\data\\stages\\startup.json", self.wave_manager, self)
+
         HELIX.controller.is_moving_left = False
         HELIX.controller.is_moving_right = False
         HELIX.controller.is_moving_up = False
