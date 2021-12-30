@@ -135,6 +135,9 @@ class Editor(Scene):
     def select_path(self, movement: int) -> None:
         if -1 < movement + self.selected_path_key < len(self.stage.paths):
             self.selected_path_key += movement
+        
+    def get_path_id(self) -> None:
+        return list(self.stage.paths.keys())[self.selected_path_key]
     
     def inputs(self) -> None:
         for event in pygame.event.get():
@@ -171,15 +174,16 @@ class Editor(Scene):
                 if event.key == pygame.K_RETURN:
                     # Add enemy to path
                     enemy_key = self.selected_enemy_key
-                    new_data = {"enemy": enemy_key, "path": self.selected_path_key}
-                    
+                    new_data = {"enemies": []}
+                        
                     if str(self.stage.time) not in self.stage.waves.keys():
-                        self.stage.waves[str(self.stage.time)] = [new_data]
+                        self.stage.waves[str(self.stage.time)] = {}
+                    
+                    if self.get_path_id() not in self.stage.waves[str(self.stage.time)]:
+                        self.stage.waves[str(self.stage.time)][self.get_path_id()] = new_data
                         print(f"Added new wave + enemy ({enemy_key}) to path ({self.selected_path_key})")
-
-                    if str(self.stage.time) in self.stage.waves.keys() and enemy_key not in self.stage.waves[str(self.stage.time)]:
-                        self.stage.waves[str(self.stage.time)].append(new_data)
-                        print(f"Added new enemy ({enemy_key}) to path ({self.selected_path_key})")
+                        
+                    self.stage.waves[str(self.stage.time)][self.get_path_id()]["enemies"].append(self.selected_enemy_key)
                     
                 if event.key == pygame.K_SPACE:
                     # Play stage
