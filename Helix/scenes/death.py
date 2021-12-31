@@ -10,6 +10,7 @@ from Helix.SakuyaEngine.text import text2
 from Helix.SakuyaEngine.button import Button
 
 from Helix.const import *
+from Helix.buttons import KEYBOARD
 
 class Death(Scene):
     def __init__(self, client):
@@ -28,7 +29,7 @@ class Death(Scene):
         win_size = self.client.original_window_size
         self.try_again_button = Button(
             pygame.Rect(win_size.x / 2 - 32, win_size.y * (3 / 5) - 8, 64, 16),
-            [{"func": self.retry, "args": [], "kwargs": {}}]
+            [{"func": self.retry, "args": [], "kwargs": {}}], key = KEYBOARD["A"]
         )
         self.try_again_button.sprite = try_again_button
 
