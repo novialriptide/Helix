@@ -1,4 +1,4 @@
-# version 0.4-dev1
+# version 0.4
 ### New Features / Changes
 1. Dialogue scene has been created.
 2. Increased Berserk's hitbox size.
