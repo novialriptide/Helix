@@ -54,7 +54,7 @@ class Ocean(Scene):
             pygame.Rect(0, screen_height - 4, screen_width, 4)
         ]
         
-        self.rain = Rain(1, self.client.screen, self.effects, velocity = pygame.Vector2(3, 3), length = 8, color = (200, 200, 200))
+        self.rain = Rain(1, self.client.screen, self.effects, velocity = pygame.Vector2(3, 3), length = 8, color = [200, 200, 200])
 
         load_stage_json("Helix\\data\\stages\\startup.json", self.wave_manager, self)
 
@@ -234,9 +234,10 @@ class Ocean(Scene):
                 pygame.draw.rect(self.client.screen, (0, 190, 0), pygame.Rect(
                     bar_pos.x, bar_pos.y + 1, display_hp, 1
                 ))
-            
+        
         self.client.screen.blit(vignette_overlay, (0, 0))
-        self.client.screen.blit(noise_overlay, (0, 0))
+        rand_pos = random.randint(-int(random_noise_size[0] / 3), 0), random.randint(-int(random_noise_size[1] / 3), 0)
+        self.client.screen.blit(random_noise, (rand_pos))
 
         # for sp in self.wave_manager.spawn_points: self.client.screen.set_at((int(sp.x), int(sp.y)), (255,255,255))
         # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)

@@ -14,9 +14,12 @@ player_sprites = split_image(
 )
 
 vignette_overlay = pygame.image.load("Helix\\sprites\\vignette_overlay.png").convert_alpha()
-vignette_overlay.set_alpha(10)
+vignette_overlay.set_alpha(50)
 noise_overlay = pygame.image.load("Helix\\sprites\\noise_overlay.png").convert_alpha()
 noise_overlay.set_alpha(4)
+random_noise = pygame.image.load("Helix\\sprites\\random_noise.png").convert_alpha()
+random_noise.set_alpha(4)
+random_noise_size = random_noise.get_size()
 pygame_powered_logo = pygame.image.load("Helix\\sprites\\pygame_powered.png").convert_alpha()
 
 font5x3 = "Helix\\fonts\\bit5x3.ttf"
