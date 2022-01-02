@@ -1,5 +1,5 @@
 # World 1 - Ocean
-## n/a
+## Lightning can hurt you.
 1. n/a
 2. n/a
 3. n/a
