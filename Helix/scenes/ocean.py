@@ -177,6 +177,7 @@ class Ocean(Scene):
             if "enemy_bullet" in c.tags:
                 try:
                     self.client.replace_scene("Ocean", "Death")
+                    break
                 except SceneNotActiveError:
                     pass
                 self.bullets.remove(c)
@@ -217,7 +218,7 @@ class Ocean(Scene):
             )
             for ps in e.particle_systems:
                 ps.render(self.client.screen, offset = self.camera.position)
-            # Draw
+            # Draw Enemy
             self.client.screen.blit(e.sprite, e.position + self.camera.position)
             # TODO: Implement this in Entity
             if e.draw_healthbar:

@@ -245,7 +245,7 @@
         }
     },
     "waves": {
-        "0": {
+        "3000": {
             "jeoyrmdvgcpozrxg": {
                 "enemies": [
                     0
@@ -257,13 +257,13 @@
                 ]
             }
         },
-        "2000": {
-            "jeoyrmdvgcpozrxg": {
+        "5000": {
+            "azqekwqwecqweslosb": {
                 "enemies": [
                     0
                 ]
             },
-            "ulkguqlrutjribdy": {
+            "esvufrewtycmxvns": {
                 "enemies": [
                     0
                 ]

@@ -18,8 +18,7 @@
 16. Primitive title screen has been created.
 17. Placeholder game logo created.
 18. Improved bullet lighting.
-19. Wave 1 has been made a little longer (This will change completely after the Stage Editor is done).
-20. Added overlays to make the game feel less bland.
+19. Added overlays to make the game feel less bland.
 
 ### Bug Fixes
 1. Player no longer moves faster than it should if moving diagonally.
@@ -27,6 +26,7 @@
 3. Window now resizes without crashing.
 4. Fixed fullscreen option.
 5. Berserk's healthbar is now centered properly.
+6. Fixed internal issue where the game would sometimes crash if you were hit with 2 bullets at once.
 
 ### Optimiziations
 1. Background scrolling
