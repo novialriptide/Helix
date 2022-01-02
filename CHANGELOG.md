@@ -18,7 +18,6 @@
 16. Primitive title screen has been created.
 17. Placeholder game logo created.
 18. Improved bullet lighting.
-19. Wave 1 has been made a little longer (This will change completely after the Stage Editor is done).
 
 ### Bug Fixes
 1. Player no longer moves faster than it should if moving diagonally.
