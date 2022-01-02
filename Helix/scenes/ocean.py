@@ -177,6 +177,7 @@ class Ocean(Scene):
             if "enemy_bullet" in c.tags:
                 try:
                     self.client.replace_scene("Ocean", "Death")
+                    break
                 except SceneNotActiveError:
                     pass
                 self.bullets.remove(c)
