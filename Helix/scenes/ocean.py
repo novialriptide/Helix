@@ -40,7 +40,6 @@ class Ocean(Scene):
         self.player_entity = HELIX
         self.player_entity.position = pygame.Vector2(win_size.x/2, win_size.y * (2 / 3)) - self.player_entity.center_offset
         self.player_entity.anim_set("idle_anim")
-
         self.entities.append(self.player_entity)
 
         self.wave_manager.entities = [
@@ -234,6 +233,9 @@ class Ocean(Scene):
                 pygame.draw.rect(self.client.screen, (0, 190, 0), pygame.Rect(
                     bar_pos.x, bar_pos.y + 1, display_hp, 1
                 ))
+            
+        self.client.screen.blit(vignette_overlay, (0, 0))
+        self.client.screen.blit(noise_overlay, (0, 0))
 
         # for sp in self.wave_manager.spawn_points: self.client.screen.set_at((int(sp.x), int(sp.y)), (255,255,255))
         # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
