@@ -40,11 +40,15 @@ class Ocean(Scene):
         self.player_entity = HELIX
         self.player_entity.position = pygame.Vector2(win_size.x/2, win_size.y * (2 / 3)) - self.player_entity.center_offset
         self.player_entity.anim_set("idle_anim")
+        self.player_entity.clock = self.clock
         self.entities.append(self.player_entity)
 
         self.wave_manager.entities = [
             ADO, BERSERK
         ]
+        
+        for e in self.wave_manager.entities:
+            e.clock = self.clock
 
         screen_width, screen_height = self.client.screen.get_width(), self.client.screen.get_height()
         self.collision_rects = [
@@ -77,6 +81,7 @@ class Ocean(Scene):
 
     def pause(self) -> None:
         self.paused = True
+        self.clock.pause()
         self.client.add_scene("Pause", exit_scene = self)
 
     def input(self) -> None:
@@ -238,6 +243,8 @@ class Ocean(Scene):
         self.client.screen.blit(vignette_overlay, (0, 0))
         rand_pos = random.randint(-int(random_noise_size[0] / 3), 0), random.randint(-int(random_noise_size[1] / 3), 0)
         self.client.screen.blit(random_noise, (rand_pos))
+        
+        print(self.clock.get_time())
 
         # for sp in self.wave_manager.spawn_points: self.client.screen.set_at((int(sp.x), int(sp.y)), (255,255,255))
         # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)

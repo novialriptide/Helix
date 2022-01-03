@@ -27,6 +27,7 @@
 4. Fixed fullscreen option.
 5. Berserk's healthbar is now centered properly.
 6. Fixed internal issue where the game would sometimes crash if you were hit with 2 bullets at once.
+7. Fixed bug where scene clock is not paused when the game is paused.
 
 ### Optimiziations
 1. Background scrolling

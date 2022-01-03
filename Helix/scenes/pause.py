@@ -20,6 +20,7 @@ class Pause(Scene):
 
     def exit(self) -> None:
         self.exit_scene.paused = False
+        self.exit_scene.clock.resume()
         self.client.remove_scene(self.name)
 
     def input(self) -> None:
