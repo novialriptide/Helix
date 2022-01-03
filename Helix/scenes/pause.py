@@ -17,6 +17,12 @@ class Pause(Scene):
             print(f"Console Controller Detected! [{self.joystick.get_name()}]")
         
         self.exit_scene = kwargs["exit_scene"]
+        
+        self.background = self.client.screen.copy()
+        
+        self.pause_bg = pygame.Surface(self.client.screen.get_size())
+        self.pause_bg.set_alpha(128)
+        self.pause_bg.fill((0, 0, 0))
 
     def exit(self) -> None:
         self.exit_scene.paused = False
@@ -37,3 +43,6 @@ class Pause(Scene):
 
     def update(self) -> None:
         self.input()
+
+        self.client.screen.blit(self.background, (0, 0))
+        self.client.screen.blit(self.pause_bg, (0, 0))
