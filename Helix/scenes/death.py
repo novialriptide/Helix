@@ -43,5 +43,5 @@ class Death(Scene):
         
         b = self.try_again_button
         self.client.screen.blit(b.sprite, (b.rect.x, b.rect.y))
-        if b.is_pressing_mousedown_instant(self.client.mouse_position):
+        if b.is_pressing_mouseup_instant(self.client.mouse_position):
             b.execute()
