@@ -157,7 +157,7 @@ class Ocean(Scene):
         # Render shadows
         shadow_offset = pygame.Vector2(6, 6)
         for e in self.entities:
-            shadow(self.client.screen, e.center_position + shadow_offset, 25, int(e.rect.width / 2 * 5 / 6))
+            shadow(self.client.screen, e.center_position, 25, int(e.rect.width / 2 * 5 / 6), offset = shadow_offset + self.camera.position)
 
         # Render effects
         self.rain.draw(self.client.screen, offset = self.camera.position)
