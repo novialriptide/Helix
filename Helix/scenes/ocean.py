@@ -244,7 +244,6 @@ class Ocean(Scene):
         rand_pos = random.randint(-int(random_noise_size[0] / 3), 0), random.randint(-int(random_noise_size[1] / 3), 0)
         self.client.screen.blit(random_noise, (rand_pos))
 
-        # for sp in self.wave_manager.spawn_points: self.client.screen.set_at((int(sp.x), int(sp.y)), (255,255,255))
         # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
         # for e in self.bullets: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
 
@@ -252,4 +251,4 @@ class Ocean(Scene):
         self.event_system.update()
         self.advance_frame(self.client.delta_time, collision_rects = self.collision_rects)
 
-        pygame.display.set_caption(f"{self.client._window_name} (fps: {round(self.client.pg_clock.get_fps(), 2)}, bullets: {int(len(self.bullets))}, entities: {len(self.entities)}, effects: {len(self.effects)})")
+        pygame.display.set_caption(f"{self.client._window_name} (fps: {round(self.client.pg_clock.get_fps(), 2)}, bullets: {int(len(self.bullets))}, entities: {len(self.entities)}, effects: {len(self.effects)}, time: {round(self.clock.get_time(), 2)})")
