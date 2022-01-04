@@ -7,9 +7,10 @@ import pygame
 
 from Helix.SakuyaEngine.client import Client
 from Helix.SakuyaEngine.scene import SceneManager
+from Helix.__version__ import GAME_VERSION
 
 HelixClient = Client(
-    "Helix",
+    f"Helix (ver: {GAME_VERSION})",
     pygame.Vector2(256, 336)
 )
 

@@ -20,6 +20,7 @@
 18. Improved bullet lighting.
 19. Added overlays to make the game feel less bland.
 20. Added primitive points system.
+21. Version has been hard-coded to the game.
 
 ### Bug Fixes
 1. Player no longer moves faster than it should if moving diagonally.
