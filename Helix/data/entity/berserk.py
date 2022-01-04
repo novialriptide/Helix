@@ -60,3 +60,4 @@ BERSERK.anim_add(
     )
 )
 BERSERK.anim_set("idle_anim")
+BERSERK.points_upon_death = 10

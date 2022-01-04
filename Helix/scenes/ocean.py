@@ -42,6 +42,8 @@ class Ocean(Scene):
         self.player_entity.anim_set("idle_anim")
         self.player_entity.clock = self.clock
         self.entities.append(self.player_entity)
+        
+        self.points = 0
 
         self.wave_manager.entities = [
             ADO, BERSERK
@@ -66,6 +68,9 @@ class Ocean(Scene):
         HELIX.controller.is_moving_right = False
         HELIX.controller.is_moving_up = False
         HELIX.controller.is_moving_down = False
+        
+        self.font_color = (255, 255, 255)
+        self.font0 = pygame.freetype.SysFont("Arial", 5)
 
     def add_dialogue(self, **kwargs) -> None:
         """Adds a Dialogue scene.
@@ -215,6 +220,7 @@ class Ocean(Scene):
                                     2, 500, 8
                                 )
                             )
+                            self.points += e.points_upon_death
                             e._destroy_queue = True
 
             # Render Entity Particles
@@ -229,6 +235,7 @@ class Ocean(Scene):
             if e.draw_healthbar:
                 bar_length = e.rect.width * 0.7
                 bar_pos = e.center_position + e.healthbar_position_offset - pygame.Vector2(bar_length / 2 - 1, e.rect.height * (2 / 3)) + self.camera.position
+
                 display_hp = int((e.healthbar.display_health / e.max_health) * bar_length)
                 if display_hp % 2 == 1:
                     bar_pos.x -= 1
@@ -246,6 +253,8 @@ class Ocean(Scene):
 
         # for e in self.entities: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
         # for e in self.bullets: pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
+    
+        self.client.screen.blit(self.font0.render(f"points: {self.points}", fgcolor = self.font_color, size = 25)[0], (0, 0))
 
         self.wave_manager.update()
         self.event_system.update()

@@ -76,5 +76,6 @@ ADO.anim_add(
     )
 )
 ADO.anim_set("idle_anim")
+ADO.points_upon_death = 20
 
 ADO.shake_screen_on_death = True
