@@ -39,9 +39,9 @@ class Death(Scene):
             if event.type == pygame.QUIT:
                 sys.exit()
 
-        self.client.screen.fill((0, 0, 0))
+        self.screen.fill((0, 0, 0))
         
         b = self.try_again_button
-        self.client.screen.blit(b.sprite, (b.rect.x, b.rect.y))
+        self.screen.blit(b.sprite, (b.rect.x, b.rect.y))
         if b.is_pressing_mouseup_instant(self.client.mouse_position):
             b.execute()

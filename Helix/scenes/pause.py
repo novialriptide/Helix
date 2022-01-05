@@ -18,9 +18,9 @@ class Pause(Scene):
         
         self.exit_scene = kwargs["exit_scene"]
         
-        self.background = self.client.screen.copy()
+        self.background = self.screen.copy()
         
-        self.pause_bg = pygame.Surface(self.client.screen.get_size())
+        self.pause_bg = pygame.Surface(self.screen.get_size())
         self.pause_bg.set_alpha(128)
         self.pause_bg.fill((0, 0, 0))
 
@@ -44,5 +44,5 @@ class Pause(Scene):
     def update(self) -> None:
         self.input()
 
-        self.client.screen.blit(self.background, (0, 0))
-        self.client.screen.blit(self.pause_bg, (0, 0))
+        self.screen.blit(self.background, (0, 0))
+        self.screen.blit(self.pause_bg, (0, 0))

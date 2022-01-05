@@ -77,7 +77,7 @@ class Editor(Scene):
             pygame.Vector2(int(win_size.x * 9/10), int(win_size.y * 2.5/7)),
         ]
         
-        self.menu_size = (self.client.screen.get_width(), 128)
+        self.menu_size = (self.screen.get_width(), 128)
         self.menu = pygame.Surface(self.menu_size)
         self.menu_pos = (0, win_size.y - self.menu.get_height())
         self.draw_menu = False
@@ -209,20 +209,20 @@ class Editor(Scene):
     def update(self) -> None:
         win_size = self.client.window_size
         self.inputs()
-        self.client.screen.fill((15, 15, 15))
+        self.screen.fill((15, 15, 15))
         self.menu.fill((5, 5, 5))
         for r in self.spawn_point_rects:
-            pygame.draw.rect(self.client.screen, (255, 0, 0), r)
+            pygame.draw.rect(self.screen, (255, 0, 0), r)
         
         # Draw path maker
         if self.path_selector is not None:
             if len(self.path_selector.points) == 0:
-                pygame.draw.line(self.client.screen, (100, 0, 0), self.axis_points(self.selected_axis), self.client.mouse_position)
+                pygame.draw.line(self.screen, (100, 0, 0), self.axis_points(self.selected_axis), self.client.mouse_position)
             if len(self.path_selector.points) == 1:
-                pygame.draw.line(self.client.screen, (100, 0, 0), self.path_selector.points[-1], self.client.mouse_position)
+                pygame.draw.line(self.screen, (100, 0, 0), self.path_selector.points[-1], self.client.mouse_position)
             if len(self.path_selector.points) == 2:
-                pygame.draw.line(self.client.screen, (100, 0, 0), self.path_selector.points[-1], self.axis_points(self.selected_axis))
-            self.path_selector.draw(self.client.screen)
+                pygame.draw.line(self.screen, (100, 0, 0), self.path_selector.points[-1], self.axis_points(self.selected_axis))
+            self.path_selector.draw(self.screen)
             
             if self.path_selector._destroy_queue:
                 path_id = ''.join(random.choices(string.ascii_lowercase, k=16))
@@ -241,9 +241,9 @@ class Editor(Scene):
                         color1 = (0, 230, 0)
                         color2 = (0, 230, 230)
                     if i == 0:
-                        pygame.draw.line(self.client.screen, color1, path[i], path[i + 1])
+                        pygame.draw.line(self.screen, color1, path[i], path[i + 1])
                     else:
-                        pygame.draw.line(self.client.screen, color2, path[i], path[i + 1])
+                        pygame.draw.line(self.screen, color2, path[i], path[i + 1])
         
         # Draw selected enemy menu
         pygame.draw.rect(self.menu, (212, 5, 212), (0, 0, 32, 32))
@@ -259,7 +259,7 @@ class Editor(Scene):
         pygame.draw.rect(self.menu, (0, 125, 0), (0, self.menu.get_height() - 10, self.menu.get_width() * (self.stage.time / self.stage.max_time), 8))
         
         if self.draw_menu:
-            self.client.screen.blit(self.menu, self.menu_pos)
+            self.screen.blit(self.menu, self.menu_pos)
 
         
         pygame.display.set_caption(f"{self.client.window_name} (time: {self.stage.time})")

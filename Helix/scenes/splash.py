@@ -33,12 +33,12 @@ class Splash(Scene):
             if event.type == pygame.JOYBUTTONDOWN:
                 self.exit_func()
                 
-        self.client.screen.fill((15, 15, 15))
+        self.screen.fill((15, 15, 15))
                 
         pg_logo_rect = pygame_powered_logo.get_rect()
-        self.client.screen.blit(pygame_powered_logo, (
-            self.client.screen.get_width() / 2 - pg_logo_rect.width / 2,
-            self.client.screen.get_height() / 2 - pg_logo_rect.height / 2
+        self.screen.blit(pygame_powered_logo, (
+            self.screen.get_width() / 2 - pg_logo_rect.width / 2,
+            self.screen.get_height() / 2 - pg_logo_rect.height / 2
         ))
         
         self.event_system.update()

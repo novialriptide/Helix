@@ -51,10 +51,10 @@ class BulletTest(Scene):
         new_pos = pygame.Vector2(self.client.mouse_position)
         self.mp.position = new_pos
         
-        self.client.screen.fill((0,0,0))
+        self.screen.fill((0,0,0))
 
         for e in self.bullets:
-            pygame.draw.rect(self.client.screen, (0, 255, 0), e.custom_hitbox, 1)
+            pygame.draw.rect(self.screen, (0, 255, 0), e.custom_hitbox, 1)
         
         self.bullets.extend(self.bullet_spawner_test.update(self.client.delta_time))
         self.advance_frame(self.client.delta_time)

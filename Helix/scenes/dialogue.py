@@ -89,4 +89,4 @@ class Dialogue(Scene):
         box.blit(self.portait, (0, 0))
         box.blit(self.text, (portait_rect.width, 6))
         
-        self.client.screen.blit(box, (4, self.client.screen.get_height() - box.get_height() - 4))
+        self.screen.blit(box, (4, self.screen.get_height() - box.get_height() - 4))

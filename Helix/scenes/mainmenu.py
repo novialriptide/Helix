@@ -72,15 +72,15 @@ class MainMenu(Scene):
         
         win_size = self.client.original_window_size
 
-        self.client.screen.fill((0, 0, 0))
+        self.screen.fill((0, 0, 0))
         
         game_logo_rect = game_logo.get_rect()
         scaled_game_logo = pygame.transform.scale(game_logo, (game_logo_rect.width * 3, game_logo_rect.height * 3))
         game_logo_rect = scaled_game_logo.get_rect()
-        self.client.screen.blit(scaled_game_logo, (win_size.x / 2 - game_logo_rect.width / 2, win_size.y * (2 / 5) - game_logo_rect.height / 2))
+        self.screen.blit(scaled_game_logo, (win_size.x / 2 - game_logo_rect.width / 2, win_size.y * (2 / 5) - game_logo_rect.height / 2))
 
         for r in self.button_layout:
             for c in self.button_layout[len(r) - 1]:
-                self.client.screen.blit(c.sprite, (c.rect.x, c.rect.y))
+                self.screen.blit(c.sprite, (c.rect.x, c.rect.y))
                 if c.is_pressing_mousedown_instant(self.client.mouse_position):
                     c.execute()
