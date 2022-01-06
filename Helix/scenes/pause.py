@@ -18,11 +18,10 @@ class Pause(Scene):
         
         self.exit_scene = kwargs["exit_scene"]
         
-        self.background = self.screen.copy()
-        
+        self.background = self.exit_scene.screen.copy()
         self.pause_bg = pygame.Surface(self.screen.get_size())
-        self.pause_bg.set_alpha(128)
         self.pause_bg.fill((0, 0, 0))
+        self.pause_bg.set_alpha(128)
 
     def exit(self) -> None:
         self.exit_scene.paused = False
