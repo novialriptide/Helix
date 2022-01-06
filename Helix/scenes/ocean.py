@@ -87,7 +87,6 @@ class Ocean(Scene):
     def pause(self) -> None:
         self.paused = True
         self.clock.pause()
-        self.client.add_scene("Pause", exit_scene = self)
 
     def input(self) -> None:
         controller = self.player_entity.controller
@@ -121,6 +120,10 @@ class Ocean(Scene):
                 if event.key == KEYBOARD["A"]:
                     controller.is_shooting = False
                 if event.key == KEYBOARD["start"]:
+                    self.client.add_scene("Pause", exit_scene = self)
+                    self.pause()
+                if event.key == KEYBOARD["select"]:
+                    self.client.add_scene("Components", exit_scene = self)
                     self.pause()
 
             if event.type == pygame.JOYBUTTONDOWN:
@@ -254,10 +257,8 @@ class Ocean(Scene):
         # for e in self.entities: pygame.draw.rect(self.screen, (0, 255, 0), e.custom_hitbox, 1)
         # for e in self.bullets: pygame.draw.rect(self.screen, (0, 255, 0), e.custom_hitbox, 1)
     
-        self.screen.blit(self.font0.render(f"points: {self.points}", fgcolor = self.font_color, size = 25)[0], (0, 0))
+        # self.screen.blit(self.font0.render(f"points: {self.points}", fgcolor = self.font_color, size = 25)[0], (0, 0))
 
         self.wave_manager.update()
         self.event_system.update()
         self.advance_frame(self.client.delta_time, collision_rects = self.collision_rects)
-
-        pygame.display.set_caption(f"{self.client._window_name} (fps: {round(self.client.pg_clock.get_fps(), 2)}, bullets: {int(len(self.bullets))}, entities: {len(self.entities)}, effects: {len(self.effects)}, time: {round(self.clock.get_time(), 2)})")
