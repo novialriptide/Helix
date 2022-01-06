@@ -14,7 +14,7 @@ KEYBOARD = {
     "B": pygame.K_x,
     "X": pygame.K_a,
     "Y": pygame.K_s,
-    "select": None,
+    "select": pygame.K_q,
     "start": pygame.K_ESCAPE
 }
 
