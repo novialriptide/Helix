@@ -6,8 +6,8 @@ import sys
 import pygame
 import json
 
-from Helix.SakuyaEngine.scene import Scene
-from Helix.SakuyaEngine.text import text2
+from SakuyaEngine.scene import Scene
+from SakuyaEngine.text import text2
 
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
 from Helix.const import font5x3

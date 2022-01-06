@@ -1,5 +1,5 @@
-from Helix.SakuyaEngine.tile import split_image
-from Helix.SakuyaEngine.bullets import Bullet
+from SakuyaEngine.tile import split_image
+from SakuyaEngine.bullets import Bullet
 
 import pygame
 

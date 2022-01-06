@@ -5,8 +5,8 @@ This code is licensed under GNU LESSER GENERAL PUBLIC LICENSE (see LICENSE for d
 import argparse
 import pygame
 
-from Helix.SakuyaEngine.client import Client
-from Helix.SakuyaEngine.scene import SceneManager
+from SakuyaEngine.client import Client
+from SakuyaEngine.scene import SceneManager
 from Helix.__version__ import GAME_VERSION
 
 HelixClient = Client(
@@ -23,11 +23,12 @@ from Helix.scenes.splash import Splash
 from Helix.scenes.dialogue import Dialogue
 from Helix.scenes.pause import Pause
 from Helix.scenes.tests.bullet_test import BulletTest
+from Helix.scenes.tests.platformer import Platformer
 from Helix.scenes.tests.editor import Editor
 from Helix.scenes.mainmenu import MainMenu
 from Helix.scenes.components import Components
 
-scenes = [Splash, MainMenu, Ocean, Death, Pause, Dialogue, BulletTest, Editor, Components]
+scenes = [Splash, MainMenu, Ocean, Death, Pause, Dialogue, BulletTest, Editor, Components, Platformer]
 HelixSceneManager = SceneManager(HelixClient)
 for s in scenes:
     HelixSceneManager.register_scene(s)

@@ -6,12 +6,12 @@ import sys
 import pygame
 import math
 
-from Helix.SakuyaEngine.entity import Entity
-from Helix.SakuyaEngine.animation import Animation
+from SakuyaEngine.entity import Entity
+from SakuyaEngine.animation import Animation
 
-from Helix.SakuyaEngine.scene import Scene
-from Helix.SakuyaEngine.bullets import BulletSpawner, Bullet
-from Helix.SakuyaEngine.text import text
+from SakuyaEngine.scene import Scene
+from SakuyaEngine.bullets import BulletSpawner, Bullet
+from SakuyaEngine.text import text
 
 class BulletTest(Scene):
     def on_awake(self) -> None:

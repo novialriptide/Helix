@@ -5,8 +5,8 @@ This code is licensed under GNU LESSER GENERAL PUBLIC LICENSE (see LICENSE for d
 import sys
 import pygame
 
-from Helix.SakuyaEngine.events import WaitEvent
-from Helix.SakuyaEngine.scene import Scene
+from SakuyaEngine.events import WaitEvent
+from SakuyaEngine.scene import Scene
 
 from Helix.const import pygame_powered_logo
 

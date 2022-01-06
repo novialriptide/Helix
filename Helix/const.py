@@ -4,7 +4,7 @@ This code is licensed under GNU LESSER GENERAL PUBLIC LICENSE (see LICENSE for d
 """
 import pygame
 
-from Helix.SakuyaEngine.tile import split_image
+from SakuyaEngine.tile import split_image
 
 DEFAULT_COLORKEY = (255,0,252)
 

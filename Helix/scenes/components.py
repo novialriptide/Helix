@@ -5,7 +5,7 @@ This code is licensed under GNU LESSER GENERAL PUBLIC LICENSE (see LICENSE for d
 import sys
 import pygame
 
-from Helix.SakuyaEngine.scene import Scene
+from SakuyaEngine.scene import Scene
 
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
 

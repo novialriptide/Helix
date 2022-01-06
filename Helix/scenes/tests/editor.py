@@ -10,8 +10,8 @@ import pygame
 import string
 import random
 
-from Helix.SakuyaEngine.scene import Scene
-from Helix.SakuyaEngine.button import Button
+from SakuyaEngine.scene import Scene
+from SakuyaEngine.button import Button
 
 from Helix.data.entity.ado import ADO
 from Helix.data.entity.berserk import BERSERK

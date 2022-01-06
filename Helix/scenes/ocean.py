@@ -6,12 +6,12 @@ import sys
 import pygame
 import random
 
-from Helix.SakuyaEngine.scene import Scene, ScrollBackgroundSprite
-from Helix.SakuyaEngine.waves import WaveManager, load_stage_json
-from Helix.SakuyaEngine.errors import SceneNotActiveError
-from Helix.SakuyaEngine.lights import light, shadow
-from Helix.SakuyaEngine.effect_circle import EnlargingCircle
-from Helix.SakuyaEngine.effect_rain import Rain
+from SakuyaEngine.scene import Scene, ScrollBackgroundSprite
+from SakuyaEngine.waves import WaveManager, load_stage_json
+from SakuyaEngine.errors import SceneNotActiveError
+from SakuyaEngine.lights import light, shadow
+from SakuyaEngine.effect_circle import EnlargingCircle
+from SakuyaEngine.effect_rain import Rain
 
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
 from Helix.const import *

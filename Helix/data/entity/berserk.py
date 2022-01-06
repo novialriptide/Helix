@@ -1,8 +1,8 @@
-from Helix.SakuyaEngine.entity import Entity
-from Helix.SakuyaEngine.bullets import Bullet, BulletSpawner
-from Helix.SakuyaEngine.animation import Animation
-from Helix.SakuyaEngine.effect_particles import Particles
-from Helix.SakuyaEngine.tile import split_image
+from SakuyaEngine.entity import Entity
+from SakuyaEngine.bullets import Bullet, BulletSpawner
+from SakuyaEngine.animation import Animation
+from SakuyaEngine.effect_particles import Particles
+from SakuyaEngine.tile import split_image
 
 from Helix.data.entity.helix import HELIX
 from Helix.data.const_bullets import *

@@ -5,9 +5,9 @@ This code is licensed under GNU LESSER GENERAL PUBLIC LICENSE (see LICENSE for d
 import sys
 import pygame
 
-from Helix.SakuyaEngine.scene import Scene
-from Helix.SakuyaEngine.text import text2
-from Helix.SakuyaEngine.button import Button
+from SakuyaEngine.scene import Scene
+from SakuyaEngine.text import text2
+from SakuyaEngine.button import Button
 
 from Helix.const import *
 from Helix.buttons import KEYBOARD
