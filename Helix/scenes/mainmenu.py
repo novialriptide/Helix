@@ -38,7 +38,7 @@ class MainMenu(Scene):
         ]
         
     def move_selection(self, movement: pygame.Vector2) -> None:
-        columns = len(self.button_layout[self.selected_button.y ])
+        columns = len(self.button_layout[int(self.selected_button.y)])
         rows = len(self.button_layout)
         
         test_vector = movement + self.selected_button
