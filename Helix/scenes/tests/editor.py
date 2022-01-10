@@ -110,7 +110,7 @@ class Editor(Scene):
         ]
         
     def axis_points(self, axis: str) -> Tuple[int, int]:
-        mp = self.client.mouse_position
+        mp = pygame.mouse.get_pos()
         win_size = self.client.original_window_size
         if axis == "up":
             return (mp.x, 0)
@@ -198,7 +198,7 @@ class Editor(Scene):
                         self.path_selector._destroy_queue = True
 
                     if len(self.path_selector.points) == 1:
-                        self.path_selector.set_point((self.client.mouse_position.x, self.client.mouse_position.y))
+                        self.path_selector.set_point((pygame.mouse.get_pos().x, pygame.mouse.get_pos().y))
 
                     if len(self.path_selector.points) == 0:
                         self.path_selector.set_point(self.axis_points(self.selected_axis))
@@ -217,9 +217,9 @@ class Editor(Scene):
         # Draw path maker
         if self.path_selector is not None:
             if len(self.path_selector.points) == 0:
-                pygame.draw.line(self.screen, (100, 0, 0), self.axis_points(self.selected_axis), self.client.mouse_position)
+                pygame.draw.line(self.screen, (100, 0, 0), self.axis_points(self.selected_axis), pygame.mouse.get_pos())
             if len(self.path_selector.points) == 1:
-                pygame.draw.line(self.screen, (100, 0, 0), self.path_selector.points[-1], self.client.mouse_position)
+                pygame.draw.line(self.screen, (100, 0, 0), self.path_selector.points[-1], pygame.mouse.get_pos())
             if len(self.path_selector.points) == 2:
                 pygame.draw.line(self.screen, (100, 0, 0), self.path_selector.points[-1], self.axis_points(self.selected_axis))
             self.path_selector.draw(self.screen)
@@ -251,7 +251,7 @@ class Editor(Scene):
         for b in self.buttons:
             pygame.draw.rect(self.menu, b.color, b.rect)
             pygame.draw.rect(self.menu, (255, 255, 255), b.rect, width = 1)
-            if b.is_pressing_mousedown_instant(self.client.mouse_position - self.menu_pos):
+            if b.is_pressing_mousedown_instant(pygame.mouse.get_pos() - self.menu_pos):
                 b.execute()
                 
         # Draw stage menu
