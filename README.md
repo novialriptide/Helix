@@ -16,6 +16,9 @@
 pygame==2.1.2
 ```
 
+## Version Control
+Odd numbered `.dev` versions are for ongoing development versions and will change.
+Even numbered `.dev` versions are for the public.
 
 ## Quotes
 ```
