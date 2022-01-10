@@ -23,12 +23,11 @@ from Helix.scenes.splash import Splash
 from Helix.scenes.dialogue import Dialogue
 from Helix.scenes.pause import Pause
 from Helix.scenes.tests.bullet_test import BulletTest
-from Helix.scenes.tests.platformer import Platformer
 from Helix.scenes.tests.editor import Editor
 from Helix.scenes.mainmenu import MainMenu
 from Helix.scenes.components import Components
 
-scenes = [Splash, MainMenu, Ocean, Death, Pause, Dialogue, BulletTest, Editor, Components, Platformer]
+scenes = [Splash, MainMenu, Ocean, Death, Pause, Dialogue, BulletTest, Editor, Components]
 HelixSceneManager = SceneManager(HelixClient)
 for s in scenes:
     HelixSceneManager.register_scene(s)
