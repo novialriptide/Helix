@@ -29,7 +29,7 @@ class Ocean(Scene):
 
         self.scroll_bgs.append(
             ScrollBackgroundSprite(
-                pygame.image.load("Helix\\sprites\\ocean_scroll_dark.png").convert(),
+                pygame.image.load("Helix/sprites/ocean_scroll_dark.png").convert(),
                 pygame.Vector2(0, 6), infinite = True
             )
         )
@@ -62,7 +62,7 @@ class Ocean(Scene):
         
         self.rain = Rain(1, self.screen, self.effects, velocity = pygame.Vector2(3, 3), length = 8, color = [200, 200, 200])
 
-        load_stage_json("Helix\\data\\stages\\startup.json", self.wave_manager, self)
+        load_stage_json("Helix/data/stages/startup.json", self.wave_manager, self)
 
         HELIX.controller.is_moving_left = False
         HELIX.controller.is_moving_right = False

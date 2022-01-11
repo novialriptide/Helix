@@ -82,5 +82,5 @@ class MainMenu(Scene):
         for r in self.button_layout:
             for c in self.button_layout[len(r) - 1]:
                 self.screen.blit(c.sprite, (c.rect.x, c.rect.y))
-                if c.is_pressing_mousedown_instant(pygame.mouse.get_pos()):
+                if c.is_pressing_mousedown_instant(self.client.mouse_pos):
                     c.execute()

@@ -48,7 +48,7 @@ HELIX.anim_add(
     Animation(
         "idle_anim",
         split_image(
-            pygame.image.load("Helix\\sprites\\helix_idle_anim.png").convert_alpha(),
+            pygame.image.load("Helix/sprites/helix_idle_anim.png").convert_alpha(),
             16, 16
         ),
         fps = 2

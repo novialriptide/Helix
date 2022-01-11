@@ -1,3 +1,7 @@
+# version 0.5
+### New Features / Changes
+1. Renamed `"\\"` to `"/"` in file paths.
+
 # version 0.4
 ### New Features / Changes
 1. Dialogue scene has been created.

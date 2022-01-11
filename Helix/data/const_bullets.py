@@ -10,10 +10,10 @@ player_big_bullet1 = Bullet(
     damage = 2,
     custom_hitbox_size = pygame.Vector2(1, 1),
     static_sprite = split_image(
-        pygame.image.load("Helix\\sprites\\projectiles.png").convert_alpha(),
+        pygame.image.load("Helix/sprites/projectiles.png").convert_alpha(),
         8, 8
     )[1],
-    sound_upon_fire = pygame.mixer.Sound("Helix\\audio\\laser-1.mp3")
+    sound_upon_fire = pygame.mixer.Sound("Helix/audio/laser-1.mp3")
 )
 
 small_bullet1 = Bullet(
@@ -23,7 +23,7 @@ small_bullet1 = Bullet(
     damage = 2,
     custom_hitbox_size = pygame.Vector2(1, 1),
     static_sprite = split_image(
-        pygame.image.load("Helix\\sprites\\projectiles2.png").convert_alpha(),
+        pygame.image.load("Helix/sprites/projectiles2.png").convert_alpha(),
         3, 3
     )[0]
 )
@@ -35,7 +35,7 @@ big_bullet1 = Bullet(
     damage = 2,
     custom_hitbox_size = pygame.Vector2(3, 3),
     static_sprite = split_image(
-        pygame.image.load("Helix\\sprites\\projectiles.png").convert_alpha(),
+        pygame.image.load("Helix/sprites/projectiles.png").convert_alpha(),
         8, 8
     )[0]
 )

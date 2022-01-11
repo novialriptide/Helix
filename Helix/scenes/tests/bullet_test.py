@@ -48,7 +48,7 @@ class BulletTest(Scene):
             if event.type == pygame.QUIT:
                 sys.exit()
 
-        new_pos = pygame.Vector2(pygame.mouse.get_pos())
+        new_pos = pygame.Vector2(self.client.mouse_pos)
         self.mp.position = new_pos
         
         self.screen.fill((0,0,0))

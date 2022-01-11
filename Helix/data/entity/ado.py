@@ -69,7 +69,7 @@ ADO.anim_add(
     Animation(
         "idle_anim",
         split_image(
-            pygame.image.load("Helix\\sprites\\ado_idle_anim.png").convert_alpha(),
+            pygame.image.load("Helix/sprites/ado_idle_anim.png").convert_alpha(),
             32, 32
         ),
         fps = 1.5

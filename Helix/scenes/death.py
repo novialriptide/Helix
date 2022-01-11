@@ -43,5 +43,5 @@ class Death(Scene):
         
         b = self.try_again_button
         self.screen.blit(b.sprite, (b.rect.x, b.rect.y))
-        if b.is_pressing_mouseup_instant(pygame.mouse.get_pos()):
+        if b.is_pressing_mouseup_instant(self.client.mouse_pos):
             b.execute()
