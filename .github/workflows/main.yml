@@ -12,6 +12,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
+    - name: Python Linter
+      # You may pin to the exact commit or the version.
+      # uses: sunnysid3up/python-linter@93076bd8f740f062069291d738fc70c1b4171c1d
+      uses: sunnysid3up/python-linter@v0.1-beta.7
+      with:
+        black-options: true
+
     - name: PyInstaller Windows
       uses: JackMcKew/pyinstaller-action-windows@main
       with:
