@@ -17,13 +17,3 @@ jobs:
       uses: sunnysid3up/python-linter@v0.1-beta.7
       with:
         black-options: true
-
-    - name: PyInstaller Windows
-      uses: JackMcKew/pyinstaller-action-windows@main
-      with:
-        path: src
-
-    - uses: actions/upload-artifact@v2
-      with:
-        name: Helix
-        path: src/dist/windows
