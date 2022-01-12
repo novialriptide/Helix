@@ -12,6 +12,7 @@ from SakuyaEngine.button import Button
 from Helix.const import *
 from Helix.buttons import KEYBOARD
 
+
 class Death(Scene):
     def __init__(self, client):
         super().__init__(client)
@@ -25,11 +26,12 @@ class Death(Scene):
         pygame.joystick.init()
         if pygame.joystick.get_count() > 0:
             self.joystick = pygame.joystick.Joystick(0)
-            
+
         win_size = self.client.original_window_size
         self.try_again_button = Button(
             pygame.Rect(win_size.x / 2 - 32, win_size.y * (3 / 5) - 8, 64, 16),
-            [{"func": self.retry, "args": [], "kwargs": {}}], key = KEYBOARD["A"]
+            [{"func": self.retry, "args": [], "kwargs": {}}],
+            key=KEYBOARD["A"],
         )
         self.try_again_button.sprite = try_again_button
 
@@ -40,7 +42,7 @@ class Death(Scene):
                 sys.exit()
 
         self.screen.fill((0, 0, 0))
-        
+
         b = self.try_again_button
         self.screen.blit(b.sprite, (b.rect.x, b.rect.y))
         if b.is_pressing_mouseup_instant(self.client.mouse_pos):

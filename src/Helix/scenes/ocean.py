@@ -20,6 +20,7 @@ from Helix.data.entity.helix import HELIX
 from Helix.data.entity.ado import ADO
 from Helix.data.entity.berserk import BERSERK
 
+
 class Ocean(Scene):
     def on_awake(self) -> None:
         pygame.joystick.init()
@@ -30,25 +31,27 @@ class Ocean(Scene):
         self.scroll_bgs.append(
             ScrollBackgroundSprite(
                 pygame.image.load("Helix/sprites/ocean_scroll_dark.png").convert(),
-                pygame.Vector2(0, 6), infinite = True
+                pygame.Vector2(0, 6),
+                infinite=True,
             )
         )
 
         win_size = self.client.original_window_size
         self.wave_manager = WaveManager()
-        
+
         self.player_entity = HELIX
-        self.player_entity.position = pygame.Vector2(win_size.x/2, win_size.y * (2 / 3)) - self.player_entity.center_offset
+        self.player_entity.position = (
+            pygame.Vector2(win_size.x / 2, win_size.y * (2 / 3))
+            - self.player_entity.center_offset
+        )
         self.player_entity.anim_set("idle_anim")
         self.player_entity.clock = self.clock
         self.entities.append(self.player_entity)
-        
+
         self.points = 0
 
-        self.wave_manager.entities = [
-            ADO, BERSERK
-        ]
-        
+        self.wave_manager.entities = [ADO, BERSERK]
+
         for e in self.wave_manager.entities:
             e.clock = self.clock
 
@@ -57,10 +60,17 @@ class Ocean(Scene):
             pygame.Rect(0, 0, 4, screen_height),
             pygame.Rect(0, 0, screen_width, 4),
             pygame.Rect(screen_width - 4, 0, 4, screen_height),
-            pygame.Rect(0, screen_height - 4, screen_width, 4)
+            pygame.Rect(0, screen_height - 4, screen_width, 4),
         ]
-        
-        self.rain = Rain(1, self.screen, self.effects, velocity = pygame.Vector2(3, 3), length = 8, color = [200, 200, 200])
+
+        self.rain = Rain(
+            1,
+            self.screen,
+            self.effects,
+            velocity=pygame.Vector2(3, 3),
+            length=8,
+            color=[200, 200, 200],
+        )
 
         load_stage_json("Helix/data/stages/startup.json", self.wave_manager, self)
 
@@ -68,7 +78,7 @@ class Ocean(Scene):
         HELIX.controller.is_moving_right = False
         HELIX.controller.is_moving_up = False
         HELIX.controller.is_moving_down = False
-        
+
         self.font_color = (255, 255, 255)
         self.font0 = pygame.freetype.SysFont("Arial", 5)
 
@@ -82,7 +92,7 @@ class Ocean(Scene):
 
         """
         self.paused = True
-        self.client.add_scene("Dialogue", exit_scene = self, **kwargs)
+        self.client.add_scene("Dialogue", exit_scene=self, **kwargs)
 
     def pause(self) -> None:
         self.paused = True
@@ -120,10 +130,10 @@ class Ocean(Scene):
                 if event.key == KEYBOARD["A"]:
                     controller.is_shooting = False
                 if event.key == KEYBOARD["start"]:
-                    self.client.add_scene("Pause", exit_scene = self)
+                    self.client.add_scene("Pause", exit_scene=self)
                     self.pause()
                 if event.key == KEYBOARD["select"]:
-                    self.client.add_scene("Components", exit_scene = self)
+                    self.client.add_scene("Components", exit_scene=self)
                     self.pause()
 
             if event.type == pygame.JOYBUTTONDOWN:
@@ -161,21 +171,27 @@ class Ocean(Scene):
         controller = self.player_entity.controller
 
         self.draw_scroll_bg()
-        
+
         # Render shadows
         shadow_offset = pygame.Vector2(6, 6)
         for e in self.entities:
-            shadow(self.screen, e.center_position, 25, int(e.rect.width / 2 * 5 / 6), offset = shadow_offset + self.camera.position)
+            shadow(
+                self.screen,
+                e.center_position,
+                25,
+                int(e.rect.width / 2 * 5 / 6),
+                offset=shadow_offset + self.camera.position,
+            )
 
         # Render effects
-        self.rain.draw(self.screen, offset = self.camera.position)
+        self.rain.draw(self.screen, offset=self.camera.position)
         self.rain.update(self.client.delta_time)
 
         for ef in self.effects:
-            ef.draw(self.screen, offset = self.camera.position)
+            ef.draw(self.screen, offset=self.camera.position)
 
         for p in self.particle_systems:
-            p.render(self.screen, offset = self.camera.position)
+            p.render(self.screen, offset=self.camera.position)
             p.update(self.client.delta_time)
 
         # Player shooting
@@ -199,13 +215,24 @@ class Ocean(Scene):
             rect = b.rect
 
             # Delete bullet if out of screen's view
-            if b.position.y < - rect.height or b.position.y > self.screen.get_height() or b.position.x + rect.width < 0 or b.position.x > self.screen.get_width():
+            if (
+                b.position.y < -rect.height
+                or b.position.y > self.screen.get_height()
+                or b.position.x + rect.width < 0
+                or b.position.x > self.screen.get_width()
+            ):
                 b._destroy_queue = True
-                
+
             # Draw bullet + lights
             self.screen.blit(b.sprite, b.position + self.camera.position)
-            light(self.screen, b.center_position + self.camera.position, (20, 0, 20), 10, brightness = 3)
-            #pygame.draw.rect(self.screen, (0, 255, 0), b.custom_hitbox, 1)
+            light(
+                self.screen,
+                b.center_position + self.camera.position,
+                (20, 0, 20),
+                10,
+                brightness=3,
+            )
+            # pygame.draw.rect(self.screen, (0, 255, 0), b.custom_hitbox, 1)
 
         for e in self.entities:
             if "enemy" in e.tags:
@@ -220,7 +247,9 @@ class Ocean(Scene):
                                 EnlargingCircle(
                                     e.center_position,
                                     random.choice(explosion_colors),
-                                    2, 500, 8
+                                    2,
+                                    500,
+                                    8,
                                 )
                             )
                             self.points += e.points_upon_death
@@ -231,34 +260,47 @@ class Ocean(Scene):
                 ((e.max_health - e.current_health) / e.max_health) * 10
             )
             for ps in e.particle_systems:
-                ps.render(self.screen, offset = self.camera.position)
+                ps.render(self.screen, offset=self.camera.position)
             # Draw Enemy
             self.screen.blit(e.sprite, e.position + self.camera.position)
             # TODO: Implement this in Entity
             if e.draw_healthbar:
                 bar_length = e.rect.width * 0.7
-                bar_pos = e.center_position + e.healthbar_position_offset - pygame.Vector2(bar_length / 2 - 1, e.rect.height * (2 / 3)) + self.camera.position
+                bar_pos = (
+                    e.center_position
+                    + e.healthbar_position_offset
+                    - pygame.Vector2(bar_length / 2 - 1, e.rect.height * (2 / 3))
+                    + self.camera.position
+                )
 
-                display_hp = int((e.healthbar.display_health / e.max_health) * bar_length)
+                display_hp = int(
+                    (e.healthbar.display_health / e.max_health) * bar_length
+                )
                 if display_hp % 2 == 1:
                     bar_pos.x -= 1
                     display_hp += 1
-                pygame.draw.rect(self.screen, (0, 230, 0), pygame.Rect(
-                    bar_pos.x, bar_pos.y, display_hp, 1
-                ))
-                pygame.draw.rect(self.screen, (0, 190, 0), pygame.Rect(
-                    bar_pos.x, bar_pos.y + 1, display_hp, 1
-                ))
-        
+                pygame.draw.rect(
+                    self.screen,
+                    (0, 230, 0),
+                    pygame.Rect(bar_pos.x, bar_pos.y, display_hp, 1),
+                )
+                pygame.draw.rect(
+                    self.screen,
+                    (0, 190, 0),
+                    pygame.Rect(bar_pos.x, bar_pos.y + 1, display_hp, 1),
+                )
+
         self.screen.blit(vignette_overlay, (0, 0))
-        rand_pos = random.randint(-int(random_noise_size[0] / 3), 0), random.randint(-int(random_noise_size[1] / 3), 0)
+        rand_pos = random.randint(-int(random_noise_size[0] / 3), 0), random.randint(
+            -int(random_noise_size[1] / 3), 0
+        )
         self.screen.blit(random_noise, (rand_pos))
 
         # for e in self.entities: pygame.draw.rect(self.screen, (0, 255, 0), e.custom_hitbox, 1)
         # for e in self.bullets: pygame.draw.rect(self.screen, (0, 255, 0), e.custom_hitbox, 1)
-    
+
         # self.screen.blit(self.font0.render(f"points: {self.points}", fgcolor = self.font_color, size = 25)[0], (0, 0))
 
         self.wave_manager.update()
         self.event_system.update()
-        self.advance_frame(self.client.delta_time, collision_rects = self.collision_rects)
+        self.advance_frame(self.client.delta_time, collision_rects=self.collision_rects)

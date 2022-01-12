@@ -9,15 +9,16 @@ from SakuyaEngine.scene import Scene
 
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
 
+
 class Pause(Scene):
     def on_awake(self, **kwargs) -> None:
         pygame.joystick.init()
         if pygame.joystick.get_count() > 0:
             self.joystick = pygame.joystick.Joystick(0)
             print(f"Console Controller Detected! [{self.joystick.get_name()}]")
-        
+
         self.exit_scene = kwargs["exit_scene"]
-        
+
         self.background = self.exit_scene.screen.copy()
         self.pause_bg = pygame.Surface(self.screen.get_size())
         self.pause_bg.fill((0, 0, 0))

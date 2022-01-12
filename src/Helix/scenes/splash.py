@@ -10,6 +10,7 @@ from SakuyaEngine.scene import Scene
 
 from Helix.const import pygame_powered_logo
 
+
 class Splash(Scene):
     def on_awake(self) -> None:
         pygame.mixer.init()
@@ -32,15 +33,18 @@ class Splash(Scene):
                 self.exit_func()
             if event.type == pygame.JOYBUTTONDOWN:
                 self.exit_func()
-                
+
         self.screen.fill((15, 15, 15))
-                
+
         pg_logo_rect = pygame_powered_logo.get_rect()
-        self.screen.blit(pygame_powered_logo, (
-            self.screen.get_width() / 2 - pg_logo_rect.width / 2,
-            self.screen.get_height() / 2 - pg_logo_rect.height / 2
-        ))
-        
+        self.screen.blit(
+            pygame_powered_logo,
+            (
+                self.screen.get_width() / 2 - pg_logo_rect.width / 2,
+                self.screen.get_height() / 2 - pg_logo_rect.height / 2,
+            ),
+        )
+
         self.event_system.update()
 
     def exit_func(self) -> None:

@@ -11,7 +11,7 @@ from Helix.__version__ import GAME_VERSION
 
 HelixClient = Client(
     f"Helix (ver: {GAME_VERSION})",
-    pygame.Vector2(256, 336)
+    pygame.Vector2(256, 336),
 )
 
 pygame.mixer.init()
@@ -27,7 +27,17 @@ from Helix.scenes.tests.editor import Editor
 from Helix.scenes.mainmenu import MainMenu
 from Helix.scenes.components import Components
 
-scenes = [Splash, MainMenu, Ocean, Death, Pause, Dialogue, BulletTest, Editor, Components]
+scenes = [
+    Splash,
+    MainMenu,
+    Ocean,
+    Death,
+    Pause,
+    Dialogue,
+    BulletTest,
+    Editor,
+    Components,
+]
 HelixSceneManager = SceneManager(HelixClient)
 for s in scenes:
     HelixSceneManager.register_scene(s)

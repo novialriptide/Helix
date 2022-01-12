@@ -2,8 +2,8 @@ import pygame
 
 
 # Define some colors.
-BLACK = pygame.Color('black')
-WHITE = pygame.Color('white')
+BLACK = pygame.Color("black")
+WHITE = pygame.Color("white")
 
 
 # This is a simple class that will help us print to the screen.
@@ -57,9 +57,9 @@ while not done:
     #
     # Possible joystick actions: JOYAXISMOTION, JOYBALLMOTION, JOYBUTTONDOWN,
     # JOYBUTTONUP, JOYHATMOTION
-    for event in pygame.event.get(): # User did something.
-        if event.type == pygame.QUIT: # If user clicked close.
-            done = True # Flag that we are done so we exit this loop.
+    for event in pygame.event.get():  # User did something.
+        if event.type == pygame.QUIT:  # If user clicked close.
+            done = True  # Flag that we are done so we exit this loop.
         elif event.type == pygame.JOYBUTTONDOWN:
             print("Joystick button pressed.")
         elif event.type == pygame.JOYBUTTONUP:
@@ -121,8 +121,7 @@ while not done:
 
         for i in range(buttons):
             button = joystick.get_button(i)
-            textPrint.tprint(screen,
-                             "Button {:>2} value: {}".format(i, button))
+            textPrint.tprint(screen, "Button {:>2} value: {}".format(i, button))
         textPrint.unindent()
 
         hats = joystick.get_numhats()
