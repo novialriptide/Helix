@@ -81,6 +81,8 @@ class Ocean(Scene):
 
         self.font_color = (255, 255, 255)
         self.font0 = pygame.freetype.SysFont("Arial", 5)
+        
+        self.camera.shake(-1, 1)
 
     def add_dialogue(self, **kwargs) -> None:
         """Adds a Dialogue scene.
