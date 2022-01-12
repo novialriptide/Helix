@@ -6,24 +6,28 @@ import pygame
 
 # Keyboard + Mouse
 KEYBOARD = {
-    "up": pygame.K_UP,
-    "left": pygame.K_LEFT,
-    "down": pygame.K_DOWN,
-    "right": pygame.K_RIGHT,
+    "up1": pygame.K_UP,
+    "left1": pygame.K_LEFT,
+    "down1": pygame.K_DOWN,
+    "right1": pygame.K_RIGHT,
+    "up2": pygame.K_w,
+    "left2": pygame.K_a,
+    "down2": pygame.K_s,
+    "right2": pygame.K_d,
     "A": pygame.K_z,
     "B": pygame.K_x,
-    "X": pygame.K_a,
-    "Y": pygame.K_s,
+    "X": None,
+    "Y": None,
     "select": pygame.K_q,
     "start": pygame.K_ESCAPE,
 }
 
 # Nintendo Switch
 NS_CONTROLLER = {
-    "up": 11,
-    "left": 13,
-    "down": 12,
-    "right": 14,
+    "up1": 11,
+    "left1": 13,
+    "down1": 12,
+    "right1": 14,
     "A": 0,
     "B": 1,
     "X": None,

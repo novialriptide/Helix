@@ -56,13 +56,13 @@ class MainMenu(Scene):
                 sys.exit()
 
             if event.type == pygame.KEYUP:
-                if event.key == KEYBOARD["left"]:
+                if event.key == KEYBOARD["left1"]:
                     self.move_selection(pygame.Vector2(-1, 0))
-                if event.key == KEYBOARD["right"]:
+                if event.key == KEYBOARD["right1"]:
                     self.move_selection(pygame.Vector2(1, 0))
-                if event.key == KEYBOARD["down"]:
+                if event.key == KEYBOARD["down1"]:
                     self.move_selection(pygame.Vector2(0, -1))
-                if event.key == KEYBOARD["up"]:
+                if event.key == KEYBOARD["up1"]:
                     self.move_selection(pygame.Vector2(0, 1))
                 if event.key == KEYBOARD["A"]:
                     sel_button = self.button_layout[int(self.selected_button.y)][

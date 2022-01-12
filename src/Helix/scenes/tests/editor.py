@@ -103,7 +103,7 @@ class Editor(Scene):
         self.selected_enemy_img = self.loaded_enemies[self.selected_enemy_key].sprite
 
         self.path_selector = None
-        self.selected_axis = "up"
+        self.selected_axis = "up1"
         self.selected_path_key = 0
 
         self.buttons = [
@@ -132,13 +132,13 @@ class Editor(Scene):
     def axis_points(self, axis: str) -> Tuple[int, int]:
         mp = pygame.Vector2(self.client.mouse_pos)
         win_size = self.client.original_window_size
-        if axis == "up":
+        if axis == "up1":
             return (mp.x, 0)
-        if axis == "down":
+        if axis == "down1":
             return (mp.x, win_size.y)
-        if axis == "left":
+        if axis == "left1":
             return (0, mp.y)
-        if axis == "right":
+        if axis == "right1":
             return (win_size.x, mp.y)
 
     def update_enemy_sprite(self):
@@ -212,13 +212,13 @@ class Editor(Scene):
                     # Play stage
                     pass
                 if event.key == pygame.K_UP:
-                    self.selected_axis = "up"
+                    self.selected_axis = "up1"
                 if event.key == pygame.K_DOWN:
-                    self.selected_axis = "down"
+                    self.selected_axis = "down1"
                 if event.key == pygame.K_LEFT:
-                    self.selected_axis = "left"
+                    self.selected_axis = "left1"
                 if event.key == pygame.K_RIGHT:
-                    self.selected_axis = "right"
+                    self.selected_axis = "right1"
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.path_selector is not None:
                     if len(self.path_selector.points) == 2:

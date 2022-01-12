@@ -104,27 +104,27 @@ class Ocean(Scene):
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
-                if event.key == KEYBOARD["left"]:
+                if event.key == KEYBOARD["left1"]:
                     controller.is_moving_left = True
-                if event.key == KEYBOARD["right"]:
+                if event.key == KEYBOARD["right1"]:
                     controller.is_moving_right = True
-                if event.key == KEYBOARD["up"]:
+                if event.key == KEYBOARD["up1"]:
                     controller.is_moving_up = True
-                if event.key == KEYBOARD["down"]:
+                if event.key == KEYBOARD["down1"]:
                     controller.is_moving_down = True
                 if event.key == KEYBOARD["A"]:
                     controller.is_shooting = True
             if event.type == pygame.KEYUP:
-                if event.key == KEYBOARD["left"]:
+                if event.key == KEYBOARD["left1"]:
                     controller.is_moving_left = False
                     self.player_entity.velocity.x = 0
-                if event.key == KEYBOARD["right"]:
+                if event.key == KEYBOARD["right1"]:
                     controller.is_moving_right = False
                     self.player_entity.velocity.x = 0
-                if event.key == KEYBOARD["up"]:
+                if event.key == KEYBOARD["up1"]:
                     controller.is_moving_up = False
                     self.player_entity.velocity.y = 0
-                if event.key == KEYBOARD["down"]:
+                if event.key == KEYBOARD["down1"]:
                     controller.is_moving_down = False
                     self.player_entity.velocity.y = 0
                 if event.key == KEYBOARD["A"]:
@@ -137,28 +137,28 @@ class Ocean(Scene):
                     self.pause()
 
             if event.type == pygame.JOYBUTTONDOWN:
-                if self.joystick.get_button(NS_CONTROLLER["left"]) == 1:
+                if self.joystick.get_button(NS_CONTROLLER["left1"]) == 1:
                     controller.is_moving_left = True
-                if self.joystick.get_button(NS_CONTROLLER["right"]) == 1:
+                if self.joystick.get_button(NS_CONTROLLER["right1"]) == 1:
                     controller.is_moving_right = True
-                if self.joystick.get_button(NS_CONTROLLER["up"]) == 1:
+                if self.joystick.get_button(NS_CONTROLLER["up1"]) == 1:
                     controller.is_moving_up = True
-                if self.joystick.get_button(NS_CONTROLLER["down"]) == 1:
+                if self.joystick.get_button(NS_CONTROLLER["down1"]) == 1:
                     controller.is_moving_down = True
                 if self.joystick.get_button(NS_CONTROLLER["A"]) == 1:
                     controller.is_shooting = True
 
             if event.type == pygame.JOYBUTTONUP:
-                if self.joystick.get_button(NS_CONTROLLER["left"]) == 0:
+                if self.joystick.get_button(NS_CONTROLLER["left1"]) == 0:
                     controller.is_moving_left = False
                     self.player_entity.velocity.x = 0
-                if self.joystick.get_button(NS_CONTROLLER["right"]) == 0:
+                if self.joystick.get_button(NS_CONTROLLER["right1"]) == 0:
                     controller.is_moving_right = False
                     self.player_entity.velocity.x = 0
-                if self.joystick.get_button(NS_CONTROLLER["up"]) == 0:
+                if self.joystick.get_button(NS_CONTROLLER["up1"]) == 0:
                     controller.is_moving_up = False
                     self.player_entity.velocity.y = 0
-                if self.joystick.get_button(NS_CONTROLLER["down"]) == 0:
+                if self.joystick.get_button(NS_CONTROLLER["down1"]) == 0:
                     controller.is_moving_down = False
                     self.player_entity.velocity.y = 0
                 if self.joystick.get_button(NS_CONTROLLER["A"]) == 0:
