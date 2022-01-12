@@ -39,4 +39,8 @@ n/a
 
 n/a
  - bydariogamer (pygame org contributor)
+
+"looking good!"
+ - ScriptLine Studios (Youtuber with 1.01k subscribers)
+
 ```
