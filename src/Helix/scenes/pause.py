@@ -5,12 +5,12 @@ This code is licensed under GNU LESSER GENERAL PUBLIC LICENSE (see LICENSE for d
 import sys
 import pygame
 
-from SakuyaEngine.scene import Scene
+from SakuyaEngine.scene import SubScene
 
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
 
 
-class Pause(Scene):
+class Pause(SubScene):
     def on_awake(self, **kwargs) -> None:
         pygame.joystick.init()
         if pygame.joystick.get_count() > 0:
@@ -23,11 +23,6 @@ class Pause(Scene):
         self.pause_bg = pygame.Surface(self.screen.get_size())
         self.pause_bg.fill((0, 0, 0))
         self.pause_bg.set_alpha(128)
-
-    def exit(self) -> None:
-        self.exit_scene.paused = False
-        self.exit_scene.clock.resume()
-        self.client.remove_scene(self.name)
 
     def input(self) -> None:
         for event in pygame.event.get():

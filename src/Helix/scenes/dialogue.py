@@ -6,14 +6,14 @@ import sys
 import pygame
 import json
 
-from SakuyaEngine.scene import Scene
+from SakuyaEngine.scene import SubScene
 from SakuyaEngine.text import text2
 
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
 from Helix.const import font5x3
 
 
-class Dialogue(Scene):
+class Dialogue(SubScene):
     def on_awake(self, **kwargs) -> None:
         """Handles the Dialogue scene.
 
@@ -72,10 +72,6 @@ class Dialogue(Scene):
             if event.type == pygame.JOYBUTTONUP:
                 if self.joystick.get_button(NS_CONTROLLER["A"]) == 0:
                     self.next_msg()
-
-    def exit(self) -> None:
-        self.exit_scene.paused = False
-        self.client.remove_scene(self.name)
 
     def next_msg(self) -> None:
         self.msg_index += 1
