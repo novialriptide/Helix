@@ -12,6 +12,7 @@ from SakuyaEngine.errors import SceneNotActiveError
 from SakuyaEngine.lights import light, shadow
 from SakuyaEngine.effect_circle import EnlargingCircle
 from SakuyaEngine.effect_rain import Rain
+from Helix.abilties.target_fire import TargetFire
 
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
 from Helix.const import *
@@ -19,6 +20,7 @@ from Helix.const import *
 from Helix.data.entity.helix import HELIX
 from Helix.data.entity.ado import ADO
 from Helix.data.entity.berserk import BERSERK
+from Helix.playercontroller import SecondaryController
 
 
 class Ocean(Scene):
@@ -78,11 +80,16 @@ class Ocean(Scene):
         HELIX.controller.is_moving_right = False
         HELIX.controller.is_moving_up = False
         HELIX.controller.is_moving_down = False
+        
+        self.secondary_controller = SecondaryController()
 
         self.font_color = (255, 255, 255)
         self.font0 = pygame.freetype.SysFont("Arial", 5)
         
         self.camera.shake(-1, 1)
+        
+        self.target_ability = TargetFire(0, self, self.secondary_controller)
+        self.target_ability.start(HELIX.center_position)
 
     def add_dialogue(self, **kwargs) -> None:
         """Adds a Dialogue scene.
@@ -101,36 +108,53 @@ class Ocean(Scene):
         self.clock.pause()
 
     def input(self) -> None:
-        controller = self.player_entity.controller
+        controller1 = self.player_entity.controller
+        controller2 = self.secondary_controller
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == KEYBOARD["left1"]:
-                    controller.is_moving_left = True
+                    controller1.is_moving_left = True
                 if event.key == KEYBOARD["right1"]:
-                    controller.is_moving_right = True
+                    controller1.is_moving_right = True
                 if event.key == KEYBOARD["up1"]:
-                    controller.is_moving_up = True
+                    controller1.is_moving_up = True
                 if event.key == KEYBOARD["down1"]:
-                    controller.is_moving_down = True
+                    controller1.is_moving_down = True
                 if event.key == KEYBOARD["A"]:
-                    controller.is_shooting = True
+                    controller1.is_shooting = True
+                if event.key == KEYBOARD["up2"]:
+                    controller2.is_moving_up = True
+                if event.key == KEYBOARD["down2"]:
+                    controller2.is_moving_down = True
+                if event.key == KEYBOARD["left2"]:
+                    controller2.is_moving_left = True
+                if event.key == KEYBOARD["right2"]:
+                    controller2.is_moving_right = True
             if event.type == pygame.KEYUP:
                 if event.key == KEYBOARD["left1"]:
-                    controller.is_moving_left = False
+                    controller1.is_moving_left = False
                     self.player_entity.velocity.x = 0
                 if event.key == KEYBOARD["right1"]:
-                    controller.is_moving_right = False
+                    controller1.is_moving_right = False
                     self.player_entity.velocity.x = 0
                 if event.key == KEYBOARD["up1"]:
-                    controller.is_moving_up = False
+                    controller1.is_moving_up = False
                     self.player_entity.velocity.y = 0
                 if event.key == KEYBOARD["down1"]:
-                    controller.is_moving_down = False
+                    controller1.is_moving_down = False
                     self.player_entity.velocity.y = 0
+                if event.key == KEYBOARD["up2"]:
+                    controller2.is_moving_up = False
+                if event.key == KEYBOARD["down2"]:
+                    controller2.is_moving_down = False
+                if event.key == KEYBOARD["left2"]:
+                    controller2.is_moving_left = False
+                if event.key == KEYBOARD["right2"]:
+                    controller2.is_moving_right = False
                 if event.key == KEYBOARD["A"]:
-                    controller.is_shooting = False
+                    controller1.is_shooting = False
                 if event.key == KEYBOARD["start"]:
                     self.client.add_scene("Pause", exit_scene=self)
                     self.pause()
@@ -140,31 +164,31 @@ class Ocean(Scene):
 
             if event.type == pygame.JOYBUTTONDOWN:
                 if self.joystick.get_button(NS_CONTROLLER["left1"]) == 1:
-                    controller.is_moving_left = True
+                    controller1.is_moving_left = True
                 if self.joystick.get_button(NS_CONTROLLER["right1"]) == 1:
-                    controller.is_moving_right = True
+                    controller1.is_moving_right = True
                 if self.joystick.get_button(NS_CONTROLLER["up1"]) == 1:
-                    controller.is_moving_up = True
+                    controller1.is_moving_up = True
                 if self.joystick.get_button(NS_CONTROLLER["down1"]) == 1:
-                    controller.is_moving_down = True
+                    controller1.is_moving_down = True
                 if self.joystick.get_button(NS_CONTROLLER["A"]) == 1:
-                    controller.is_shooting = True
+                    controller1.is_shooting = True
 
             if event.type == pygame.JOYBUTTONUP:
                 if self.joystick.get_button(NS_CONTROLLER["left1"]) == 0:
-                    controller.is_moving_left = False
+                    controller1.is_moving_left = False
                     self.player_entity.velocity.x = 0
                 if self.joystick.get_button(NS_CONTROLLER["right1"]) == 0:
-                    controller.is_moving_right = False
+                    controller1.is_moving_right = False
                     self.player_entity.velocity.x = 0
                 if self.joystick.get_button(NS_CONTROLLER["up1"]) == 0:
-                    controller.is_moving_up = False
+                    controller1.is_moving_up = False
                     self.player_entity.velocity.y = 0
                 if self.joystick.get_button(NS_CONTROLLER["down1"]) == 0:
-                    controller.is_moving_down = False
+                    controller1.is_moving_down = False
                     self.player_entity.velocity.y = 0
                 if self.joystick.get_button(NS_CONTROLLER["A"]) == 0:
-                    controller.is_shooting = False
+                    controller1.is_shooting = False
                 if self.joystick.get_button(NS_CONTROLLER["start"]) == 0:
                     self.pause()
 
@@ -296,12 +320,16 @@ class Ocean(Scene):
         rand_pos = random.randint(-int(random_noise_size[0] / 3), 0), random.randint(
             -int(random_noise_size[1] / 3), 0
         )
+        
+        self.target_ability.draw(offset = self.camera.position)
+        
         self.screen.blit(random_noise, (rand_pos))
 
         # for e in self.entities: pygame.draw.rect(self.screen, (0, 255, 0), e.custom_hitbox, 1)
         # for e in self.bullets: pygame.draw.rect(self.screen, (0, 255, 0), e.custom_hitbox, 1)
 
         # self.screen.blit(self.font0.render(f"points: {self.points}", fgcolor = self.font_color, size = 25)[0], (0, 0))
+        self.target_ability.update(self.client.delta_time)
 
         self.wave_manager.update()
         self.event_system.update()
