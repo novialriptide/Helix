@@ -8,19 +8,18 @@ import random
 
 from SakuyaEngine.scene import Scene, ScrollBackgroundSprite
 from SakuyaEngine.waves import WaveManager, load_stage_json
+from SakuyaEngine.effect_circle import EnlargingCircle
 from SakuyaEngine.errors import SceneNotActiveError
 from SakuyaEngine.lights import light, shadow
-from SakuyaEngine.effect_circle import EnlargingCircle
 from SakuyaEngine.effect_rain import Rain
+
+from Helix.playercontroller import SecondaryController
 from Helix.abilties.target_fire import TargetFire
-
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
-from Helix.const import *
-
+from Helix.data.entity.berserk import BERSERK
 from Helix.data.entity.helix import HELIX
 from Helix.data.entity.ado import ADO
-from Helix.data.entity.berserk import BERSERK
-from Helix.playercontroller import SecondaryController
+from Helix.const import *
 
 
 class Ocean(Scene):
