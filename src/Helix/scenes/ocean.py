@@ -79,14 +79,14 @@ class Ocean(Scene):
         HELIX.controller.is_moving_right = False
         HELIX.controller.is_moving_up = False
         HELIX.controller.is_moving_down = False
-        
+
         self.secondary_controller = SecondaryController()
 
         self.font_color = (255, 255, 255)
         self.font0 = pygame.freetype.SysFont("Arial", 5)
-        
+
         self.camera.shake(-1, 1)
-        
+
         self.target_ability = TargetFire(0, self, self.secondary_controller)
         self.target_ability.start(HELIX.center_position)
 
@@ -319,9 +319,9 @@ class Ocean(Scene):
         rand_pos = random.randint(-int(random_noise_size[0] / 3), 0), random.randint(
             -int(random_noise_size[1] / 3), 0
         )
-        
-        self.target_ability.draw(offset = self.camera.position)
-        
+
+        self.target_ability.draw(offset=self.camera.position)
+
         self.screen.blit(random_noise, (rand_pos))
 
         # for e in self.entities: pygame.draw.rect(self.screen, (0, 255, 0), e.custom_hitbox, 1)
