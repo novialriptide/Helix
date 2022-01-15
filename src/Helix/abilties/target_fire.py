@@ -18,7 +18,7 @@ class TargetFire(Ability):
     def start(self, position: pygame.Vector2) -> None:
         self.position = position
         self.active = True
-        self.scene.client.delta_time_modifier = 1
+        self.scene.client.delta_time_modifier = 0.25
         
     def draw(self, offset = pygame.Vector2(0, 0)) -> None:
         pygame.draw.circle(self.scene.screen, self.color1, self.position + offset, 3)
