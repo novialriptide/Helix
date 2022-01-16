@@ -2,6 +2,7 @@
 Helix: Flight Test (c) 2021 Andrew Hong
 This code is licensed under GNU LESSER GENERAL PUBLIC LICENSE (see LICENSE for details)
 """
+from copy import copy
 import sys
 import pygame
 import random
@@ -40,7 +41,7 @@ class Ocean(Scene):
         win_size = self.client.original_window_size
         self.wave_manager = WaveManager()
 
-        self.player_entity = HELIX
+        self.player_entity = copy(HELIX)
         self.player_entity.position = (
             pygame.Vector2(win_size.x / 2, win_size.y * (2 / 3))
             - self.player_entity.center_offset
