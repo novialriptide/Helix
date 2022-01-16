@@ -5,7 +5,7 @@ from SakuyaEngine.effect_particles import Particles
 from SakuyaEngine.tile import split_image
 
 from Helix.playercontroller import PlayerController
-from Helix.data.const_bullets import *
+from Helix.const_bullets import *
 
 import pygame
 

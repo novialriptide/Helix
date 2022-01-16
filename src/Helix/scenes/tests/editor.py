@@ -13,8 +13,8 @@ import random
 from SakuyaEngine.scene import Scene
 from SakuyaEngine.button import Button
 
-from Helix.data.entity.ado import ADO
-from Helix.data.entity.berserk import BERSERK
+from Helix.entity.ado import ADO
+from Helix.entity.berserk import BERSERK
 
 
 class PathSelector:

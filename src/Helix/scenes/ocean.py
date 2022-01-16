@@ -16,9 +16,9 @@ from SakuyaEngine.effect_rain import Rain
 from Helix.playercontroller import SecondaryController
 from Helix.abilties.target_fire import TargetFire
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
-from Helix.data.entity.berserk import BERSERK
-from Helix.data.entity.helix import HELIX
-from Helix.data.entity.ado import ADO
+from Helix.entity.berserk import BERSERK
+from Helix.entity.helix import HELIX
+from Helix.entity.ado import ADO
 from Helix.const import *
 
 

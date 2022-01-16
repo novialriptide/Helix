@@ -4,8 +4,8 @@ from SakuyaEngine.animation import Animation
 from SakuyaEngine.effect_particles import Particles
 from SakuyaEngine.tile import split_image
 
-from Helix.data.entity.helix import HELIX
-from Helix.data.const_bullets import *
+from Helix.entity.helix import HELIX
+from Helix.const_bullets import *
 
 import pygame
 
