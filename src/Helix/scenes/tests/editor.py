@@ -62,23 +62,6 @@ class Editor(Scene):
         stage_name = input("Stage name > ")
 
         win_size = self.client.original_window_size
-        self.spawn_points = [
-            pygame.Vector2(int(win_size.x * 1 / 10), int(win_size.y * 1 / 7)),
-            pygame.Vector2(int(win_size.x * 3 / 10), int(win_size.y * 1 / 7)),
-            pygame.Vector2(int(win_size.x * 5 / 10), int(win_size.y * 1 / 7)),
-            pygame.Vector2(int(win_size.x * 7 / 10), int(win_size.y * 1 / 7)),
-            pygame.Vector2(int(win_size.x * 9 / 10), int(win_size.y * 1 / 7)),
-            pygame.Vector2(int(win_size.x * 1 / 10), int(win_size.y * 1.75 / 7)),
-            pygame.Vector2(int(win_size.x * 3 / 10), int(win_size.y * 1.75 / 7)),
-            pygame.Vector2(int(win_size.x * 5 / 10), int(win_size.y * 1.75 / 7)),
-            pygame.Vector2(int(win_size.x * 7 / 10), int(win_size.y * 1.75 / 7)),
-            pygame.Vector2(int(win_size.x * 9 / 10), int(win_size.y * 1.75 / 7)),
-            pygame.Vector2(int(win_size.x * 1 / 10), int(win_size.y * 2.5 / 7)),
-            pygame.Vector2(int(win_size.x * 3 / 10), int(win_size.y * 2.5 / 7)),
-            pygame.Vector2(int(win_size.x * 5 / 10), int(win_size.y * 2.5 / 7)),
-            pygame.Vector2(int(win_size.x * 7 / 10), int(win_size.y * 2.5 / 7)),
-            pygame.Vector2(int(win_size.x * 9 / 10), int(win_size.y * 2.5 / 7)),
-        ]
 
         self.menu_size = (self.screen.get_width(), 128)
         self.menu = pygame.Surface(self.menu_size)
@@ -86,13 +69,6 @@ class Editor(Scene):
         self.draw_menu = False
 
         radius = 10
-        self.spawn_point_rects = []
-        for s in self.spawn_points:
-            self.spawn_point_rects.append(
-                pygame.Rect(
-                    s - pygame.Vector2(radius, radius), (radius * 2, radius * 2)
-                )
-            )
 
         self.stage_name = ""
         self.stage = Stage(stage_name, ["ADO", "BERSERK"])
@@ -239,12 +215,9 @@ class Editor(Scene):
                     self.stage.time += event.y
 
     def update(self) -> None:
-        win_size = self.client.window_size
         self.inputs()
         self.screen.fill((15, 15, 15))
         self.menu.fill((5, 5, 5))
-        for r in self.spawn_point_rects:
-            pygame.draw.rect(self.screen, (255, 0, 0), r)
 
         # Draw path maker
         if self.path_selector is not None:
