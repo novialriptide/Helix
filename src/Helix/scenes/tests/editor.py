@@ -134,6 +134,11 @@ class Editor(Scene):
 
     def get_path_id(self) -> None:
         return list(self.stage.paths.keys())[self.selected_path_key]
+    
+    def draw_path(self, path_id: str, color1, color2, width: int = 1) -> None:
+        path = self.stage.paths[path_id]["paths"]
+        pygame.draw.line(self.screen, color1, path[0], path[1], width=width)
+        pygame.draw.line(self.screen, color2, path[1], path[2], width=width)
 
     def inputs(self) -> None:
         for event in pygame.event.get():
@@ -252,18 +257,15 @@ class Editor(Scene):
 
         # Draw loaded paths
         for p in self.stage.paths:
-            path = self.stage.paths[p]["paths"]
-            if len(p) > 1:
-                for i in range(len(path) - 1):
-                    color1 = (0, 200, 0)
-                    color2 = (200, 200, 200)
-                    if p == list(self.stage.paths.keys())[self.selected_path_key]:
-                        color1 = (0, 230, 0)
-                        color2 = (0, 230, 230)
-                    if i == 0:
-                        pygame.draw.line(self.screen, color1, path[i], path[i + 1])
-                    else:
-                        pygame.draw.line(self.screen, color2, path[i], path[i + 1])
+            self.draw_path(p, (0, 100, 50), (200, 200, 200))
+        
+        # Draw selected path
+        try:
+            selected_path_id = list(self.stage.paths.keys())[self.selected_path_key]
+            self.draw_path(selected_path_id, (0, 230, 0), (0, 230, 230), width=2)
+                        
+        except IndexError:
+            pass
 
         # Draw selected enemy menu
         pygame.draw.rect(self.menu, (212, 5, 212), (0, 0, 32, 32))
