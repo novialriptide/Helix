@@ -73,7 +73,7 @@ class Ocean(Scene):
             color=[200, 200, 200],
         )
 
-        load_stage_json("Helix/data/stages/startup.json", self.wave_manager, self)
+        load_stage_json("Helix/stages/startup.json", self.wave_manager, self)
 
         HELIX.controller.is_moving_left = False
         HELIX.controller.is_moving_right = False

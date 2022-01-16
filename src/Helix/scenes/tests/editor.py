@@ -43,7 +43,7 @@ class Stage:
         self.waves = {}
 
     def save(self) -> None:
-        path = "Helix/data/stages/"
+        path = "Helix/stages/"
         print(self.__dict__)
         with open(path + f"{self.name}.json", "w") as outfile:
             json.dump(self.__dict__, outfile)
