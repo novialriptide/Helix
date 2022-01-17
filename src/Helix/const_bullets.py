@@ -12,7 +12,7 @@ player_big_bullet1 = Bullet(
     static_sprite=split_image(
         pygame.image.load("Helix/sprites/projectiles.png").convert_alpha(), 8, 8
     )[1],
-    sound_upon_fire=pygame.mixer.Sound("Helix/audio/laser-1.mp3"),
+    sound_upon_fire=pygame.mixer.Sound("Helix/audio/sound_laser_1.mp3"),
 )
 
 small_bullet1 = Bullet(
