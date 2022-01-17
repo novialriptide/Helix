@@ -134,7 +134,7 @@ class Editor(Scene):
 
     def get_path_id(self) -> None:
         return list(self.stage.paths.keys())[self.selected_path_key]
-    
+
     def draw_path(self, path_id: str, color1, color2, width: int = 1) -> None:
         path = self.stage.paths[path_id]["paths"]
         pygame.draw.line(self.screen, color1, path[0], path[1], width=width)
@@ -258,12 +258,12 @@ class Editor(Scene):
         # Draw loaded paths
         for p in self.stage.paths:
             self.draw_path(p, (0, 100, 50), (200, 200, 200))
-        
+
         # Draw selected path
         try:
             selected_path_id = list(self.stage.paths.keys())[self.selected_path_key]
             self.draw_path(selected_path_id, (0, 230, 0), (0, 230, 230), width=2)
-                        
+
         except IndexError:
             pass
 
