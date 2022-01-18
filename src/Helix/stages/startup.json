@@ -2,6 +2,7 @@
     "name": "startup",
     "time": 0,
     "max_time": 60000,
+    "music_path": "song_rahvitas.mp3",
     "paths": {
         "dxwlpxjhizhcyjrd": {
             "paths": [
