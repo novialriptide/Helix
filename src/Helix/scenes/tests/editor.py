@@ -10,6 +10,7 @@ import pygame
 import string
 import random
 
+from SakuyaEngine.clock import Clock
 from SakuyaEngine.scene import Scene
 from SakuyaEngine.button import Button
 
@@ -36,8 +37,10 @@ class PathSelector:
 class Stage:
     def __init__(self, name: str, entities: List[str]) -> None:
         self.name = name
+        self.clock = Clock()
         self.time = 0
         self.max_time = 60000
+        self.music_path = ""
 
         self.paths = {}
         self.waves = {}
@@ -47,7 +50,17 @@ class Stage:
         print(self.__dict__)
         with open(path + f"{self.name}.json", "w") as outfile:
             json.dump(self.__dict__, outfile)
-            # use pickle to dump this
+    
+    def load(self, stage_name: str) -> None:
+        path = "Helix/stages/"
+        file = open(path + f"{stage_name}.json")
+        data = json.load(file)
+        self.name = data["name"]
+        self.time = data["time"]
+        self.max_time = data["max_time"]
+        self.music_path = data["music_path"]
+        self.paths = data["paths"]
+        self.waves = data["waves"]
 
 
 class Editor(Scene):
@@ -68,10 +81,13 @@ class Editor(Scene):
         self.menu_pos = (0, win_size.y - self.menu.get_height())
         self.draw_menu = False
 
-        radius = 10
-
         self.stage_name = ""
         self.stage = Stage(stage_name, ["ADO", "BERSERK"])
+        try:
+            self.stage.load(stage_name)
+        except FileNotFoundError:
+            pass
+        
         self.default_lifetime = 10000
 
         self.loaded_enemies = [ADO, BERSERK]
@@ -81,6 +97,11 @@ class Editor(Scene):
         self.path_selector = None
         self.selected_axis = "up1"
         self.selected_path_key = 0
+        self.playing = False
+
+        self.music_path = "Helix/audio/" + self.stage.music_path
+        pygame.mixer.music.load(self.music_path)
+        pygame.mixer.music.set_volume(0.2)
 
         self.buttons = [
             Button(
@@ -104,6 +125,16 @@ class Editor(Scene):
                 color=(0, 100, 0),
             ),
         ]
+
+    def play(self) -> None:
+        self.stage.time = int(self.stage.time)
+        print(self.stage.time)
+        pygame.mixer.music.play(start=self.stage.time)
+        self.playing = True
+    
+    def stop(self) -> None:
+        pygame.mixer.music.stop()
+        self.playing = False
 
     def axis_points(self, axis: str) -> Tuple[int, int]:
         mp = pygame.Vector2(self.client.mouse_pos)
@@ -144,16 +175,15 @@ class Editor(Scene):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-            if event.type == pygame.KEYDOWN:
+            if event.type == pygame.KEYUP:
                 if self.path_selector is not None:
                     if event.key == pygame.K_ESCAPE:
                         self.path_selector = None
-                if event.key == pygame.K_c:
-                    # Copy
-                    pass
-                if event.key == pygame.K_v:
-                    # Paste
-                    pass
+                if event.key == pygame.K_SPACE:
+                    if self.playing:
+                        self.stop()
+                    elif not self.playing:
+                        self.play()
                 if event.key == pygame.K_h:
                     # Hide/unhide menu
                     self.draw_menu = not self.draw_menu
@@ -297,6 +327,9 @@ class Editor(Scene):
 
         if self.draw_menu:
             self.screen.blit(self.menu, self.menu_pos)
+            
+        if self.playing:
+            self.stage.time += self.client.delta_time / self.client.current_fps
 
         pygame.display.set_caption(
             f"{self.client.window_name} (time: {self.stage.time})"
