@@ -129,7 +129,7 @@ class Editor(Scene):
     def play(self) -> None:
         self.stage.time = int(self.stage.time)
         print(self.stage.time)
-        pygame.mixer.music.play(start=self.stage.time)
+        pygame.mixer.music.play(start=self.stage.time / 1000)
         self.playing = True
     
     def stop(self) -> None:
@@ -329,7 +329,7 @@ class Editor(Scene):
             self.screen.blit(self.menu, self.menu_pos)
             
         if self.playing:
-            self.stage.time += self.client.delta_time / self.client.current_fps
+            self.stage.time += self.client.delta_time / self.client.current_fps * 1000
 
         pygame.display.set_caption(
             f"{self.client.window_name} (time: {self.stage.time})"
