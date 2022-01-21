@@ -3,6 +3,7 @@ Helix: Flight Test (c) 2021 Andrew Hong
 This code is licensed under GNU LESSER GENERAL PUBLIC LICENSE (see LICENSE for details)
 """
 from copy import copy
+from math import degrees
 import sys
 import pygame
 import random
@@ -13,6 +14,7 @@ from SakuyaEngine.effect_circle import EnlargingCircle
 from SakuyaEngine.errors import SceneNotActiveError
 from SakuyaEngine.lights import light, shadow
 from SakuyaEngine.effect_rain import Rain
+from SakuyaEngine.math import get_angle
 
 from Helix.playercontroller import SecondaryController
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
@@ -215,12 +217,15 @@ class Ocean(Scene):
         for p in self.particle_systems:
             p.render(self.screen, offset=self.camera.position)
             p.update(self.client.delta_time)
-
+            
         # Player shooting
+        player_angle = degrees(get_angle(self.player_entity.center_position, self.client.mouse_pos))
+        self.player_entity.angle = player_angle
+
         if controller.is_shooting:
             bs = self.player_entity.bullet_spawners[0]
             if bs.can_shoot:
-                self.bullets.append(bs.shoot_with_firerate(-90))
+                self.bullets.append(bs.shoot_with_firerate(player_angle))
 
         # Test for collisions with player
         collided = self.test_collisions_rect(self.player_entity)
@@ -246,7 +251,7 @@ class Ocean(Scene):
                 b._destroy_queue = True
 
             # Draw bullet + lights
-            self.screen.blit(b.sprite, b.position + self.camera.position)
+            self.screen.blit(b.sprite, b.abs_position + self.camera.position)
             light(
                 self.screen,
                 b.center_position + self.camera.position,
@@ -254,7 +259,6 @@ class Ocean(Scene):
                 10,
                 brightness=3,
             )
-            # pygame.draw.rect(self.screen, (0, 255, 0), b.custom_hitbox, 1)
 
         for e in self.entities:
             if "enemy" in e.tags:
@@ -284,7 +288,7 @@ class Ocean(Scene):
             for ps in e.particle_systems:
                 ps.render(self.screen, offset=self.camera.position)
             # Draw Enemy
-            self.screen.blit(e.sprite, e.position + self.camera.position)
+            self.screen.blit(e.sprite, e.abs_position + self.camera.position)
             # TODO: Implement this in Entity
             if e.draw_healthbar:
                 bar_length = e.rect.width * 0.7
