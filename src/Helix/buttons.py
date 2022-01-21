@@ -6,10 +6,10 @@ import pygame
 
 # Keyboard + Mouse
 KEYBOARD = {
-    "up1": pygame.K_UP,
-    "left1": pygame.K_LEFT,
-    "down1": pygame.K_DOWN,
-    "right1": pygame.K_RIGHT,
+    "up1": pygame.K_w,
+    "left1": pygame.K_a,
+    "down1": pygame.K_s,
+    "right1": pygame.K_d,
     "up2": pygame.K_w,
     "left2": pygame.K_a,
     "down2": pygame.K_s,
