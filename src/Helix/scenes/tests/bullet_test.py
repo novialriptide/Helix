@@ -11,7 +11,6 @@ from SakuyaEngine.animation import Animation
 
 from SakuyaEngine.scene import Scene
 from SakuyaEngine.bullets import BulletSpawner, Bullet
-from SakuyaEngine.text import text
 
 
 class BulletTest(Scene):
@@ -49,6 +48,7 @@ class BulletTest(Scene):
             spread_within_bullet_arrays=40,
             bullet_curve=2,
             spin_rate=10,
+            clock=self.clock
         )
 
     def update(self) -> None:
