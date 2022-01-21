@@ -15,7 +15,6 @@ from SakuyaEngine.lights import light, shadow
 from SakuyaEngine.effect_rain import Rain
 
 from Helix.playercontroller import SecondaryController
-from Helix.abilties.target_fire import TargetFire
 from Helix.buttons import KEYBOARD, NS_CONTROLLER
 from Helix.entity.berserk import BERSERK
 from Helix.entity.helix import HELIX
@@ -87,9 +86,6 @@ class Ocean(Scene):
         self.font0 = pygame.freetype.SysFont("Arial", 5)
 
         self.camera.shake(-1, 1)
-
-        self.target_ability = TargetFire(0, self, self.secondary_controller)
-        self.target_ability.start(HELIX.center_position)
 
     def add_dialogue(self, **kwargs) -> None:
         """Adds a Dialogue scene.
@@ -321,15 +317,7 @@ class Ocean(Scene):
             -int(random_noise_size[1] / 3), 0
         )
 
-        self.target_ability.draw(offset=self.camera.position)
-
         self.screen.blit(random_noise, (rand_pos))
-
-        # for e in self.entities: pygame.draw.rect(self.screen, (0, 255, 0), e.custom_hitbox, 1)
-        # for e in self.bullets: pygame.draw.rect(self.screen, (0, 255, 0), e.custom_hitbox, 1)
-
-        # self.screen.blit(self.font0.render(f"points: {self.points}", fgcolor = self.font_color, size = 25)[0], (0, 0))
-        self.target_ability.update(self.client.delta_time)
 
         self.wave_manager.update()
         self.event_system.update()
