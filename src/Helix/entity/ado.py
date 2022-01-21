@@ -51,7 +51,7 @@ ADO = Entity(
     ],
     particle_systems=[
         Particles(
-            velocity=pygame.Vector2(0, -2),
+            velocity=pygame.Vector2(0, 0),
             colors=[[249, 199, 63], [255, 244, 70], [255, 78, 65]],
             offset=pygame.Vector2(16, 16),
             particles_num=0,
