@@ -122,14 +122,6 @@ class Ocean(Scene):
                     controller1.is_moving_down = True
                 if event.key == KEYBOARD["A"]:
                     controller1.is_shooting = True
-                if event.key == KEYBOARD["up2"]:
-                    controller2.is_moving_up = True
-                if event.key == KEYBOARD["down2"]:
-                    controller2.is_moving_down = True
-                if event.key == KEYBOARD["left2"]:
-                    controller2.is_moving_left = True
-                if event.key == KEYBOARD["right2"]:
-                    controller2.is_moving_right = True
             if event.type == pygame.KEYUP:
                 if event.key == KEYBOARD["left1"]:
                     controller1.is_moving_left = False
@@ -143,14 +135,6 @@ class Ocean(Scene):
                 if event.key == KEYBOARD["down1"]:
                     controller1.is_moving_down = False
                     self.player_entity.velocity.y = 0
-                if event.key == KEYBOARD["up2"]:
-                    controller2.is_moving_up = False
-                if event.key == KEYBOARD["down2"]:
-                    controller2.is_moving_down = False
-                if event.key == KEYBOARD["left2"]:
-                    controller2.is_moving_left = False
-                if event.key == KEYBOARD["right2"]:
-                    controller2.is_moving_right = False
                 if event.key == KEYBOARD["A"]:
                     controller1.is_shooting = False
                 if event.key == KEYBOARD["start"]:
@@ -193,7 +177,13 @@ class Ocean(Scene):
     def update(self) -> None:
         self.input()
         controller = self.player_entity.controller
-
+    
+        # Controller movement
+        m = self.player_entity.controller.movement
+        if m.magnitude() != 0:
+            m.normalize_ip()
+        self.player_entity.velocity = self.player_entity.controller.movement * self.player_entity.speed
+        
         self.draw_scroll_bg()
 
         # Render shadows
