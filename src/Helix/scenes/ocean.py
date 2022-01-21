@@ -9,7 +9,6 @@ import pygame
 import random
 
 from SakuyaEngine.scene import Scene, ScrollBackgroundSprite
-from SakuyaEngine.waves import WaveManager, load_stage_json
 from SakuyaEngine.effect_circle import EnlargingCircle
 from SakuyaEngine.errors import SceneNotActiveError
 from SakuyaEngine.lights import light, shadow
@@ -40,7 +39,6 @@ class Ocean(Scene):
         )
 
         win_size = self.client.original_window_size
-        self.wave_manager = WaveManager()
 
         self.player_entity = copy(HELIX)
         self.player_entity.position = (
@@ -53,10 +51,8 @@ class Ocean(Scene):
 
         self.points = 0
 
-        self.wave_manager.entities = [ADO, BERSERK]
-
-        for e in self.wave_manager.entities:
-            e.clock = self.clock
+        # for e in self.wave_manager.entities:
+        #     e.clock = self.clock
 
         screen_width, screen_height = self.screen.get_width(), self.screen.get_height()
         self.collision_rects = [
@@ -74,8 +70,6 @@ class Ocean(Scene):
             length=8,
             color=[200, 200, 200],
         )
-
-        load_stage_json("Helix/stages/startup.json", self.wave_manager, self)
 
         HELIX.controller.is_moving_left = False
         HELIX.controller.is_moving_right = False
@@ -317,6 +311,5 @@ class Ocean(Scene):
 
         self.screen.blit(random_noise, (rand_pos))
 
-        self.wave_manager.update()
         self.event_system.update()
         self.advance_frame(self.client.delta_time, collision_rects=self.collision_rects)
