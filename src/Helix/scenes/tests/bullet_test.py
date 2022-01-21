@@ -48,7 +48,7 @@ class BulletTest(Scene):
             spread_within_bullet_arrays=40,
             bullet_curve=2,
             spin_rate=10,
-            clock=self.clock
+            clock=self.clock,
         )
 
     def update(self) -> None:

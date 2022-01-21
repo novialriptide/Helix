@@ -50,7 +50,7 @@ class Stage:
         print(self.__dict__)
         with open(path + f"{self.name}.json", "w") as outfile:
             json.dump(self.__dict__, outfile)
-    
+
     def load(self, stage_name: str) -> None:
         path = "Helix/stages/"
         file = open(path + f"{stage_name}.json")
@@ -87,7 +87,7 @@ class Editor(Scene):
             self.stage.load(stage_name)
         except FileNotFoundError:
             pass
-        
+
         self.default_lifetime = 10000
 
         self.loaded_enemies = [ADO, BERSERK]
@@ -131,7 +131,7 @@ class Editor(Scene):
         print(self.stage.time)
         pygame.mixer.music.play(start=self.stage.time / 1000)
         self.playing = True
-    
+
     def stop(self) -> None:
         pygame.mixer.music.stop()
         self.playing = False
@@ -327,7 +327,7 @@ class Editor(Scene):
 
         if self.draw_menu:
             self.screen.blit(self.menu, self.menu_pos)
-            
+
         if self.playing:
             self.stage.time += self.client.delta_time / self.client.current_fps * 1000
 

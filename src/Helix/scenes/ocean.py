@@ -177,13 +177,15 @@ class Ocean(Scene):
     def update(self) -> None:
         self.input()
         controller = self.player_entity.controller
-    
+
         # Controller movement
         m = self.player_entity.controller.movement
         if m.magnitude() != 0:
             m.normalize_ip()
-        self.player_entity.velocity = self.player_entity.controller.movement * self.player_entity.speed
-        
+        self.player_entity.velocity = (
+            self.player_entity.controller.movement * self.player_entity.speed
+        )
+
         self.draw_scroll_bg()
 
         # Render shadows
@@ -207,9 +209,11 @@ class Ocean(Scene):
         for p in self.particle_systems:
             p.render(self.screen, offset=self.camera.position)
             p.update(self.client.delta_time)
-            
+
         # Player shooting
-        player_angle = degrees(get_angle(self.player_entity.center_position, self.client.mouse_pos))
+        player_angle = degrees(
+            get_angle(self.player_entity.center_position, self.client.mouse_pos)
+        )
         self.player_entity.angle = player_angle
 
         if controller.is_shooting:
