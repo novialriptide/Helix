@@ -28,7 +28,19 @@ from Helix.const import *
 
 
 class Ocean(Scene):
+    def spawn_enemies(self, num) -> None:
+        enemies = [ADO, BERSERK]
+        
+        win_size = pygame.Vector2(self.client.screen.get_size())
+        for i in range(num):
+            enemy = random.choice(enemies).copy()
+            enemy.position = pygame.Vector2(random.randint(20, win_size.x - 20), random.randint(20, win_size.y - 20))
+            enemy.target_position = pygame.Vector2(random.randint(20, win_size.x - 20), random.randint(20, win_size.y - 20))
+            enemy.clock = self.clock
+            self.entities.append(enemy)
+    
     def on_awake(self) -> None:
+        win_size = pygame.Vector2(self.client.screen.get_size())
         pygame.joystick.init()
         if pygame.joystick.get_count() > 0:
             self.joystick = pygame.joystick.Joystick(0)
@@ -45,7 +57,7 @@ class Ocean(Scene):
 
         win_size = self.client.original_window_size
 
-        self.player_entity = copy(HELIX)
+        self.player_entity = HELIX
         self.player_entity.position = (
             pygame.Vector2(win_size.x / 2, win_size.y * (2 / 3))
             - self.player_entity.center_offset
@@ -55,9 +67,6 @@ class Ocean(Scene):
         self.entities.append(self.player_entity)
 
         self.points = 0
-
-        # for e in self.wave_manager.entities:
-        #     e.clock = self.clock
 
         screen_width, screen_height = self.screen.get_width(), self.screen.get_height()
         self.collision_rects = [
@@ -87,6 +96,14 @@ class Ocean(Scene):
         self.font0 = pygame.freetype.SysFont("Arial", 5)
 
         self.camera.shake(-1, 1)
+        
+        def spawn_en():
+            self.spawn_enemies(4)
+            return True
+        
+        event_spawn = RepeatEvent("spawn_enemies", spawn_en, wait_time=5000)
+        spawn_en()
+        self.event_system.add(event_spawn)
 
     def add_dialogue(self, **kwargs) -> None:
         """Adds a Dialogue scene.
