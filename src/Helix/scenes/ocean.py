@@ -3,15 +3,19 @@ Helix: Flight Test (c) 2021 Andrew Hong
 This code is licensed under GNU LESSER GENERAL PUBLIC LICENSE (see LICENSE for details)
 """
 from copy import copy
+from distutils.spawn import spawn
 from math import degrees
 import sys
 import pygame
 import random
 
+# just make the game have enemies come from all directions and just shoot..
+
 from SakuyaEngine.scene import Scene, ScrollBackgroundSprite
 from SakuyaEngine.effect_circle import EnlargingCircle
 from SakuyaEngine.errors import SceneNotActiveError
 from SakuyaEngine.lights import light, shadow
+from SakuyaEngine.events import RepeatEvent
 from SakuyaEngine.effect_rain import Rain
 from SakuyaEngine.math import get_angle
 
@@ -37,6 +41,7 @@ class Ocean(Scene):
                 infinite=True,
             )
         )
+
 
         win_size = self.client.original_window_size
 
@@ -101,7 +106,6 @@ class Ocean(Scene):
 
     def input(self) -> None:
         controller1 = self.player_entity.controller
-        controller2 = self.secondary_controller
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -129,8 +133,6 @@ class Ocean(Scene):
                 if event.key == KEYBOARD["down1"]:
                     controller1.is_moving_down = False
                     self.player_entity.velocity.y = 0
-                if event.key == KEYBOARD["A"]:
-                    controller1.is_shooting = False
                 if event.key == KEYBOARD["start"]:
                     self.client.add_scene("Pause", exit_scene=self)
                     self.pause()
@@ -163,10 +165,14 @@ class Ocean(Scene):
                 if self.joystick.get_button(NS_CONTROLLER["down1"]) == 0:
                     controller1.is_moving_down = False
                     self.player_entity.velocity.y = 0
-                if self.joystick.get_button(NS_CONTROLLER["A"]) == 0:
-                    controller1.is_shooting = False
                 if self.joystick.get_button(NS_CONTROLLER["start"]) == 0:
                     self.pause()
+            
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                controller1.is_shooting = True
+                
+            if event.type == pygame.MOUSEBUTTONUP:
+                controller1.is_shooting = False
 
     def update(self) -> None:
         self.input()
