@@ -11,7 +11,7 @@ from Helix.__version__ import GAME_VERSION
 
 HelixClient = Client(
     f"Helix (ver: {GAME_VERSION})",
-    pygame.Vector2(256, 336),
+    pygame.Vector2(256*1.5, 224*1.5),
 )
 
 pygame.mixer.init()
