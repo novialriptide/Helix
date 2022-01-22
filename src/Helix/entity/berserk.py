@@ -35,7 +35,7 @@ BERSERK = Entity(
     ],
     particle_systems=[
         Particles(
-            pygame.Vector2(0, -2),
+            pygame.Vector2(0, 0),
             colors=[[249, 199, 63], [255, 244, 70], [255, 78, 65]],
             offset=pygame.Vector2(8, 8),
             particles_num=0,
