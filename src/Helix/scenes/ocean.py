@@ -135,8 +135,6 @@ class Ocean(Scene):
                     controller1.is_moving_up = True
                 if event.key == KEYBOARD["down1"]:
                     controller1.is_moving_down = True
-                if event.key == KEYBOARD["A"]:
-                    controller1.is_shooting = True
             if event.type == pygame.KEYUP:
                 if event.key == KEYBOARD["left1"]:
                     controller1.is_moving_left = False
