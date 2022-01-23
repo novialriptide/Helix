@@ -19,28 +19,3 @@ pygame==2.1.2
 ## Version Control
 Odd numbered `.dev` versions are for ongoing development versions and will change.
 Even numbered `.dev` versions are for the public.
-
-## Quotes
-```
-"wow, looking good"
- - bitcraft (pytmx & pyscroll creator, pygame org member, Tuxemon maintainer)
-
-"can't wait to play it"
- - lucysir (developer of Heat2D, pygame-video, PyQt5 Custom Widgets)
-
-n/a
- - Starbuck5 (pygame org member)
-
-n/a
- - Ghast_NEOH (game developer)
-
-n/a
- - Ankith (pygame org member)
-
-n/a
- - bydariogamer (pygame org contributor)
-
-"looking good!"
- - ScriptLine Studios (Youtuber with 1.01k subscribers)
-
-```
