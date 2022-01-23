@@ -52,9 +52,6 @@ class Ocean(Scene):
             )
         )
 
-
-        win_size = self.client.original_window_size
-
         self.player_entity = HELIX
         self.player_entity.position = (
             pygame.Vector2(win_size.x / 2, win_size.y * (2 / 3))

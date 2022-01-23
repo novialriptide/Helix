@@ -35,7 +35,6 @@ class Death(Scene):
         self.try_again_button.sprite = try_again_button
 
     def update(self) -> None:
-        win_size = self.client.original_window_size
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
