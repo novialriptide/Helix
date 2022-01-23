@@ -6,10 +6,9 @@ import sys
 import pygame
 
 from SakuyaEngine.scene import Scene
-from SakuyaEngine.text import text2
 from SakuyaEngine.button import Button
 
-from Helix.buttons import KEYBOARD, NS_CONTROLLER
+from Helix.buttons import KEYBOARD
 from Helix.const import *
 
 

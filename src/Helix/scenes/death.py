@@ -6,7 +6,6 @@ import sys
 import pygame
 
 from SakuyaEngine.scene import Scene
-from SakuyaEngine.text import text2
 from SakuyaEngine.button import Button
 
 from Helix.const import *

@@ -2,8 +2,6 @@
 Helix: Flight Test (c) 2021 Andrew Hong
 This code is licensed under GNU LESSER GENERAL PUBLIC LICENSE (see LICENSE for details)
 """
-from copy import copy
-from distutils.spawn import spawn
 from math import degrees
 import sys
 import pygame
