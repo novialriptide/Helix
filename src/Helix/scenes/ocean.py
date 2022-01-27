@@ -28,15 +28,19 @@ from Helix.const import *
 class Ocean(Scene):
     def spawn_enemies(self, num) -> None:
         enemies = [ADO, BERSERK]
-        
+
         win_size = pygame.Vector2(self.client.screen.get_size())
         for i in range(num):
             enemy = random.choice(enemies).copy()
-            enemy.position = pygame.Vector2(random.randint(20, win_size.x - 20), random.randint(20, win_size.y - 20))
-            enemy.target_position = pygame.Vector2(random.randint(20, win_size.x - 20), random.randint(20, win_size.y - 20))
+            enemy.position = pygame.Vector2(
+                random.randint(20, win_size.x - 20), random.randint(20, win_size.y - 20)
+            )
+            enemy.target_position = pygame.Vector2(
+                random.randint(20, win_size.x - 20), random.randint(20, win_size.y - 20)
+            )
             enemy.clock = self.clock
             self.entities.append(enemy)
-    
+
     def on_awake(self) -> None:
         win_size = pygame.Vector2(self.client.screen.get_size())
         pygame.joystick.init()
@@ -91,11 +95,11 @@ class Ocean(Scene):
         self.font0 = pygame.freetype.SysFont("Arial", 5)
 
         self.camera.shake(-1, 1)
-        
+
         def spawn_en():
             self.spawn_enemies(4)
             return True
-        
+
         event_spawn = RepeatEvent("spawn_enemies", spawn_en, wait_time=5000)
         spawn_en()
         self.event_system.add(event_spawn)
@@ -177,10 +181,10 @@ class Ocean(Scene):
                     self.player_entity.velocity.y = 0
                 if self.joystick.get_button(NS_CONTROLLER["start"]) == 0:
                     self.pause()
-            
+
             if event.type == pygame.MOUSEBUTTONDOWN:
                 controller1.is_shooting = True
-                
+
             if event.type == pygame.MOUSEBUTTONUP:
                 controller1.is_shooting = False
 

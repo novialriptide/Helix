@@ -58,10 +58,10 @@ class BossEntity(Entity):
             chance = random.randint(0, 1) == 1
             if chance:
                 pos[1] = random.randint(-1, 1)
-            
+
             if pos[1] == 0 or not chance:
                 pos[0] = random.randint(-1, 1)
-            
+
             self.components.append(
                 {
                     "x": pos[0] + last_component["x"],
@@ -75,5 +75,6 @@ class BossEntity(Entity):
             sprite = c["compon"].sprite
             width, height = sprite.get_size()
             surface.blit(
-                sprite, self.abs_position + pygame.Vector2(c["x"] * width, c["y"] * height)
+                sprite,
+                self.abs_position + pygame.Vector2(c["x"] * width, c["y"] * height),
             )
