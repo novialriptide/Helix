@@ -5,7 +5,6 @@
 3. Resolution size change.
 4. The player can now aim and rotate.
 5. Particles disappear more naturally.
-6. 
 
 # version 0.4
 ### New Features / Changes
