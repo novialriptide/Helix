@@ -2,6 +2,10 @@
 ### New Features / Changes
 1. Renamed `"\\"` to `"/"` in file paths.
 2. Added camera shake.
+3. Resolution size change.
+4. The player can now aim and rotate.
+5. Particles disappear more naturally.
+6. 
 
 # version 0.4
 ### New Features / Changes
